@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .parent {
+            width: 300px;
+            height: 180px;
+            border: 1px solid pink;
+        }
+    </style>
+    <script>
+        var students = [{
+            name: 'zhangsan',
+            age: 12,
+            gender: '男'
+        },
+        {
+            name: 'lisi',
+            age: 13,
+            gender: '男'
+        },
+        {
+            name: 'xiaohong',
+            age: 12,
+            gender: '女'
+        }];
+        window.onload = function () {
+            //拿到table
+            var table = document.getElementsByClassName('parent')[0];
+            //遍历数组
+            for (i = 0; i < students.length; i++) {
+                //拿到对象
+                var item = students[i];
+                //创建tr
+                var tr = document.createElement('tr');
+                //遍历对象
+                for (var data in item) {
+                    //创建td
+                    var td = document.createElement('td');
+                    //把对象中的属性值写到td
+                    td.innerText = item[data];
+                    //把td添加到tr中
+                    tr.appendChild(td);
+                }
+                //把tr添加到table中
+                table.appendChild(tr);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <table class="parent"></table>
+</body>
+
+</html>

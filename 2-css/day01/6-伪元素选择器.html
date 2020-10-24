@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伪元素选择器</title>
+    <style>
+        /* 选中第一行文本 */
+        div::first-line{
+            color:red;
+        }
+        /* 选中第一个字符 */
+        div::first-letter{
+            color:teal;
+            font-size: 30px;
+        }
+        /* 用户选中的文本 */
+        div::selection{
+            background-color: coral;
+            color: cornsilk;
+        }
+        /* ::before 选中p标签之前不存在的节点，添加一些内容 */
+        /* ::after 选中p标签之后不存在的节点，添加一些内容 */
+        p::after{
+            content:'***';
+            color:red;
+            font-size:12px;
+        }
+        #one{
+            width:200px;
+            height:200px;
+            background-color: teal;
+            /* 相对定位元素 */
+            position:relative;
+        }
+        /* 包角 */
+        #one::before{
+            /* 设置伪元素绝对定位 */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width:20px;
+            height:20px;
+            content:'';
+            /* 上边框 */
+            border-top:5px solid cyan;
+            /* 左边框 */
+            border-left:5px solid cyan;
+        }
+        #one::after{
+            /* 设置伪元素绝对定位 */
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width:20px;
+            height:20px;
+            content:'';
+            /* 下边框 */
+            border-bottom:5px solid cyan;
+            /* 右边框 */
+            border-right:5px solid cyan;
+        }
+        #two{
+            position:absolute;
+            bottom:0;
+            left:0;
+            width:20px;
+            height:20px;
+            border-bottom:5px solid cyan;
+            border-left:5px solid cyan;
+        }
+        #three{
+            position:absolute;
+            top:0;
+            right:0;
+            width:20px;
+            height:20px;
+            border-top:5px solid cyan;
+            border-right:5px solid cyan;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        The div element has no special meaning at all. It represents its children. It can be used with the class, lang, and title attributes to mark up semantics common to a group of consecutive elements.The div element has no special meaning at all. It represents its children. It can be used with the class, lang, and title attributes to mark up semantics common to a group of consecutive elements.The div element has no special meaning at all. It represents its children. It can be used with the class, lang, and title attributes to mark up semantics common to a group of consecutive elements.
+    </div>
+    <p>第一章</p>
+    <p>第二章</p>
+    <p>第三章</p>
+    <div id="one">
+        <div id="two"></div>
+        <div id="three"></div>
+    </div>
+    
+   
+</body>
+</html>

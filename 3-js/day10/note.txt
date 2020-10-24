@@ -1,0 +1,46 @@
+超时调用与间歇调用
+    超时调用：超过多少时间执行一次代码，改代码仅执行一次
+        setTimeout(function(){
+            console.log(1);
+        },1000)
+    间歇调用：每个多少毫秒执行一次代码，代码重复执行
+        setInterval(function(){
+            console.log(1);
+        },1000)
+
+
+查询字符串
+    ?name=zhangsan&age=12
+
+ssh连上服务器
+小黄鸭上传jar包
+navicat 打开连接 新建university数据库，运行SQL文件 修改权限
+
+
+
+访问后台接口
+   http://120.26.176.26:7788/swagger-ui.html#/
+   先登录后认证
+5.
+
+
+http 协议
+    浏览器和服务器之间遵循http协议，浏览器发送请求报文，服务器给出响应报文
+    请求报文：请求头，请求体（浏览器决定，js决定）
+    响应报文：响应头，响应体（服务器决定，java决定）
+
+XMLHttpRequest
+
+Ajax 前端传递数据给后台
+    get方式：url后的查询字符串，默认get传递数据，数据格式是表单数据格式application/x-www-form-urlencoded
+    post方式：参数在请求体里
+        如果post传递参数格式是表单格式
+            需要设置application/x-www-form-urlencoded，还需要将js对象转为表单格式(qs)  qs.stringify(obj)
+        如果post传递参数格式是json格式
+            需要设置application/json，还需要将js对象转为json字符串传递(JSON)   JSON.string(obj)
+前端说要给后台的数据格式（Content-Type）
+前端真正给后台的数据的数据格式
+
+
+
+

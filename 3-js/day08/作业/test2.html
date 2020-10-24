@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var students = [{
+            name: 'zhansan',
+            age: 1,
+            gender: '男'
+        }, {
+            name: 'zhansan',
+            age: 2,
+            gender: '男'
+        }, {
+            name: 'zhansan',
+            age: 3,
+            gender: '男'
+        }, {
+            name: 'zhansan',
+            age: 4,
+            gender: '男'
+        }];
+
+        window.onload = function () {
+
+            var parent = document.getElementsByClassName('parent')[0];
+
+            for (var i = 0; i < students.length; i++) {
+                var newtr = document.createElement('tr');
+                var re = students[i];
+                for (var b in re) {
+                    // console.log(re[b]);
+                    newtr.innerHTML += `<td>` + re[b] + `</td>`;
+                }
+                // console.log(newtr.innerHTML);
+                parent.appendChild(newtr);
+            }
+
+
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+<table class="parent">
+
+</table>
+
+</html>

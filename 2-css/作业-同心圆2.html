@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>同心圆-动画</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            width: 400px;
+            height: 500px;
+            background-color: #343434;
+            padding-top: 50px;
+            position: relative;
+
+        }
+
+        .circle1 {
+            width: 200px;
+            height: 200px;
+            border: 8px solid #999999;
+            position: absolute;
+            left: 92px;
+            /* 宽高比例相等时 50%是圆 */
+            border-radius: 50%;
+            background-color: #343434;
+            /* flex 伸缩盒布局 */
+            /* 动画名称 */
+            animation-name: circle1;
+            /* 动画持续时间 */
+            animation-duration: 2s;
+            /* 动画交替执行 */
+            animation-direction: alternate;
+            /* 无限循环 */
+            animation-iteration-count: infinite;
+        }
+
+        .circle2 {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            top: 84px;
+            left: 126px;
+            border: 14px solid #FFFFFF;
+            border-radius: 50%;
+            background-color: #343434;
+            animation-name: circle2;
+            /* 动画持续时间 */
+            animation-duration: 2s;
+            /* 动画交替执行 */
+            animation-direction: alternate;
+            /* 无限循环 */
+            animation-iteration-count: infinite;
+
+            transition: animation 2s linear 1s;
+
+        }
+
+
+        p {
+            font-size: 50px;
+            font-family: sans-serif;
+            color: #FFFFFF;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        @keyframes circle1 {
+            0% {
+                /* scale缩放 */
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100
+        }
+
+        @keyframes circle2 {
+            50% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(0.9);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="circle1"> </div>
+        <div class="circle2"></div>
+        <!-- <p>HI!</p> -->
+    </div>
+
+</body>
+
+</html>

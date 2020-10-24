@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#">
+        进度条：<progress id="progress" max="100" value="30"></progress>
+        <br>
+        <output>结果在这里</output>
+        <br>
+        <meter min="0" max="100" value="80" low="40" high="60" optimum="20"></meter>
+        <br>
+        <input type="search" list="one">
+        <datalist id="one">
+        <option value="shanghai"></option>
+        <option value="beijing"></option>
+        <option value="nanjing"></option>
+        </datalist>
+        <section>
+            <h3>inout的type值</h3>
+            数值框：<input min="10" max="100" type="number" >
+            <br>
+            滑块：<input min="0"max="100" step="20" type="range">
+            <br>
+            搜索框：<input type="search" name="" id="">
+            <br>
+            <!-- pattern 正则表达式匹配 
+            [0-9]{10}  0-9中的数字出现10次-->
+            <!-- 表单验证 -->
+            <!-- JS出现的目的表单验证 -->
+            电话框：<input type="tel" name="" id="" pattern="1[0-9]{10}">
+            <br>
+            邮箱：<input type="email" name="" id="">
+            <br>
+            网址：<input type="url" name="" id="">
+            <br>
+            颜色：<input type="color" name="" id="">
+            <br>
+            <h3>日期</h3>
+            年月日：<input type="date"></input>
+            <br>
+            时间：<input type="time" name="" id="">
+            <br>
+            年月日：<input type="datetime-local"></input>
+            <br>
+            月份：<input type="month" name="" id="">
+            <br>
+            周数：<input type="week" name="" id="">
+        </section>
+    </form>
+    <script>
+        var progress = document.getElementById("progress");
+        // progress.value
+        // progress.value = progress.value+5
+        // 间歇调用  每隔多少毫秒执行一次代码
+        setInterval(function() {
+            if(progress.value<=100){
+                progress.value += 5
+            }           
+            },1000);
+    </script>
+</body>
+</html>

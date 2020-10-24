@@ -1,0 +1,47 @@
+=====================
+HTML 超文本标记语言   结构
+CSS  层叠样式表   表现
+  CSS在HTNL中使用
+    外部样式
+      <link rel="stylesheet" href="XXX.css">
+      a.css  b.css 
+      在b.css
+    内部样式
+    <style>
+        @import 'a.css' 
+    </style>
+
+    行内样式
+      style="color:red;"
+  注释  /**/
+  选择器
+    基本选择器
+      *{} 普遍选择器
+      #id id选择器
+      .class  类选择器
+      div  标签选择器
+    组合选择器
+      #one,.two,div{}
+    嵌套选择器
+      div#one.two{} 
+    后代选择器
+      空格  后代选择器
+      >    子代
+      +   下一个兄弟
+      ~   之后所有的兄弟
+        .one p{} 
+        .one>.two>p{} 
+        .one .two p{}
+        .one>.two p{}
+
+       <div class="one">
+         <div class="two">
+           <p></p>
+         </div>
+        <div class="two">
+            <p></p>
+        </div>
+       </div>
+    属性选择器
+      [attr]  有attr属性名的
+      

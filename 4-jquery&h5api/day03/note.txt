@@ -1,0 +1,76 @@
+原生cloneNode(true/false)方法
+    false 浅复制 只复制元素不复制内容
+    true 深复制 复制元素和内容，不复制事件
+jq clone(true/false)方法
+    false 浅复制 复制元素和内容 不复制事件
+    true 深复制 复制元素和内容 复制事件
+js对象复制
+    浅复制 复制内存地址
+
+jQuery中默认请求头部Content-Type是application/x-www-form-urlencoded;charset=utf-8
+    get方式发表单格式数据
+      //传递数据可以附加在url后面，也可以在data上。
+        url:'url值'+"?"+$.param(obj),
+        //data:$.param(obj),
+        headers:{
+            "Content-Type":"application/x-www-form-urlencoded"
+        }
+    post方式发表单格式数据
+        data:$.param(obj),
+        //可省略
+        headers:{
+            "Content-Type":"application/x-www-form-urlencoded"
+        }
+    post方式发json格式数据
+        data:JSON.stringify(obj),
+        headers:{
+            "Content-Type":"application/json;charset=utf-8"
+        },
+//快捷函数
+$.get('url',obj,'function(res){
+    console.log(res);
+})
+$.post('url',obj,'function(res){
+    console.log(res);
+})
+
+
+H5新增的标签
+    nav
+    article
+    section
+    header
+    footer
+    aside
+    vedio
+    audio
+    
+    ...
+
+表单新特性
+    type = 'date'
+    type = 'time'
+    type = 'week'
+    type = 'email'
+    type = 'number'
+    ...
+
+属性
+    <form></form>
+
+
+HTML5API   HTML5中的JS部分
+    媒体
+    画布
+    拖曳
+    本地存储
+        sessionStorage
+    webSocket
+    本地数据库
+    ...
+
+
+获取自定义属性的属性值
+    dom.getAttribute('data-id')
+    $(dom).attr('data-id')
+    dom.dataset.id

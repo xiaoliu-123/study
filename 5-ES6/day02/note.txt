@@ -1,0 +1,106 @@
+
+
+ES6
+    广义：ES版本>5.1
+    狭义：ES2015
+
+ES6-->ES5
+    0.初始化一个项目
+        npm init
+        npm init -y
+    1.局部安装babel-cli babel-preset-latest(包，依赖，模块)
+        局部安装babel工具，转换预设
+          babel-preset-es2015
+          babel-preset-latest
+          babel-preset-env
+        cnpm install --save-dev babel-cli babel-preset-latest
+    2.项目根目录创建.babelre文件
+        {
+            "preset":["latest","es2015"]
+        }
+    3.转换
+        babel xxx.js
+        babel a.js --out-file b.js
+        babel src --out-dir dist
+
+ES6方法
+    Array.from()类数组-->数组
+babel-ployfill垫片 可以将ES6的功能代码转为ES5代码实现
+    假设ES6中没有Array.from(args)方法，写from方法
+    Array.from = function(args){
+        return Array.pretotype.slice.call(args,0);
+    }
+    Array.from(args);
+
+  cnpm install --save-dev babel-polyfill
+
+模块化
+    ES6模块化代码 import
+    NodeJS内有自己的模块化规范，实现CommonJS模块化规范 require('babel-polyfill')
+
+index.html
+    先引入a.js
+     name = 'zhangsan'
+    再引入b.js
+     name
+
+    <script src="a.js"></script>
+    <script src="b.js"></script>
+    var name = 'zhangsan'
+    console.log(name);
+
+js文件引入到html内
+  将js文件内的代码在html引入位置运行一下
+
+a.js   var name = 'zhangsan'
+b.js   console.log(name);
+b.js想用a.js内的变量
+  1.html页面引入a.js  b.js
+  2.模块化的导入与导出，模块之间就可以通信了
+    a.js里将name导出
+    b.js里将name导入
+
+    a.js想要用b.js内的变量
+      a.js  要导入变量
+      b.js  要导出变量
+  CommonJS模块化规范(服务器端，NodeJS实现了)
+    导入模块   require('babel-polyfill');
+    导出
+  AMD模块化规范(客户端的)
+  ES6模块化规范
+    导入模块  import 'babel-polyfill';
+    导出
+
+
+ES6模块化机制
+    export 导出接口
+        export {a,b}
+        export {a as aa, b as bb}
+        export function test(){}
+        export a;错误
+    export default 值或者变量
+        export default {name:'zhangsan'，age:12}
+        export default function(){}
+        export default a; //可以
+    导入
+        import {a,b,aa as aaa,bb as bbb} from './a.js';
+        import * as obj from './a.js';
+            obj.aa
+            obj.a
+        import obj from './a.js';  //导入a.js默认导出的内容
+对象解构，模式匹配
+let {name,age} = {name:'zhangsan',age:12};
+name = 'zhangsan';
+age = 12;
+
+let {a,b,c} = require('./a.js');
+let temp = require('./a.js')
+let a = temp.a;
+let b = temp.b;
+let c = temp.c;
+
+
+
+
+
+

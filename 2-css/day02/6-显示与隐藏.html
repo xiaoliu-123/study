@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>显示与隐藏</title>
+    <style>
+        div{
+            width: 100px;
+            height:100px;
+            background-color: rgb(122, 176, 221);
+            margin:10px;
+        }
+        .one{
+            /* 显示与隐藏 */
+            /* 隐藏 位置保留*/
+            opacity:0;
+            /* 显示 */
+            opacity:1;
+            /* display 隐藏 位置不保留*/
+            display:none;
+            /* 显示 */
+            display:block;
+            /* 隐藏 位置保留*/
+            visibility:hidden;
+            /* 显示 */
+            visibility:visible;
+        }
+    </style>
+</head>
+<body>
+    <div class="one">hello</div>
+    <div class="two">hello2</div>
+</body>
+</html>

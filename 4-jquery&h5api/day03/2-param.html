@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>序列化为查询字符串</title>
+    <script src="../js/jquery-3.5.1.js"></script>
+    <script>
+        var obj = {
+            // roles: {
+            //     name: '教师',
+            //     id: 1
+            // },
+            rolesName: '教师',
+            rolesId: 1,
+            username: 'admin1',
+            password: '123321',
+            realname: '张三',
+            // hobby: ['basketball', 'swimming', 'dancing'].toString(),
+            hobby: ['basketball', 'swimming', 'dancing'].join(),
+        };
+        //$.param()将对象序列化为表单格式数据
+        //深层序列化，适用于对象内套对象
+        // var result = $.param(obj);
+        //传统浅层序列化，适用于对象内套数组
+        var result = $.param(obj, true);
+        console.log(result);
+        console.log(decodeURIComponent(result));
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

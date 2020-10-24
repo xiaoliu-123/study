@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise</title>
+    <script src="../../6-jquery&h5api/js/jquery-3.5.1.js"></script>
+    <script>
+        let p1 = new Promise((resolve, reject) => {
+            // $.get('http://47.106.244.1:8099/manager/category/findAllCategory',)
+            $.ajax({
+                url: 'http://47.106.244.1:8099/manager/category/findAllCategory',
+                success(res) {
+                    resolve(res)
+                },
+                error(err) {
+                    reject(err)
+                },
+            })
+        });
+        p1.then((res) => {
+            console.log(res);
+            //对res的操作
+        }).catch((err) => {
+            console.log(err);
+        })
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

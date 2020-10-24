@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>兼容性</title>
+    <style>
+        div {
+            border: 1px solid red;
+            /* font-size: 100px; */
+            /* 解决img底部空隙问题 父容器字体大小设置为0 */
+            /* font-size: 0; */
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            /* 解决img底部空隙问题  display: block; */
+            display: block;
+            /* 去边框 */
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <!-- <img src="../day02/images/1.PNG" alt=""> -->
+        <a><img src="../day02/images/1.PNG" alt=""></a>
+    </div>
+
+</body>
+
+</html>

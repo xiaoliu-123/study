@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象的深浅拷贝</title>
+    <script>
+        var obj = {
+            name: 'zhangsan',
+            age: 12,
+            friends: ['tom', 'terry'],
+        };
+        //拷贝对象
+        //浅拷贝 -->引用传递
+        var obj2 = obj;  //浅拷贝就是赋值  （将钥匙复制一份）
+
+        //深拷贝
+        var str = JSON.stringify(obj);
+        var obj3 = JSON.parse(str);
+        console.log(obj, obj3);
+        console.log(obj == obj3);  //false
+
+
+
+
+        //深拷贝 -->内部内容复制一份  （将房子复制一份）
+        // var obj3 = {};
+        // //遍历obj对象，将obj对象的内容复制到obj3中。
+        // for (var key in obj) {
+        //     obj3[key] = obj[key];
+        // }
+        // //判断引用地址
+        // console.log(obj == obj3);  //false
+        // console.log(obj == obj2);  //true
+        // console.log(obj.name);
+        // console.log(obj3.name);
+        // console.log(obj.name == obj3.name);  //true
+        // console.log(obj.friends);
+        // console.log(obj3.friends);
+        // console.log(obj.friends == obj3.friends); //true
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>插槽</title>
+  <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <my-com>hello</my-com>
+    <my-com>world</my-com>
+    <my-com></my-com>
+    <!-- 具名插槽填充  -->
+    <my-com>
+      <!-- 默认可以不写名字 -->
+      <template #default>
+        <div>
+          <!-- 模板中如何使用父组件的数据，模板中如何使用子组件的数据 -->
+          123
+          456
+          {{msg}}
+        </div>
+      </template>
+
+      <!-- <template v-slot:slot2> -->
+      <!-- scope插槽作用域对象{}，内部存放插槽声明时的属性 -->
+      <!-- { "sub": "子组件的数据" } -->
+      <!-- <template #slot2="scope"> -->
+      <!-- 解构 -->
+      <template #slot2="{sub,test}">
+        <div>
+          <!-- {{scope}} -->
+          <!-- {{scope.sub}} -->
+          {{sub}}
+          {{test}}
+          <p>段落</p>
+          <h4>标题</h4>
+        </div>
+      </template>
+    </my-com>
+  </div>
+  <script>
+    Vue.component('my-com', {
+      data() {
+        return {
+          subMsg: '子组件的数据',
+        }
+      },
+      template: `
+                <div>
+                0921 day04
+                子组件模板内可以使用自己内部的数据，或者props的数据，不能直接使用父组件的数据
+
+                子组件模板的环境是子组件
+                <button><slot :a="subMsg" name="default">默认内容{{subMsg}}</slot></button>
+                <div><slot :sub="subMsg" :test="1" name="slot2">默认内容2</slot></div>
+                </div>
+            `
+    })
+    new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      methods: {},
+    })
+  </script>
+</body>
+
+</html>

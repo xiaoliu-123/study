@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>路由</title>
+  <script src="../js/vue-2.6.12.js"></script>
+  <script src="../js/vue-router-3.4.3.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    {{msg}}
+    <!-- 4.使用路由 -->
+    <div>
+      <router-link to="/a">去A路由</router-link>
+      <router-link to="/b">去B路由</router-link>
+      <a href="#/a">a标签去A路由</a>
+      <button @click="$router.push('/a')">跳转到A1</button>
+      <button @click="$router.push('a')">跳转到A2</button>
+      <button @click="toPath">跳转到A3</button>
+      <button @click="toPath2">跳转到A4</button>
+    </div>
+    <div>
+      <!-- 路由对象组件现实的位置 -->
+      <router-view></router-view>
+    </div>
+  </div>
+  <script>
+    //声明组件
+    let myA = {
+      template: `
+            <div>A组件</div>
+            `,
+      // 接收路由参数
+      created() {
+        console.log(this.$route);
+      }
+    }
+    let myB = {
+      template: `
+            <div>B组件</div>
+            `
+    }
+    //1. 定义路由对象数组 route路由对象  router路由器对象  routes路由对象组
+    let routes = [{
+      path: '/a',
+      component: myA,
+      name: 'mya'
+    }, {
+      path: '/b',
+      component: myB,
+      name: 'myb'
+    }]
+    //2.创建路由器对象
+    let router = new VueRouter({
+      routes: routes,
+      //路由模式 哈希路由
+      // mode: 'hash'
+      //历史记录路由，浏览器路由browser
+      // mode: 'history'
+    })
+    //3.注册路由器对象
+    new Vue({
+      el: '#app',
+      router: router,
+      components: {
+        "my-a": myA,
+        "my-b": myB
+      },
+      data: {
+        msg: 'hello'
+      },
+      methods: {
+        toPath() {
+          // 路由跳转
+          this.$router.push('a');
+          // this.$router.push({ path: '/a' });
+          // this.$router.push({ name: 'mya' });
+          //go 路由记录跳转、历史记录跳转
+          // this.$router.go(1);
+          //替换路由 和push参数一样
+          // this.$router.replace('/a')
+        },
+        toPath2() {
+          this.$router.push({
+            //name跳转路由，params query 都有效
+            name: 'mya',
+            //参数带在查询字符串，刷新不会消失
+            query: {
+              id: 1
+            },
+            //参数是一次性携带，刷新会消失
+            params: {
+              name: 'zhangsan'
+            }
+          })
+
+          /* this.$router.push({
+            //有效
+            // path: '/a?id=1001',
+            //path 跳转路由 params无效，query有效
+            path: '/a',
+            //带参
+            //有效
+            query: {
+              id: 1
+            },
+            //无效
+            params: {
+              name: 'zhangsan'
+            }
+          }) */
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

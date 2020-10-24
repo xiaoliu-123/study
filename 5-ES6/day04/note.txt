@@ -1,0 +1,111 @@
+
+
+class Person{
+    //静态属性
+    static attr = '1'
+    constructor(){
+        //实例属性
+        this.name=name;
+    }
+    //实例方法
+    sayName(){
+        console.log(this.name)
+    }
+    //静态方法 Array.isArray() Object.is()
+    static test(){
+        console.log(2)
+    }
+}
+//静态属性
+Person.attr = '1'
+
+
+
+let p = new Person('zhangsan')
+p.name
+p.sayName()
+Person.test()
+
+实例方法和实例属性写在哪里 ： 实例属性写在constructor里面，实例方法写在类里
+    实例可以调用的方法和属性   
+静态方法和静态属性写在哪里  ：静态属性和静态方法写在类里
+    类本身调用的方法和属性  
+
+实例属性和实例方法通过实例调用
+静态属性和静态方法通过类调用
+
+
+继承
+    子类继承父类
+    Dog.__proto__ === Animal
+    子类的原型对象继承父类的原型对象
+    Dog.prototype.__proto__ === Animal.prototype
+
+
+symbol基本数据类型
+let s1 = Symbol('描述')
+let s2 = Symbol('描述')
+
+//如果在全局注册表没有symbol值，就放进去，如果有就拿出来
+let s3 = Symbol.for('key值'); 
+let s4 = Symbol.for('key值');
+
+应用
+  symbol放到变量名上用中括号包起来，用在值上，表示独一无二的值
+  let obj={
+      [s1]:'1',
+      [s2]:'2',
+      name:s3,
+      name2:s3
+  }
+
+  消除魔术字符串
+
+$.ajax({
+    url:''
+    method:''
+    data:{},
+    headers:{},
+    success:function(res){},
+    error:function(err){},
+})
+
+异步代码同步编写
+async function test(){
+    let res = await $.get('url')
+    console.log(res);
+}
+
+generator函数
+function* test(){
+  //generator状态机管理
+  ...10行代码
+  yield 1;
+  ...10行代码
+  yield 2;
+  ...10行代码
+  yield 3;
+  ...10行代码
+  yield 4;
+}
+每一次只执行一段代码，分状态的
+
+generator函数
+    异步编程解决方案：异步代码可以同步编写
+    function* test(){
+        let result = yield 1;
+        console.log(result);  //100 是下方next()的参数 1状态返回的一个结果
+    }
+    遍历对象 geo = test()
+    geo.next();
+    //**比较关键
+    geo.next(100);
+    geo.next();
+
+async function test(){
+    let result = await $.get('');
+    console.log(result);
+}
+
+
+

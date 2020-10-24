@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件基础</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <br>
+        ----组件使用-----
+        <br>
+        <my-com></my-com>
+        <my-com></my-com>
+        <my-com></my-com>
+    </div>
+    <script>
+        //1.创建组件
+        let myCom = {
+            data() {
+                //返回的对象是该组件的数据模型
+                return {
+                    comMsg: '组件数据'
+                }
+            },
+            //模板 只能有一个根节点
+            template: `
+                <div>
+                    <span>{{comMsg}}</span>
+                    <span>{{comMsg}}</span>
+                    <button @click="comMsg='新数据'">更改数据模型中的数据</button>
+                </div>
+            `
+        };
+        //2.组件注册
+        //全局注册
+        Vue.component('my-com', myCom)
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello'
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

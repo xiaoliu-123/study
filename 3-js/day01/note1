@@ -1,0 +1,79 @@
+
+
+js语言为基础
+  nodejs语言
+
+js
+弱类型语言
+  //number
+  var a = 1；
+  //string
+  a = "s"
+  a = {}
+  a = []
+
+
+java
+强类型语言
+  int a = 1;
+      a = 's';
+
+
+var a,,b,c;
+var a=1,b=2,c=3;
+
+标识符--变量名、函数名
+  1.有字母、数字、下划线、$组成
+  2、不要以数字、下划线开头
+  3.有一定意义、小驼峰命名法
+  4.不要以关键字和保留字命名
+
+5种基本数据类型
+  undefined
+  number
+  null
+  boolean
+  string
+1种引用数据类型
+typeof返回值
+  undefined
+  number
+  object
+  boolean
+  string
+  function
+
+''  空字符串
+' '  空格字符串
+
+var 声明的变量
+  有提升特性，变量提升，提升到代码前边
+  var a = 1;
+ES6
+  let 声明变量  变量不提升
+    let a = 1;
+
+JS中的引用数据类型都直接或间接继承自Object类型
+  函数
+    function test(){}
+    var test = function(){}
+  对象
+    var obj = {
+      name:'zhangsan',
+      age:20,
+    };
+  数组
+    var arr = [1,2,3];
+    arr.length  //3
+    下标从0开始，下标arr.
+    length-1结束
+
+
+
+
+
+
+
+
+
+

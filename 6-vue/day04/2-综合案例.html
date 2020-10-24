@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>综合案例</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <my-table :data="stus">
+            <template #header>
+                <th>编号</th>
+                <th>名称</th>
+                <th>年龄</th>
+            </template>
+            <!-- 放到name为tbody的插槽中 -->
+            <!-- 通过插槽属性间接访问子组件的数据 -->
+            <!-- {item} 解构scope -->
+            <template #tbody="{item}">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+            </template>
+        </my-table>
+        <my-table :data="teachers">
+            <template #header>
+                <th>编号</th>
+                <th>名称</th>
+                <th>薪资</th>
+                <th>性别</th>
+            </template>
+            <template #tbody="{item}">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.salary}}</td>
+                <td>{{item.gender}}</td>
+            </template>
+        </my-table>
+        <my-table :data="course">
+            <template #header>
+                <th>编号</th>
+                <th>名称</th>
+                <th>描述</th>
+            </template>
+            <template #tbody="{item}">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.desc}}</td>
+            </template>
+        </my-table>
+    </div>
+    <script>
+        Vue.component('my-table', {
+            data() {
+                return {
+
+                }
+            },
+            // props 获取父组件的数据
+            props: ['data'],
+            template: `
+                <table>
+                    <thead>
+                        <tr>
+                            <slot name="header"></slot>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item,index) in data" :key="index">
+                            <slot :item="item" name="tbody"></slot>
+                        </tr>
+                    </tbody>
+                </table>
+            
+            `
+
+        })
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello',
+                stus: [{
+                    id: 1001,
+                    name: 'zhangsan',
+                    age: 12
+                }, {
+                    id: 1002,
+                    name: 'lisi',
+                    age: 22
+                }, {
+                    id: 1001,
+                    name: 'xiaohong',
+                    age: 33
+                },],
+
+                teachers: [{
+                    id: 101,
+                    name: 'terry',
+                    salary: 100001,
+                    gender: 'male'
+                }, {
+                    id: 102,
+                    name: 'terry2',
+                    salary: 100002,
+                    gender: 'male'
+                }, {
+                    id: 103,
+                    name: 'terry3',
+                    salary: 100003,
+                    gender: 'male'
+                }, {
+                    id: 104,
+                    name: 'terry4',
+                    salary: 100004,
+                    gender: 'male'
+                }],
+                course: [{
+                    id: 1,
+                    name: 'HTML',
+                    desc: '超文本'
+                },
+                {
+                    id: 2,
+                    name: 'CSS',
+                    desc: '层叠样式表'
+                }],
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

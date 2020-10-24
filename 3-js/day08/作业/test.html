@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        var students = [{
+            name: 'zhansan',
+            age: 1,
+            gender: '男'
+        }, {
+            name: 'zhansan',
+            age: 2,
+            gender: '男'
+        }, {
+            name: 'zhansan',
+            age: 3,
+            gender: '男'
+        }, {
+            name: 'zhansan',
+            age: 4,
+            gender: '男'
+        }];
+
+        window.onload = function () {
+            var parent = document.getElementsByClassName('parent')[0];
+            // console.log(parent);
+            for (var i = 0; i < students.length; i++) {
+
+                var re = students[i];
+                var newChild = document.createElement('tr');
+                //for-in  a是形参，接收对象里面的属性
+                for (var a in re) {
+                    var newtd = document.createElement('td');
+                    newtd.innerText = re[a];
+                    console.log(re[a]);
+                    newChild.appendChild(newtd);
+                }
+                parent.appendChild(newChild);
+            }
+        }
+    </script>
+    <style>
+        .parent {
+            width: 70px;
+            height: 80px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <table class="parent">
+
+    </table>
+</body>
+
+</html>

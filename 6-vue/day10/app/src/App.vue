@@ -1,0 +1,23 @@
+<template>
+  <div id="app">
+    <!-- 根组件 -->
+    <!-- <Login></Login> -->
+    <!-- <Home></Home> -->
+    <router-view></router-view>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "app",
+  components: {},
+};
+</script>
+
+<style>
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>

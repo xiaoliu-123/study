@@ -1,0 +1,46 @@
+昨天
+对象属性定义
+Object.defineProperty(obj, 'name', {
+    enumerable: true,
+})
+Object.defineProperties(obj, {
+    name: {
+
+    },
+    age: {
+
+    }
+});
+对象属性特性的获取
+Object.getOwnPropertyDescriptor(obj, 'name');
+返回一个描述符对象
+
+
+Object.prototype.isPrototypeOf(obj); Object.prototype是否是obj的原型对象
+
+全局变量和局部变量
+    使用var修饰写在函数内的变量，是函数内的局部变量
+
+
+JS的作用域是静态作用域
+  取决于函数定义时的作用域
+如果函数内使用了this，考虑函数的调用方式。如果只是在函数内使用了变量，那么考虑函数定义时的作用域链。
+
+//函数作为参数
+function ac(fun){
+    fun('http://...');
+}
+ac(function(url)){
+    console.log(url);
+}
+
+
+
+基本工具方法
+
+
+迭代方法，高阶方法，高级方法
+
+
+
+

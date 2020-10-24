@@ -1,0 +1,35 @@
+/* @mycolor:'#ccc';
+
+div{
+  color:color(@mycolor);
+  //向上取整
+  // font-size: ceil(22.4px);
+  //向下取整
+  // font-size: floor(22.4px);
+  //四舍五入
+  // font-size: round(22.6px);
+  //百分比
+  // width: percentage((0.4));
+  // width: pi()*10px;
+  // width:min(12px,37px,23px)
+  // width:max(12px,37px,23px)
+
+} */
+/* @list:{
+  red:red1;
+  blue:blue1;
+  green:green1;
+} */
+/* each(@list,{
+  //@value  @key @index
+  .col-@{value}{
+    // width: 6%*@index;
+    // width:@index;
+    width:@key;
+  }
+}) */
+div {
+  my-1: 5;
+  my-2: 8;
+  my-3: 11;
+}

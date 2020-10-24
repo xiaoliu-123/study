@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>同心圆-动画</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            width: 400px;
+            height: 500px;
+            background-color: #343434;
+            padding-top: 50px;
+        }
+
+        .circle1 {
+            width: 200px;
+            height: 200px;
+            border: 8px solid #999999;
+            margin: 0px auto;
+            /* 宽高比例相等时 50%是圆 */
+            border-radius: 50%;
+            background-color: #343434;
+            /* flex 伸缩盒布局 */
+            display: flex;
+            /* 在主轴居中 */
+            justify-content: center;
+            /* 在交叉轴居中 */
+            align-items: center;
+            /* 动画名称 */
+            animation-name: circle1;
+            /* 动画持续时间 */
+            animation-duration: 2s;
+            /* 动画交替执行 */
+            animation-direction: alternate;
+            /* 无限循环 */
+            animation-iteration-count: infinite;
+        }
+
+        .circle2 {
+            width: 120px;
+            height: 120px;
+            border: 15px solid #FFFFFF;
+            border-radius: 50%;
+            background-color: #343434;
+            animation-name: circle2;
+            /* 动画持续时间 */
+            animation-duration: 2s;
+            /* 动画交替执行 */
+            animation-direction: alternate;
+            /* 无限循环 */
+            animation-iteration-count: infinite;
+        }
+
+
+        p {
+            font-size: 50px;
+            font-family: sans-serif;
+            color: #FFFFFF;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        @keyframes circle1 {
+            from {
+                /* scale缩放 */
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes circle2 {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(0.9);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div class="circle1">
+            <div class="circle2"></div>
+        </div>
+        <p>HI!</p>
+    </div>
+
+</body>
+
+</html>

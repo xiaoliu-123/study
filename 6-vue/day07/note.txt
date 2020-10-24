@@ -1,0 +1,240 @@
+==============复习==============
+vue-router
+  路由控制
+    hash路由 127.0.0.1：80/test/index.html#/a/b
+    history路由  127.0.0.1:80/a/b
+  声明路由对象数组
+    let routes={
+      path:'',
+      name:'',
+      component:myA,
+      redirect:'/a'{name:''} {path:''},
+      alias:'',
+      children:[{
+        path:'',
+        component:myAA,
+      },{}]
+    }
+  声明路由器
+    new VueRouter({
+      //mode:'hash'
+      mode:'history',
+      routes:routes
+    })
+  注册
+    new Vue({
+      router:router
+    })
+  动态路由
+    path:'/a/:id',
+    监听路由对象变化，变化的时候获取到参数
+      watch:{
+        $router(to,from){}
+      },
+      组件内守卫
+      berforeRouteUpdate(to,from,next){
+        to.params.id是动态路由的参数
+      }
+  路由嵌套
+    路由对象内children属性上
+      {
+        path:'/a',
+        name:'',
+        component:myA,
+        children:[{
+          path:'aa',
+          component:myAA,
+        }]
+      }
+      再根模板中写router-view展示一级路由组件
+      在一级路由对应的模板内写reouter-view展示二级路由组件
+  编程式导航（API操作路由）
+    this.$router.push('/a')
+    this.$router.push({path:'/a'})
+    //path跳转路由带参query带，params无效
+    this.$router.push({path:'/a',query:{id:1}})
+    //name跳转路由带参query,params都有效  
+    //params参数页面刷新会消失
+    //query参数页面刷新不会消失
+    this.$router.push({name:'mya',params:{name:'zhangsan'},query:{id:1}})
+
+
+ 路由守卫
+  全局前置路由守卫
+    beforeEach((to,from,next)=>({})
+  全局后置路由守卫
+    afterEach((to,from)=>({})
+  路由独享守卫
+    beforeEnter(to,from,next){}
+
+  组件内守卫
+    berforeRouteEnter(to,from,next){
+      this-->window
+    }
+    berforeRouteUpdate(to,from,next){
+      this-->组件实例
+    }
+    berforeRouteLeave(to,from,next){
+      this-->组件实例
+    }
+
+vuex插件 （管理组件共享状态的状态机，store里面有四个属性state，getters，mutations,actions）
+  管理组件共享的状态（数据）
+  状态管理模式  状态机  组件状态管理
+  声明仓库配置对象
+    let storeConf = {
+      //状态
+      satte:{
+        arr:[]
+      },
+      //派生状态
+      getters:{
+        arr2(state){
+          return state.arr
+        },
+        arr:state=>state.arr
+      },
+      //突变 同步操作, 提交突变 修改state中的数据只有突变这一种方法
+      mutations:{
+        CHANGE_MSG(state,payload){
+          state.msg = payload
+        }
+      },
+      //动作  分发动作   发异步，提交突变，分发动作
+      actions:{
+        findAll({commit,dispatch},payload){
+          $get('url',null,(res)=>{
+            res设置到state中
+            commit('',res.data)
+          })
+        },
+        deleteById({commit,dispatch},payload){
+          $get('url',payload,(res)=>{
+            if(res.status==200){
+              //分发动作
+              dispatch('findAll',{})
+            }
+          })
+        }
+      }
+    }
+    let aStore = {
+      namespaced:ture,
+      state:{},
+      getters:{},
+      mutations:{},
+      actions:{}
+    }  
+    let bStore = {
+      namespaced:ture,
+      state:{},
+      getters:{},
+      mutations:{},
+      actions:{}
+    }    
+  创建仓库对象
+    let store = new Vuex.Store(storeConf)
+    ler store = new Vuex.Store({
+      modules:{
+        aSt:aStore,
+        bSt:bStore
+      }
+    })
+  注册
+    new Vue({
+      store,
+    })
+  组件内使用vuex仓库中的内容
+    this.$store.state[.aSt]...
+    this.$store.getters[.aSt]...
+    this.$store.commit('突变名',参数)
+    this.$store.dispatch(动作名',参数)
+  组件辅助函数
+    computed:{
+      ...Vuex.mapState(['','']),
+      ...Vuex.mapGetters(['',''])
+    },
+    methods:{
+      ...Vuex.mapMutations(['',''])
+      ...Vuex.mapActions(['',''])
+    }
+  辅助函数参数
+    第一个参数可选，代表命名空间字符串
+    第二个参数是数组或者对象
+    Vuex.mapActions('aSt',['findAll','deleteById'])
+    Vuex.mapActions('aSt',{
+      //命名冲突--重命名
+      findA:'findAll',
+      deleteById:'deleteById'
+    })
+
+axios插件  ajax  http纯粹
+
+原生ajax
+  let xhr = new XMLHttpRequest();
+
+  //打开连接
+  //get 请求不用设置请求头
+  //xhr.open('get','url+'?'+'查询字符串');
+  //xhr.open('post','url');
+
+  //post 发送请求前可以设置请求头
+  //xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=utf-8")
+  xhr.setRequestHeader("Content-Type","application/json;charset=utf-8")
+
+  //发送请求
+  //xhr.send(qs.stringify(post参数 js对象));
+  xhr.send(JSON.stringify(post参数 js对象));
+
+  //监听
+  xhr.onreadystatechange=function(){
+    if(xhr.readyState == 4 && xhr.status == 200){
+      //响应数据
+      xhr.responseText
+    }
+  }
+
+jQuery的ajax
+  默认发送表单格式数据，post默认的头部Content-Type是application/x-www-form-urlencoded
+  $.ajax({
+    url:'',
+    //method:'get',
+    method:'post',
+    data:{},
+    headers:{},
+    success(res){},
+    error(err){}
+  })
+
+原生ajax  
+  get请求 头部不设置，参数转为查询字符串拼接到url上
+  post请求  
+    参数在send()里
+    发表单格式，设置头部为表单格式，数据也要是表单格式数据
+    发json格式，设置头部为json格式，数据也要是json格式数据
+    
+jQuery的ajax
+  默认发表单格式数据
+  get 头部不设置，参数【对象】放到data上，jquery帮转为查询字符串拼到url上
+  post 
+    发表单格式,头部不设置，参数【对象】放到data上，jquery帮转为查询字符串拼到url上
+    发json格式，设置头部为json格式，参数【对象】转为json字符串放到data上
+
+axios  
+  默认发json格式数据
+  get 参数带在params:{}  get请求不用设置请求头
+  post 参数带在data:{}
+    发表单格式 发表单数据就行，qs转数据就行
+    发json格式 发js对象，不用转换，axios帮忙转换
+
+actions:{
+  async findAll(){
+    let res = await axios({url:''})
+  },
+  findAll(){
+    axios({url:''}).then()
+  }
+}
+
+
+

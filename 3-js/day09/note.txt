@@ -1,0 +1,82 @@
+事件代理
+    父元素代理子元素的事情，事件委托。
+    parent 
+        child
+
+事件
+  三要素
+    事件目标
+    事件处理程序
+    事件对象
+    
+  事件流
+    冒泡事件（IE事件流）
+      从内往外
+    捕获事件
+      从外往内
+  DOM事件流
+    先事件捕获——>目标元素执行事件处理程序——>事件
+    冒泡
+  绑定事件
+    HTML绑定事件
+      <div onclick="test(event,10,20)"></div>
+    DOM0级绑定事件
+      var div = document.getElementById('one');
+      div.onclick = function(event){
+          //可以使用event事件对象
+      }
+      //覆盖
+      div.onclick = function(){}
+      //解绑
+      div.onclick = null;
+    DOM2级绑定事件
+      非IE8及以下
+        div.addEventListenner('click',handle,false);
+        //累加
+        div.addEventListenner('click',handle2);
+      非IE8及以下解绑
+        div.removeEventListenner('click',handle,false);
+        div.removeEventListenner('click',handle2);
+
+        function handle2(event){
+            console.log(event);
+        }
+    
+  事件对象
+    event
+    属性
+      event.targrt  触发事件的源头元素
+      event.currentTarget 当前正在执行事件处理程序的元素，与this一样
+      event.stopPropagation() 停止冒泡
+          event.cancelBubble = true 停止冒泡
+      event.preventDefault() 阻止默认
+          event.returnValue = false() 阻止默认
+      ......
+  事件代理（底层是冒泡原理）
+    父元素代理子元素的事情
+    parent.onclick = function(event){
+        //event.target是哪个孩子
+        if(A孩子){
+            A孩子的事情
+        }
+        if(B孩子){
+            B孩子的事情
+        }
+        if(parent孩子){
+            parent孩子的事情
+        }
+    }
+
+change事件
+  当select的下拉列表的选中的选项更改的时候触发
+
+字符串拼接变量
+    var name = 'zhangsan';
+    对   'he' + name + 'llo'
+    对   "he" + name + "llo"
+    对   `he` + name + `llo`
+    ES6模板语法
+      `he${name}llo`
+
+    错`he'+name+'llo`
+    错'he"+name+"llo'

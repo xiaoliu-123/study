@@ -1,0 +1,350 @@
+webpack
+  网站  https://webpack.docschina.org
+  文档 https://webpack.docschina.org/concepts/
+简介：本质上，webpack 是一个前端资源构建工具，用于现代 JavaScript 应用程序的静态模块打包工具。当 webpack 处理应用程序时，它会在内部构建一个 依赖图(dependency graph)，此依赖图对应映射到项目所需的每个模块，并生成一个或多个 bundle。
+
+全局下载包
+  cnpm install -g webpack webpack-cli
+  或者cnpm i -g webpack webpack-cli
+局部下载包
+  初始化项目npm init -y
+  下载包
+    cnpm i --save-dev webpack webpack-cli
+    或者cnpm i -D webpack webpack-cli
+
+五大模块
+  入口(entry)
+  输出(output)
+  loader加载器 (module)
+  插件(plugin)
+  模式(mode)
+1.入口
+  入口起点(entry point)指示 webpack 应该使用哪个模块，来作为构建其内部 依赖图(dependency graph) 的开始。进入入口起点后，webpack 会找出有哪些模块和库是入口起点（直接和间接）依赖的。
+  默认值是 ./src/index.js，但你可以通过在 webpack configuration 中配置 entry 属性，来指定一个（或多个）不同的入口起点。例如：
+  webpack.config.js
+    module.exports = {
+      //单入口
+      entry: './path/to/my/entry/file.js',
+      //多入口
+      entry: {
+        app: './src/app.js',
+        adminApp: './src/adminApp.js'
+      }
+    };
+2.输出(output) 
+  output 属性告诉 webpack 在哪里输出它所创建的 bundle，以及如何命名这些文件。主要输出文件的默认值是 ./dist/main.js，其他生成文件默认放置在 ./dist 文件夹中。
+  你可以通过在配置中指定一个 output 字段，来配置这些处理过程：
+  webpack.config.js
+    const path = require('path');
+    module.exports = {
+      entry: './path/to/my/entry/file.js',
+      output: {
+        //filename: 'my-first-webpack.bundle.js',
+        filename: './js/my-first-webpack.bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+      }
+    };
+    path 模块是什么，它是一个 Node.js 核心模块，用于操作文件路径。resolve()用来拼接路径
+3.loader
+  webpack 只能理解 JavaScript 和 JSON 文件，这是 webpack 开箱可用的自带能力。loader 让 webpack 能够去处理其他类型的文件，并将它们转换为有效 模块，以供应用程序使用，以及被添加到依赖图中。
+    在更高层面，在 webpack 的配置中，loader 有两个属性：
+      test 属性，识别出哪些文件会被转换。
+      use 属性，定义出在进行转换时，应该使用哪个 loader。
+    webpack.config.js
+    const path = require('path');
+    module.exports = {
+      output: {
+        filename: 'my-first-webpack.bundle.js'
+      },
+      module: {
+        rules: [
+          { 
+            test: /\.html$/, 
+            use: 'html-loader'
+          }
+        ]
+      }
+    };
+
+4.插件(plugin)
+  loader 用于转换某些类型的模块，而插件则可以用于执行范围更广的任务。包括：打包优化，资源管理，注入环境变量。
+  想要使用一个插件，你只需要 require() 它，然后把它添加到 plugins 数组中。多数插件可以通过选项(option)自定义。你也可以在一个配置文件中因为不同目的而多次使用同一个插件，这时需要通过使用 new 操作符来创建一个插件实例。
+  webpack.config.js
+    const HtmlWebpackPlugin = require('html-webpack-plugin'); // 通过 npm 安装
+    const webpack = require('webpack'); // 用于访问内置插件
+    module.exports = {
+      module: {
+        rules: [
+          { test: /\.txt$/, use: 'raw-loader' }
+        ]
+      },
+      plugins: [
+        new HtmlWebpackPlugin({template: './src/index.html'})
+      ]
+    };
+    在上面的示例中，html-webpack-plugin 为应用程序生成 HTML 一个文件，并自动注入所有生成的 bundle。
+5.模式(mode) 
+  通过选择 development, production 或 none 之中的一个，来设置 mode 参数，你可以启用 webpack 内置在相应环境下的优化。其默认值为 production。
+
+*************操作*********************
+基础操作
+  index.js webpack的入口文件
+  1.运行指令
+   开发环境  webpack ./src/index.js -o ./build/built-dev.js --mode=development
+     webpack以./src/index.js为入口文件开始打包，打包到build.js
+     整体打包环境，开发环境
+   生产环境  webpack ./src/index.js -o ./build/built-pro.js --mode=production
+     整体打包环境，生产环境
+  2.注意
+   webpack能处理js和json文件，不能处理css和image资源
+   生产环境和开发环境将ES的模块化编译成浏览器能识别的模块化
+   生产环境比开发环境多一个压缩js代码
+  3.loader
+   定义配置文件
+ 
+高级操作，使用webpack.config.js配置文件========
+项目中有了webpack.config.js配置文件后，使用webpack命令进行打包操作
+使用loader
+  1.下载
+  2.使用，配置loader
+使用插件
+  1.下载
+  2.引入
+  3.使用
+=================entry入口=======================
+在webpack.config.js文件中
+  module.exports = {
+    //单入口
+    //entry:'./src/js/index.js',
+    //多入口
+    entry: {
+      index: './src/js/index.js',
+      index2: './src/js/index2.js'
+    },
+  }
+=================output输出=======================
+在webpack.config.js文件中
+  const {resolve} = require('path');
+  module.exports = {
+    output: {
+      //单出口
+      //filename: './js/built-dev.js',
+      //多出口
+      filename: './js/[name]-built-dev.js',
+      // 输出路径写绝对路径
+      // __dirname nodejs的变量，代表当前文件的目录的绝对路径
+      path: resolve(__dirname, 'build')
+    }
+  }
+=================loader module=======================
+在webpack.config.js文件中
+  module.exports = {
+    module:[
+      //loader的配置
+      ....
+    ]
+  }
+转义js文件，排除node_modules中的文件
+  babel-loader
+  安装 cnpm i -D @babel/core @babel/preset-env babel-loader
+  配置
+    {
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
+        }
+      }
+    }
+css文件
+  style-loader
+  css-loader
+  安装  cnpm i -D style-loader css-loader
+  配置
+    {
+      // 检测  匹配哪些文件 值为正则表达式
+      test: /\.css$/,
+      // 使用哪些loader对文件进行处理
+      use: [
+        // use数组中的执行顺序：从右到左，从下到上
+        // 创建一个style标签，将js中的css样式资源插入进去，添加到页面head中生效
+        "style-loader",
+        // 将css文件变成commonJS的模块，加载到js中，里面内容是样式字符串
+        "css-loader",
+      ]
+    }
+less文件(less-loader依赖less)
+  style-loader
+  css-loader
+  less-loader
+  安装 cnpm i -D style-loader css-loader less-loader less
+  配置
+    {
+      test: /\.less$/,
+      use: [
+        // 创建style标签并添加到head中
+        'style-loader',
+        //将css处理成模块，整合到js中
+        'css-loader',
+        // 将less文件编译成css文件  需要下载less-loader 和less
+        'less-loader'
+      ]
+    }
+less和css中的图片使用，不处理html中的img
+  1.url-loader(url-loader依赖file-loader)
+    安装
+      cnpm i -D url-loader file-loader
+    配置
+      {
+        test: /\.(JPG|jpg|png|gif)$/,
+        // 下载url-loader和file-loader   url-loader依赖file-loader
+        use: 'url-loader',
+        options: {
+          //设置输出文件目录路路径
+          outputPath: 'images',
+          // 图片大小小于8kb,就会被base64处理， 8-12kb以下图片base64处理
+          // base64优点：减少请求数量（减轻服务器压力）
+          // base64缺点：图片体积会更大（文件请求速度会更慢）
+          limit: 8 * 1024,
+          // 给图片进行重命名  
+          // [hash:10]  取图片的hash的前10位
+          // [ext]取图片原来扩展名
+          name: '[hash:10].[ext]',
+        }
+      }
+  2.或者file-loader（file-loader不会使用base64处理小文件，原文件会保留）
+    安装
+      cnpm i -D url-loader file-loader
+    配置
+      {
+        test: /\.(JPG|jpg|png|gif)$/,
+        use: 'file-loader',
+        options: {
+          //设置输出文件目录路路径
+          outputPath: 'images',
+          // 给图片进行重命名  
+          // [hash:10]  取图片的hash的前10位
+          // [ext]取图片原来扩展名
+          name: '[hash:10].[ext]',
+        }
+      }
+html中的img图片使用（
+  html-loader（处理html中的image图片的,负责引入img，从而能被url-loader处理）
+  安装 cnpm i -D html-loader
+  配置
+    {
+      test: /\.html$/,
+      use: 'html-loader'
+    },
+其他文件（比如：字体文件）
+  排除之前已经loader配置过的文件
+  file-loader
+  安装 cnpm i -D file-loader
+  配置
+    {
+      exclude: /\.(html|js|less|css|png|jpg|gif|json)$/,
+      loader: 'file-loader',
+      options: {
+        name: "[hash:10].[ext]",
+        outputPath: 'media'
+      }
+    }
+=================plugin的配置=======================
+在webpack.config.js文件中
+  module.exports = {
+    plugins:[
+      //插件的配置  插件实例
+      ....
+    ]
+  }
+第三方插件：自动生成bundle的html文件
+  html-webpack-plugin
+  安装 cnpm i -D html-webpack-plugin
+  引入 const HTMLWebpackPlugin = require('html-webpack-plugin');
+  配置:
+    在出口目录中生成默认html文件
+      new HTMLWebpackPlugin()
+    或者在出口目录中生成指定模板html文件
+    new HTMLWebpackPlugin({
+      // 指定一个html文件，在改html文件中不需要引入出口js文件，会自动引入
+      template: './src/main.html'
+    })
+内置插件：最小化压缩，webpack4不支持如下写法了
+  安装 cnpm i -D webpack
+  引入 const webpack = require('webpack');
+  配置：
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false, },
+      output: { comments: false, } 
+    })
+  webpack4变为放在optimization(最优化)里面
+    安装
+      cnpm i -D uglifyjs-webpack-plugin 
+    引入
+      const UglifyJsPlugin=require('uglifyjs-webpack-plugin');
+    配置：
+    module.exports = {
+      optimization:{
+        minimizer:[
+          new UglifyJsPlugin({
+            uglifyOptions: {
+              output: {
+                comments: false
+              },
+              compress: {
+                warnings: false,
+                drop_debugger: true,
+                drop_console: true
+              }
+            }
+          })
+        ]
+      }
+    }
+内置插件：去重复（webpack4已将其废弃，默认webpack不引入重复的文件）
+  安装 cnpm i -D webpack
+  引入 const webpack = require('webpack');
+  配置：
+    new webpack.optimize.DedupePlugin()
+=================源映射source maps=======================
+source maps可以准确定位错误出现在具体哪个模块中
+source-map提供一种技术，提供源代码到构建后的代码的映射的技术，如果构建后代码出错了，通过映射关系可以追踪到源代码的错误，利于调试和找错误，使用webpack命令会生成xxx.map文件
+    inline-source-map 内联，构建速度更快，只生成一个内联source-map
+    hidden-source-map 外部
+    eval-source-map   内联，每一个文件生成一个对应的source-map，都在eval
+配置：
+  在webpack.config.js文件中
+  module.exports = {
+    devtool: 'inline-source-map'
+  }
+=================mode 模式=======================
+在webpack.config.js文件中
+  module.exports = {
+    // 模式配置  开发模式
+    mode: 'development',
+    // 模式配置  生产模式  压缩代码
+    // mode: 'production',
+  }
+=================webpack-dev-server 开发服务器=======================
+webpack-dev-server是一个简单的web服务器，在代码修改后能重新构建代码并且刷新浏览器
+自动化，自动编译，自动打开浏览器，自动刷新浏览器
+特点：只会在内存中共编译打包，不会有任何输出
+启动devServer指令为 webpack-dev-server   
+本地下载的话需要npx webpack-dev-server查找包并运行，可以将该命令配置到package.json中
+安装 cnpm i -D webpack-dev-server
+配置：
+  在webpack.config.js文件中
+  module.exports = {
+    devServer: {
+      // 运行的构建后的目录
+      contentBase: resolve(__dirname, 'build'),
+      // 启动gzip压缩
+      compress: true,
+      // 端口号，默认是8080
+      port: 3000,
+      // 是否自动打开浏览器
+      open: true
+    }
+  }

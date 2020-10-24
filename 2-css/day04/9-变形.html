@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>变形</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0px;
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            margin: 300px;
+            background-color: pink;
+            /* 变形 */
+            /* rotateX 绕X轴旋转30度 */
+            /* transform: rotateX(60deg); */
+            animation-name: test;
+            animation-duration: 3s;
+            /* animation-iteration-count: infinite; */
+            /* 变形原点 坐标原点 */
+            /* transform-origin: -20px -20px; */
+            /* left right center top bottom */
+            /* transform-origin: top right; */
+            /* transform-origin: bottom right; */
+            /* transform-origin: bottom center; */
+            /* transform-origin: center; */
+        }
+
+        @keyframes test {
+            from {
+                /* 旋转 */
+                transform: rotateX(0deg);
+                transform: rotateY(0deg);
+                transform: rotateZ(0deg);
+                transform: rotate(0deg);
+                /* 倾斜 */
+                transform: skewX(0deg);
+                transform: skewY(0deg);
+                /* 缩放 */
+                transform: scaleX(1);
+                transform: scaleY(1);
+                /* 平移 */
+                transform: translateX(0);
+                transform: translateY(0);
+                /* 在平移中旋转 */
+                transform: translateX(0) rotate(0deg);
+            }
+
+            to {
+                transform: rotateX(360deg);
+                transform: rotateY(360deg);
+                transform: rotateZ(360deg);
+                transform: rotate(360deg);
+                transform: skewX(120deg);
+                transform: skewY(120deg);
+                transform: scaleX(2);
+                transform: scaleY(2);
+                transform: translateX(-100px);
+                transform: translateY(200px);
+                transform: translateX(200px) rotate(360deg);
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>hello</div>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .pointer {
+            /* pointer 手型 */
+            cursor: pointer;
+        }
+
+        /* 嵌套选择器 */
+        div.pointer {
+            /* 等待 */
+            cursor: wait;
+            cursor: help;
+            cursor: crosshair;
+            cursor: text;
+            cursor: move;
+            cursor: n-resize;
+            cursor: ne-resize;
+            /* line-height 只能设置单行文本在height内垂直居中 */
+            line-height: 100px;
+            height: 100px;
+            border: 2px solid rgb(184, 102, 177);
+            /* 垂直方向对齐方式 */
+            /* vertical-align:bottom; */
+            /* 溢出处理  如果div不设置高，那么高由子元素撑起 */
+            /* 超出内容隐藏 */
+            /* overflow:hidden; */
+            /* 自动产生滚动条 */
+            overflow: auto;
+            /* 强制产生滚动条 */
+            /* overflow: scroll; */
+            /* overflow-y:hidden; */
+            /* overflow-x:hidden */
+        }
+    </style>
+</head>
+
+<body>
+    <button class="pointer">按钮</button>
+    <a class="pointer" href="">超链接</a>
+    <div class="pointer">
+        查看不同的光标
+        <br>
+        dididi
+    </div>
+</body>
+
+</html>

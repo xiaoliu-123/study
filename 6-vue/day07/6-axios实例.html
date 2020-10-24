@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>axios</title>
+  <script src="../js/axios-0.20.0.js"></script>
+  <script src="../js/qs-6.9.4.min.js"></script>
+  <script>
+    let qs = Qs
+    //axios.get()
+    // 创建axios实例,并设置默认值
+    let instance = axios.create({
+      method: 'post',
+      headers: {
+        "Auth2": "token123"
+      },
+      timeout: 2000,
+      baseURL: 'http://47.106.244.1:8099'
+    });
+    // instance.get('http://47.106.244.1:8099/manager/category/findAllCategory')
+    instance({ url: '/manager/category/findAllCategory' })
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

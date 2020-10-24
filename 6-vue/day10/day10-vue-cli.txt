@@ -1,0 +1,42 @@
+vue-cli
+  Vue.js 开发的标准工具，搭建vue项目的脚手架
+安装
+  npm install -g @vue/cli
+是否安装成功
+  vue --version或者vue -V
+创建项目
+  vue create my-project
+进入项目
+  cd my-project
+启动项目
+  yarn serve
+暴露webpack配置
+  vue-cli-service 暴露了 inspect 命令用于审查解析好的 webpack 配置
+  vue inspect > output.js
+
+  vue-cli-service传递给webpackDevServer，通过webpackDevServer实现自动编译和热更新。
+
+  注意在创建项目的时候：
+    1.项目版本为2.x
+    2.集成babel
+    3.集成vuex
+    4.集成vue-router
+    5.css预处理器less
+    6.单独的配置文件
+    7.保存为babel-router-vuex
+  在vue-cli中添加element，使用vue add element命令
+    注意在引入elementui的时候，全部引入，覆盖变量，ZH-CN
+  elementui官网 
+    https://element.eleme.cn/#/zh-CN
+如果要配置webpack，在项目根目录下创建vue.config.js,内部编写webpack的配置，会与vue-cli内部的webpack进行合并。比如设置webpack-dev-server的默认浏览器打开和.修改端口号等等..
+
+熟悉vue-cli项目内的vue-router和vuex的使用
+在vue-cli项目中引入axios，并进行默认配置和拦截器
+在vue-cli工具中使用elementui组件库
+
+vscode中新建用户代码片段
+  1.首选项->用户代码片段
+  2.新建全局代码片段文件
+    输入文件名，比如vue.json
+    内部内容参考vue.json文件内容
+  3.在vue文件中输入vue调用用户代码片段

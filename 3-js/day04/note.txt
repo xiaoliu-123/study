@@ -1,0 +1,113 @@
+属性
+  数据属性
+    configurable
+    enumerable
+    writable
+    value
+  访问器属性
+    configurable (默认false)
+    enumerable   (默认false)
+    get 
+    set
+  定义属性
+    Object.defineProperty(obj,'name',{
+        configurable:false,
+        enumerable:false,
+        writable:false,
+        value:'lili,
+    })
+    //访问器属性
+    Object.defineProperty(obj,'name',{
+        configurable:true,
+        enumerable:true,
+        get:function(){},
+        set:function(){}
+    })
+    //同时定义多个属性
+    Object.defineProperties(obj,{
+        name:{
+            writable:false,
+        },
+        weight:{
+            get:function(){},
+            set:function(){}
+        }
+    })
+
+    获取属性描述特征的对象，获取属性描述符对象
+    var result = Object.getOwnPropertyDscriptor(obj,'name');
+    //result内每一个属性特性的值
+    configurable
+      是否可删除，是否可重新定义该属性
+    enumerable
+      是否可枚举，是否可以使用for-in遍历出来
+    writable
+      值是否可修改
+    value
+      设置属性的值
+    get
+      函数，如果访问访问器属性，调用该函数，可以监听用户是否获取该访问器属性
+    set
+      函数，如果设置访问器属性，调用set方法，可以监听用户是否设置该访问器属性
+
+
+    Vue框架中有个双向数据绑定
+      A  B
+      数据模型中的数据发生变化，视图中的对应位置也发生变化
+      视图中的对应位置也发生变化，数据模型中的数据发生变化
+      
+实例什么情况下会调用原型中的方法？
+  实例没有该方法的时候会调用原型中的，如果实例有该方法，那么不调用原型中的方法，调用自己的。
+
+
+m+n 
+  m,n 如有一个字符串，另一个是基本数据类型，拼接
+  m,n 都是除了字符串类型外的其他基本数据类型，转number累加
+  m,n 中有一个是对象，如果重写了valueOf，用valveOf返回值，如果没有，用重写的toString方法返回值，如果还没有，用原型中的toString方法返回值。拿到返回值之后，继续判断。
+
+
+函数
+  普通函数  封装代码
+  方法      对象内的函数
+  构造函数  Object 用来创建实例
+
+
+  function test(){
+    ...
+  }
+  test()
+  
+  var obj = {
+    name:'',
+    sayName:function(){},  //方法
+    test:test,              //把该变量对应的值放到这
+    test:function(){...},
+    test1:test,
+  }
+  test();
+  obj.test1=test;
+
+
+//函数会提升到最顶部  变量会提升到顶部
+
+函数声明
+  function 函数名(形参列表){
+    //函数体
+  }
+函数表达式
+  var test = function(形参列表){
+    //函数体
+  }
+
+
+函数内的属性
+  arguments
+    类数组对象，存实参
+    arguments.callee==>函数本身
+
+
+
+
+
+
+

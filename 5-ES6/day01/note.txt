@@ -1,0 +1,12 @@
+安装工具
+cnpm install -g babel-cli
+安装转换规则
+cnpm install -g babel-preset-latest
+
+babel工具在项目开发阶段使用的工具
+jquery是在产品阶段使用的工具
+
+    npm install -g cnpm 全局安装cnpm
+    npm install --save-dev babel-cli 开发阶段
+    npm install --save jquery        产品阶段
+E:\briup\7-ES6\day01>cnpm install --save-dev babel-cli babel-preset-latest 在day01中安装

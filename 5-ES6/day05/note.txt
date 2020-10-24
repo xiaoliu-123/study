@@ -1,0 +1,32 @@
+
+Symbol
+  Symbol('描述')
+  Symbol('描述')
+  Symbol.for('描述')
+
+Promise对象
+  容器，内部存放将来才会执行完毕的代码，
+  比如说是一个异步函数
+  
+
+
+在网页创建了一个远程仓库。git地址
+克隆远程仓库到本地
+	git clone 仓库地址
+更新本地代码，将远程仓库代码更新到本地
+	git pull origin master
+上传本地仓库代码到远程仓库，上传之前一定先更新
+	git add *
+	git commit -m '提交代码的说明'
+	git push origin master
+  
+假设现在有一个本地项目，上传到码云
+  需要创建一个远程仓库
+  将本地项目初始化为本地仓库
+    git init
+    会产生一个.git隐藏文件
+  将本地仓库与远程仓库绑定
+    git remote add origin https://gitee.com/xiaoliu-123/test2.git
+  更新与提交操作
+
+https://github.com/xiaoliu-123/test3.git

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>axios</title>
+  <script src="../js/axios-0.20.0.js"></script>
+  <script src="../js/qs-6.9.4.min.js"></script>
+  <script>
+    let qs = Qs
+    axios({
+      //配置对象
+      url: 'http://47.106.244.1:8099/manager/category/findAllCategory',
+      method: 'post',
+      // get 带参，参数带在params上  get请求不用设置请求头
+      // params: { id: 1 },
+      // post 带参，参数带在data上  请求体
+      //在data上设置相应格式的数据就可以不设置请求头的Content-Type
+      data: qs.stringify({ name: 'zhangsan' }),
+      //头部
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+      }
+    })
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

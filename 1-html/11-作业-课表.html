@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>课表</title>
+    <style>
+        table{
+            border:1px solid #dedede;
+            /* width:600px; */
+            margin: 50px auto;
+            /* 合并边框 */
+            border-collapse: collapse;           
+        }
+        thead{
+            background-color:#F1F7F7;
+        }
+        th{
+            border-top:1px solid #dedede; 
+            border-bottom:1px solid #dedede; 
+        }
+        td{
+            /* width:100px; */
+            height: 40px;
+            border-top:1px dashed #dedede; 
+            border-bottom:2px dashed #dedede; 
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <colgroup>
+            <col span="1" style="background-color: #F1F7F7;">
+        </colgroup>
+        <thead>
+            <tr>
+                <th ></th>
+                <th>周一</th>
+                <th>周二</th>
+                <th>周三</th>
+                <th>周四</th>
+                <th>周五</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td width="25px">1<br>8:30</td>
+                <td rowspan="2" width="100px" bgcolor="#ED5565">大学英语</td>
+                <td></td>
+                <td rowspan="2" width="100px" bgcolor="#4BAAE3">大学体育</td>
+                <td width="100px"></td>
+                <td width="100px"></td>
+            </tr>
+            <tr>
+                <td>2<br>9:30</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>3<br>10:30</td>
+                <td></td>
+                <td rowspan="2" bgcolor="#FDD06C">信号与系统</td>
+                <td rowspan="2" bgcolor="#58DA9D">形式与政策</td>
+                <td></td>
+                <td rowspan="2" bgcolor="#73D4E6">数据结构与算法分析</td>
+            </tr>
+            <tr>
+                <td>4<br>11:30</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>5<br>12:30</td>
+                <td></td>
+                <td rowspan="2" bgcolor="#58DA9D">模拟电子技术基础</td>
+                <td></td>
+                <td rowspan="2" bgcolor="#3E55B2">电装实习</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>6<br>14:30</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>7<br>15:30</td>
+                <td rowspan="2" bgcolor="#F0D154">毛概</td>
+                <td></td>
+                <td rowspan="2" bgcolor="#51DBC3">电路、信号与系统实验</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>8<br>16:30</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>9<br>17:30</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td rowspan="2" bgcolor="#6440B5">信号与系统</td>
+            </tr>
+            <tr>
+                <td>10<br>18:30</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td rowspan="2" bgcolor="#F1DA56">大学体育</td>
+            </tr>
+            <tr>
+                <td>11<br>19:30</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>12<br>20:30</td>
+                <td bgcolor="#78C0CC">选修</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本修饰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 80%;
+            /* 中划线 删除线 */
+            text-decoration-line: line-through;
+            /* 下划线 */
+            text-decoration-line: underline;
+            /* 上划线 */
+            /* text-decoration-line:overline; */
+            /* 实线 */
+            text-decoration-style: solid;
+            /* 虚线 */
+            text-decoration-style: dashed;
+            /* 点状线 */
+            text-decoration-style: dotted;
+            /* 双实线 */
+            text-decoration-style: double;
+            /* 波浪线 */
+            text-decoration-style: wavy;
+            ;
+            /* 颜色 */
+            text-decoration-color: red;
+
+            /* 速写属性 */
+            text-decoration: line-through solid #777;
+            /* border: 1px solid red; */
+
+            /* 阴影 */
+            font-size: 50px;
+            text-shadow: 3px 3px 2px #999999;
+            box-shadow: 0px 0px 10px #999999;
+            margin: 100px;
+        }
+
+        a {
+            /* a标签去除下划线 */
+            text-decoration: none;
+        }
+
+        /* 将ul内的li一行显示 列表项编号不在了 */
+        li {
+            /* 将块级元素行内显示 */
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+    <div>你好，Hello</div>
+    <!-- <del>删除线</del> -->
+    <a href="http://www.baidu.com">百度一下</a>
+    <ul>
+        <li>Java</li>
+        <li>JS</li>
+        <li>Html</li>
+    </ul>
+</body>
+
+</html>

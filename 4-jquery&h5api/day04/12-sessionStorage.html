@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sessionStorage-WebStorage</title>
+    <!-- sessionStorage是WebStorage的一种 -->
+    <script>
+        //设置内容，存储内容
+        //一个选项卡，一个sessionStorage，选项卡一关，sessionStorage就没了
+        sessionStorage.setItem('name', 'zhangsan');
+        //获取内容
+        console.log(sessionStorage.getItem('name'));
+        //清空  只是清空value值
+        sessionStorage.clear();
+        //移除
+        sessionStorage.removeItem('name')
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

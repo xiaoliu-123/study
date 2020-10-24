@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class</title>
+    <script src="../js/vue-2.6.12.js"></script>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .size {
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="red" :class="{size:true}">hello</div>
+        <div :class="{red:false,size:true}">world</div>
+        <div :class="[{red:true},{size:false}]">hello world</div>
+    </div>
+    <script>
+
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello',
+
+            },
+            methods: {
+
+            },
+        })
+    </script>
+</body>
+
+</html>

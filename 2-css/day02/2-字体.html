@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字体属性</title>
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <style>
+        div {
+            border: 2px solid rgb(71, 63, 124);
+            /* 字体家族 */
+            /* serif 有衬线字体 */
+            font-family: serif;
+            /* sans-serif 无衬线字体 */
+            font-family: sans-serif;
+            /* 梦幻字体 */
+            font-family: fantasy;
+            /* cursive 草书字体 */
+            font-family: cursive;
+
+            /* 宋体 */
+            font-family: 宋体;
+            /* font-family:微软雅黑; */
+            /* font-family:华文行楷; */
+            /* 字体栈 */
+            /* font-family:雅痞-简,华文行楷,cursive,宋体; */
+
+            /* font-family: webfont; */
+
+            /* italic斜体  oblique模拟斜体 normal正常字体 */
+            font-style: italic;
+            /* bold加粗字体 */
+            font-weight: bold;
+            font-weight: 700;
+
+            /*文字排列方式 text-align: right; */
+            text-align: center;
+            /* 字体变形 */
+            /* 字母全大写 */
+            text-transform: uppercase;
+            /* 字母全小写 */
+            text-transform: lowercase;
+            /* 首字母大写 */
+            text-transform: capitalize;
+            /* 等宽 */
+            text-transform: full-width;
+            /* 不变形 */
+            text-transform: none;
+        }
+
+        p {
+            font-family: 宋体;
+            /* 等宽字体家族 */
+            font-family: monospace;
+        }
+
+        /* ttf文件，字体文件，可以使用网络字体 */
+        /* 声明网络字体 */
+        @font-face {
+            /* 字体家族名称 */
+            font-family: webfont;
+            src: url(./fonts/令东齐伋体.ttf);
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        字体设置 Font系列和Text系列
+    </div>
+    <p>字体设置 Font系列和Text系列</p>
+    <br>
+
+    <i class="fa fa-camera-retro"></i> fa-camera-retro
+
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+基本数据类型
+    var str='hello';
+    string类型
+    str.split('');
+    string类型
+    自动装箱和自动拆箱
+
+
+基本数据类型没有属性和方法，但是
+
+
+js的内置对象和函数有哪些
+    Object,Array,Number,Boolean,String,RegExp,Math,Date
+    //Array.isArray()
+    isNaN()
+    isFinite()
+
+var arr = [year,month,day];
+var arr = [hours,minutes,seconds];
+arr.join('-')+' '+arr.join(':');
+
+
+时间戳
+    当前时间距离格林威治时间的（1970-01-01 00：00：00）毫秒数，秒数
+        13位毫秒数  10位秒数
+
+
+
+批量创建对象
+    4种方式
+        工厂模式         不能识别对象
+        构造函数模式     方法冗余
+            new Object()  
+            new Array()
+            new String()
+            String()  //不加new 就是普通函数的调用
+        原型模式         属性和方法都在原型中
+        组合模式（原型+构造函数模式）  //最重要
+            公共的属性和方法放到原型对象中
+            实例的私有属性和方法，放到构造函数中
+继承
+    3种方式
+    原型链继承
+        每个构造函数都有一个原型对象，原型对象中都包含一个指向构造函数的指针，而实 例都包含一个指向原型对象的内部指针。
+        当原型对象等于另外一个类型的实例即继承。
+        Dog.prototype = new Animal();
+    构造函数继承(经典继承)
+        在子类型构造函数的内部调用超类型构造函数
+        Animal.call(this,name);
+    组合继承（原型链继承+构造函数继承）
+
+
+子构造函数的实例可以调用父构造函数的原型中的属性和方法
+var arr = [];
+arr.toString();
+
+实例使用属性和方法
+    1.从实例对象本身查找属性或者方法
+    2.如果实例中没有，从构造函数的原型对象中找
+    3.如果还没有，从父构造函数的原型对象中找
+
+
+promise 
+        then resolve  
+        catch  reject
+
+async  内部封装了generator函数
+axios和jquery的ajax的区别

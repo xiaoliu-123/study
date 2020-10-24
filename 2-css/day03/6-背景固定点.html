@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>背景固定点</title>
+    <style>
+        /* 首先测试body背景图片的固定点 */
+        body {
+            height: 1000px;
+            /* background-image: url(./images/图标.jpg); */
+
+            /* 设定背景图片的固定点 */
+            /* 背景图片与元素绑定  背景图片随着页面的滚动而滚动*/
+            background-attachment: scroll;
+            /* 背景图片与元素内容绑定  背景图片随着页面的滚动而滚动*/
+            background-attachment: local;
+            /* 背景图片与视口区绑定 背景图片不随着页面的滚动而滚动*/
+            background-attachment: fixed;
+        }
+
+        /* 其次再测试div背景图片的固定点 */
+        div {
+            width: 300px;
+            height: 300px;
+            overflow: auto;
+            border: 1px solid red;
+            background-image: url(./images/图标.jpg);
+            /*背景图片绑定在元素上 背景图片不动 */
+            background-attachment: scroll;
+            /*背景图片绑定在元素内容上 背景图片动 */
+            background-attachment: local;
+            /*背景图片绑定在视口区 背景图片不动 */
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+
+<body>
+    hello
+    <div>
+        start
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        end
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node</title>
+    <script>
+        window.onload = function () {
+            //Node类型的属性和方法
+            //Body节点
+            var body = document.body;
+            // console.log(body);
+            //查看节点类型， 9Document 1Element 3Text 8Comment
+            console.log(body.nodeType);
+            //获取节点名称，返回纯大写的节点名称
+            console.log(body.nodeName);
+            //获取子节点
+            console.log(body.childNodes);
+            var childs = body.childNodes;
+
+            console.log('-------------------------');
+            console.log(childs[1].previousSibling);
+            console.log(childs[1].nextSibling);
+            console.log(childs[1].parentNode);
+            console.log(body.firstChild);
+            console.log(body.lastChild);
+            console.log(body.ownerDocument);
+
+            console.log(Array.isArray(childs));
+            //将类数组转成数组
+            // var arr = Array.prototype.slice.call(childs, 0);   //ES5
+            // console.log(arr);
+            var arr = Array.from(childs);  //ES6
+            // console.log(arr);
+            //实现从孩子节点中过滤出元素节点
+            var result = arr.filter(function (arr) {
+                return arr.nodeType === 1;
+            });
+            console.log(result);
+            //获取某一元素节点内的元素孩子节点
+            //.children  Element属性的类型和方法
+            console.log(body.children);
+        }
+    </script>
+</head>
+
+<body>
+    hello
+    <div id="one" class="two">
+        div的内容
+    </div>
+
+    world
+    <!-- 注释 -->
+</body>
+
+</html>

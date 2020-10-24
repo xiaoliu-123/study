@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax</title>
+    <script src="../js/jquery-3.5.1.js"></script>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+
+        table {
+            margin-top: 10px;
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            line-height: 30px;
+        }
+    </style>
+    <script>
+        //设置基础URL
+        var baseURL = 'http://120.26.176.26:7788';
+
+        //if判断是解决刷新页面之后带不上toktn
+        if (sessionStorage.getItem('token')) {
+            $.ajaxSetup({
+                headers: {
+                    "Authorization": sessionStorage.getItem('token')
+                }
+            })
+        }
+
+        $(function () {
+            //Auth2认证  JWT认证  token
+            //登录功能:访问后台接口获取token，将token存到sessionStorage
+            $('.login').click(function () {
+                var user = {
+                    username: 'admin1',
+                    password: '123321',
+                };
+                $.ajax({
+                    url: baseURL + '/user/login',
+                    method: 'post',
+                    data: JSON.stringify(user),
+                    headers: {
+                        //设置JSON
+                        "Content-Type": "application/json"
+                    },
+                    success: function (res) {
+                        // console.log(res);
+                        // res.data.token
+                        sessionStorage.setItem('token', res.data.token);
+                        //配置全局ajax,注意当前sessionStorage还没有token
+                        $.ajaxSetup({
+                            headers: {
+                                "Authorization": sessionStorage.getItem('token')
+                            }
+                        })
+
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    },
+                });
+            });
+            //获取数据功能：点击获取数据按钮，发起请求，请求携带token，获取响应，遍历用户数据，生成tr，追加到tbody中
+            $('.load').click(function () {
+                $.ajax({
+                    url: baseURL + '/baseUser/cascadeRoleFindAll',
+                    method: 'get',
+                    success: function (res) {
+                        //清空tbody数据
+                        $('.tables tbody').empty();
+                        console.log(res, '------');
+                        res.data.forEach(function (item, index) {
+                            //item-->每一个用户对象
+                            var newTr = $(`
+                                <tr>
+                                    <td>
+                                        <input type="checkbox">
+                                    </td>
+                                    <td>${index + 1}</td>
+                                    <td>${item.username}</td>
+                                    <td>${item.realname}</td>
+                                    <td>${item.roles.map(function (it) { return it.name }).join()}</td>
+                                    <td>${item.gender === 'male' ? '男' : '女'}</td>
+                                    <td>${item.status}</td>
+                                    <td>${item.telephone}</td>
+                                    <td>
+                                        <button data-id="${item.id}" class="deleteBtn">删除</button>
+                                        <button>修改</button>
+                                    </td>
+                                </tr>
+                            `);
+                            $('.tables tbody').append(newTr);
+                        })
+                    },
+                    error: function (err) {
+                        console.log(err, '++++++');
+                    }
+                });
+            });
+            //单个删除：获取到当前要删除的用户的id，确认是否真的要删除，如果是真的，拿到id给后台，后台删除成功之后，再次查找数据局部刷新页面
+            //事件代理
+            $('.tables tbody').on('click', '.deleteBtn', function () {
+                // console.log(this);
+                //获取data-id值 
+                //attr('name','test') attr获取属性值  如果是两个参数：设置属性值
+                var id = $(this).attr('data-id');
+                // console.log(id);
+                if (confirm('确认删除吗？')) {
+                    $.ajax({
+                        url: baseURL + '/baseUser/deleteById',
+                        method: 'get',
+                        //第一个id与后台对应的，后台的单个删除接口需要一个参数id
+                        //第二个id是变量id，是要删除的用户的id
+                        data: { id: id },
+                        success: function (res) {
+                            console.log(res);
+                            $('.load').trigger('click');
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+            });
+        })
+    </script>
+</head>
+
+<body>
+    <div class="btns">
+        <button class="login">登录</button>
+        <button class="load">加载数据</button>
+        <button>新增</button>
+        <button>批量删除</button>
+
+    </div>
+    <!-- 表格 -->
+    <div class="tables">
+        <!-- 追加到表格中数据 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox">
+                    </th>
+                    <th>编号</th>
+                    <th>用户名</th>
+                    <th>姓名</th>
+                    <th>角色</th>
+                    <th>性别</th>
+                    <th>状态</th>
+                    <th>手机号</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>编号</td>
+                    <td>用户名</td>
+                    <td>姓名</td>
+                    <td>角色</td>
+                    <td>性别</td>
+                    <td>状态</td>
+                    <td>手机号</td>
+                    <td>操作</td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

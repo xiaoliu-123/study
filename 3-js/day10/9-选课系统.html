@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选课系统</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/qs/6.9.4/qs.min.js"></script>
+    <script src="./utils.js"></script>
+    <script>
+        var user = {
+            username: 'admin1',
+            password: '123321'
+        };
+        login(user);
+        //调用postJson
+        /*
+        myAjax.postJson('/a', { name: 'zhangsan' }, function (res) {
+            console.log(res);
+        }, function (error) {
+            console.log(error);
+        })
+        */
+
+        //调用postForm
+        /*
+        myAjax.postJson('/a', { name: 'zhangsan' }, function (res) {
+            console.log(res);
+        }, function (error) {
+            console.log(error);
+        })
+        */
+
+        //测试get
+        /*
+        myAjax.get('/baseUser/findAll', null, function (res) {
+            console.log(res);
+        }, function (error) {
+            console.log(error);
+        })
+        */
+
+        window.onload = function () {
+            var main = document.getElementById('main');
+            //查找所有用户数据
+            findAll();
+            deleteById(43);
+            //删除一个用户，删除完用户后再查找一下用户信息
+            function deleteById(id) {
+                myAjax.get('/baseUser/deleteById', { id: id }, function (res) {
+                    console.log(res);
+                    findAll();
+                }, function (error) {
+                    console.log(error);
+                })
+            }
+
+
+
+
+            function findAll() {
+                myAjax.get('/baseUser/findAll', null, function (res) {
+                    // console.log(res);
+                    //将数据显示在页面上
+                    main.innerHTML = JSON.stringify(res);
+                    //遍历数据，展示表格
+
+                }, function (error) {
+                    console.log(error);
+                })
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="main"></div>
+</body>
+
+</html>

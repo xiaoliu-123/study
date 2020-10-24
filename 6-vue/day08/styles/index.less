@@ -1,0 +1,30 @@
+//声明变量
+/* @mycolor:red;
+body{
+  //使用变量
+  color:@mycolor;
+}
+ */
+
+//混合
+// .one{
+#one{
+  color:teal;
+  // font-size: 30px+10cm;  407px
+  // font-size: 3rem+10;  //13rem
+  // font-size: 3rem+10px;  //13rem
+  // font-size: 10+10px;  //20px
+  font-size: 2 + 5px - 3cm; //-106.38582677px
+  //总结：操作数 m+n 
+  /* 如果m,n都是绝对单位，单位转换再计算
+    如果m,n有一个是相对单位，有一个是绝对单位，操作符左侧单位为准
+    如果m,n只有一个有单位，有单位的那个为准
+  */
+  
+}
+body{
+  background-color: #ccc;
+  //使用混合
+  // .one()
+  #one()
+}

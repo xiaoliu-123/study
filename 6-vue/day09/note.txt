@@ -1,0 +1,205 @@
+
+
+其特殊的文件想要在html中使用，需要经过特殊的处理...
+如果项目中有特殊的文件，需要转换后在引入到html文件
+  a.less--->lessc a.less a.css
+  手动的将a.css文件引入到html中
+  ......
+
+工具：webpack      webpack基于nodeJS平台开发
+  前端资源编译器 （less-->css  es6-->es5）
+  静态资源打包工具（捆 束）
+    html css js png...
+
+index.js
+  import {b} from 'a.js'
+  import {a} from 'b.js'
+  //less  vue  需要额外处理
+  import 'a.less'
+  import 'c.less'
+  //png  需要额外处理
+  import a from 'a.png'
+模块依赖图
+  index.js
+  |      |
+  a.js   b.js
+
+Node.js而言 一个js文件就是一个模块
+
+webpack可以识别js、json文件
+
+使用webpack
+  全局安装
+    npm i -g webpack webpack-cli
+  局部安装
+    cnpm install --save-dev webpack webpack-cli
+    简写
+    cnpm i -D webpack webpack-cli
+  产品依赖（webpack不在产品阶段安装）
+    cnpm install --save webpack webpack-cli
+构建
+  webpack src/a.js -o dist/a.js
+
+
+
+
+
+
+*************************操作*************************
+基础操作
+  index.js webpack的入口文件
+  1.运行指令
+    开发环境 webpack ./src/index.js -o ./dist/index-dev.js --mode=development
+      webpack以./src/index.js为入口文件开始打包，打包到index-dev.js
+      整体打包环境，开发环境 
+    生产环境 webpack ./src/index.js -o ./dist/index-pro.js --mode=production
+      整体打包环境，生产环境
+  2.注意
+    webpack能处理js和json文件，不能处理css和image资源
+    生产环境和开发环境将ES的模块化编译成浏览器能识别的模块化
+    生产环境比开发环境多一个压缩js代码
+  3.loader
+    定义配置文件
+
+高级操作，使用webpack.config.js配置文件===========
+项目中有了webpack.config.js配置文件后，使用webpack命令进行打包操作
+使用loader
+  1.下载
+  2.使用，配置loader
+使用插件
+  1.下载
+  2.引入
+  3.使用
+
+=========================入口==========================
+在webpack.config.js文件中
+  module.exports={
+    //单入口
+    //entry:'./src/index.js'
+    //多入口
+    entry:{
+      index1:'./src/index.js',
+      indexa:'./src/js/a.js'
+    },
+  }
+
+======================output输出=======================
+在webpack.config.js文件中
+  const {resolve} = require('path');
+  module.exports={
+    output:{
+      //单出口
+      //filename:'./js/index-dev.js'
+      //多出口
+      // [name]是入口对象的属性名
+      filename:'./js/[name]-dev.js'
+      //输出路径写绝对路径
+      //__dirname nodejs的变量，代表当前文件的目录的绝对路径
+      path:resolve(__dirname,'dist')
+    }
+  }
+
+=====================loader module====================
+在webpack.config.js文件中
+  module.export={
+    module:{
+      //loader的配置
+      rules:[
+        //处理css文件
+        {
+          test:/\.css$/i,
+          //use:['style-loader','css-loader']
+          //use:'file-loader'
+          use:[{
+            loader:'file-loader',
+            options:{
+              outputPath:'styles'
+            }
+          }]
+        },
+
+        //处理less文件
+        {
+          test:/\.less$/i,
+          use:["style-loader","css-loader","less-loader"]
+        },
+        //处理html中的image
+        {
+          test:/\.html$/i,
+          use:'html-loader'
+        },
+
+        //处理图片文件 css中用到的图片
+        {
+          test:'/\.jpg|png|gif$/i',
+          //use:'file-loader'
+          use:[{
+            loader:'file-loader',
+            options:{
+              outputPath:'images'
+            }
+          }]
+        },
+
+      ]
+    }
+  }
+
+====================plugin的配置=======================
+安装cnpm i -D html-webpack-plugin
+在webpack.config.js文件中
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+
+  module.export={
+    plugins:[
+      //插件的配置  插件实例
+      // new HtmlWebpackPlugin
+      new HtmlWebpackPlugin({
+        //以指定的html模板生成html
+        template: './src/main.html'
+      })
+    ]
+  }
+
+=======================mode 模式=========================
+在webpack.config.js文件中
+  module.exports={
+    //打包模式设置
+    mode: 'development',
+    // mode:'production',
+  }
+
+===========webpack-dev-server 开发服务器======================
+安装cnpm i -D webpack-dev-server
+在webpack.config.js文件中
+  module.exports={
+    devServer:{
+      //构建后的目录  一般是打包后的文件存储的目录
+      contentBase:resolve(__dirname,'dist'),
+      //是否gzip压缩
+      compress:true,
+      //端口号 默认8080
+      port:3000,
+      //是否自动打开浏览器
+      open:true
+    }
+  }
+
+
+
+
+插件
+  先下载  cnpm i -D html-webpack-plugin
+  引入
+  使用
+
+css file-loader 可以单独打出css文件
+css style-loader css-loader  js内，style标签
+
+index.css  ==>style-loader  css-loader
+  import './a.css'
+  import './b.css'
+  import './c.css'
+a.css |
+b.css |  ==> file-loader
+c.css |

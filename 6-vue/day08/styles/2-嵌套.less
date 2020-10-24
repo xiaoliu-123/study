@@ -1,0 +1,35 @@
+
+#one>a{
+  color: purple;
+  font-size: 20px;
+}
+//嵌套功能
+
+body{
+  background-color: #ccc;
+  div{
+    color: red;
+  }
+  // 在嵌套功能中&代表当前所处代码块的选择器
+  &>a{
+    text-decoration: none;
+  }
+  &:hover{
+    background-color: rosybrown;
+  }
+}
+
+// body div>*:first-child span{}
+body{
+  div{
+    &>*{
+      &:first-child{
+        span{
+          color: blue;
+        }
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,8 @@
+
+
+vue 虚拟操作 虚拟dom 虚拟节点
+
+MVVM模式
+ Model 数据模型
+ View  视图
+ VM  ViewModel  视图模型

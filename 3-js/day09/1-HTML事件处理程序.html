@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML事件绑定</title>
+    <script>
+        //事件处理程序
+        //第一个默认事件对象
+        function test(event, a, b) {
+            console.log(1);
+            console.log(event, a, b);
+        }
+        window.onload = function () {
+            //事件处理程序不要写在这里
+        }
+    </script>
+</head>
+
+<body>
+    <div onclick="console.log(1)">
+        点击我
+    </div>
+    <div onclick="test()">
+        点击我2
+    </div>
+    <!-- 点击onclick时，test函数要运行，要加() -->
+    <div onclick="test(event,10,20)">
+        点击我3
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>location对象</title>
+    <script>
+        //注意查看对象内的属性，属性里有地址栏的所有信息
+        // console.log(location);
+        console.log(window.location === location);
+        console.log(document.location === location);
+        console.log(document.location === window.location);
+        //打开新页面的方法
+        window.onload = function () {
+            var btns = document.getElementsByTagName('button');
+            btns[0].onclick = function () {
+                //跳转页面,产生历史记录
+                location.assign('./2-时间.html');
+                // location = './2-时间.html';
+                // location.href = './2-时间.html';
+                //与location没有任何关系  在新选项卡打开页面
+                // window.open('./2-时间.html');
+            }
+            btns[1].onclick = function () {
+                //替换页面,不会产生历史记录
+                location.replace('./2-时间.html');
+            }
+            btns[2].onclick = function () {
+                //刷新操作，默认参数是false，以有效的方式刷新页面，可能会从缓存中获取，如果参数设置为true,强制从服务器加载刷新
+                location.reload();
+            }
+            btns[3].onclick = function () {
+                //通过历史记录打开下一页
+                history.forward();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    Location对象
+    <button>跳转页面</button>
+    <button>替换页面</button>
+    <button>刷新页面</button>
+    <button>下一页</button>
+</body>
+
+</html>

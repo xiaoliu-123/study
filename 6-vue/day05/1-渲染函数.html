@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渲染函数</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <my-a :level='2'>
+            <template #default>default</template>
+            <template #header>header</template>
+        </my-a>
+    </div>
+    <script>
+        // h1~h6
+        let myA = {
+            props: {
+                level: {
+                    type: Number,
+                    required: true
+                }
+            },
+            /* render(createdElement) {
+                //JSX
+                return (<div>hello</div>)
+            } */
+
+
+
+            render(createElement) {
+                return createElement(
+                    'h' + this.level,
+                    //相当于slot声明
+                    this.$slots.header
+                    // {
+                    // default: default模板,
+                    // header: header模板,
+                    // }
+                )
+            }
+
+            /* render(createElement) {
+                //createElement() 创建出vnode
+                //参数：第一个节点名称，第二个是对象可省略，第三个孩子节点
+                return createElement('div', { attrs: { id: '1', title: 'test' } }, '文本')
+            } */
+
+            /* template: `
+                <div>hello world</div>
+            ` */
+
+        }
+        Vue.component('my-a', myA);
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello'
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

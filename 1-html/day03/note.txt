@@ -1,0 +1,42 @@
+HTML 表单
+HTML5表单新增特性
+表单控件 
+  radio
+    <input type="radio"> 单选按钮
+  checkbox
+    <input type="checkbox"> 复选按钮
+
+查询字符串
+  ?username=张三$password="123"
+
+  表单控件的name属性值，是将来提交给后台的属性名，提交给后台的属性值是用户在表单控件上输入的信息
+
+  表单默认提交的方式是get方式，get方式典型特征，用户信息在地址栏中可以看到，get方式不安全。因为是在地址栏中，所以提交的数据量有限制。
+
+  post方式，用户信息在请求报文的请求体里。比较安全，提交的数据量比较大
+
+
+  <input type="submit" value="提交按钮文本">
+  <button type="submit">提交按钮文本</button>
+  写在表单内的<button></button>默认有提交表单的功能
+  写在表单外的<button></button>没有提交表单的功能
+  
+  <button>提交</button>       在表单内：能提交  在表单外：不能提交
+  <input type="submit" value="提交">         能提交
+  <button type="submit">提交按钮</button>    能提交
+  <button type="button">普通按钮</button>  不能提交
+  <input type="button" value="普通按钮">   不能提交
+  
+  <button type="reset">重置按钮</button>
+
+  type="hidden"
+    不可见，数据可提交
+    
+  disabled
+    可见，不可操作，不可提交
+  readonly,只读
+    可见，不可操作，可提交
+
+  
+        
+        

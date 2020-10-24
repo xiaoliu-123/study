@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //创建Promise对象
+        let p1 = new Promise((resolve, reject) => {
+            //resolve,reject是回调函数
+            //resolve()函数是promise对象最终状态为成功状态
+            //reject()函数是promise对象最终状态为失败状态
+            if (5 > 3) {
+                resolve('hello');
+            } else {
+                reject('error');
+            }
+        });
+
+        //如果then里面提供了两个回调函数，分别代表resolve()和reject()
+        p1.then((res) => {
+            console.log('成功');
+        }, (err) => {
+            console.log('失败');
+        })
+
+
+        //then里面的回调函数是成功的回调函数
+        //catch里面的回调函数是失败的回调函数
+        /*  p1.then((res) => {
+             console.log('promise成功', res);
+             //res的处理
+         }).catch((err) => {
+             console.log('promise失败', err);
+         }).finally(() => {
+             //无论成功还是失败都会执行finally
+             console.log('最终执行')
+         }) */
+
+        /*  var test;
+         test(1);
+         test = function(a){} */
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

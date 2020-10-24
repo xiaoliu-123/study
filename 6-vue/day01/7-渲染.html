@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渲染</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-html -->
+        <div v-html="htmlStr"></div>
+        <div v-bind:title="msg">属性绑定</div>
+        <div :title="msg">属性绑定</div>
+        <div v-on:click="test">弹框</div>
+        <div @click="test">弹框</div>
+    </div>
+    <script>
+
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello',
+                htmlStr: '<span>123</span>'
+            },
+            methods: {
+                test() {
+                    alert(1)
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

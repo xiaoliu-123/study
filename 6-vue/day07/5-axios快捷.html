@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>axios</title>
+  <script src="../js/axios-0.20.0.js"></script>
+  <script src="../js/qs-6.9.4.min.js"></script>
+  <script>
+    let qs = Qs
+    let obj = {
+      name: 'zhangsan'
+    }
+    //get 第二个参数是配置对象    axios.get(url[, config])
+    // axios.get('http://47.106.244.1:8099/manager/category/findAllCategory', { params: obj })
+    //post 第一个url，第二个传递的参数    axios.post(url[, data[, config]])
+    // axios.post('http://47.106.244.1:8099/manager/category/findAllCategory', obj)
+    //axios.delete(url[, config])
+    // axios.delete('http://47.106.244.1:8099/manager/category/findAllCategory', { params: obj })
+    axios.put('http://47.106.244.1:8099/manager/category/findAllCategory', obj)
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

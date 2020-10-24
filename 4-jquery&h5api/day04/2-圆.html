@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画布</title>
+    <style>
+        canvas {
+            border: 1px solid red;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            //获取画布dom
+            var canvas = document.querySelector('canvas');
+            //获取画布上下文对象
+            var context = canvas.getContext('2d');
+            //开始路径
+            context.beginPath();
+            //圆的路径 x,y,r,开始弧度，结束弧度，圆的方向
+            //Math.PI  180
+            //true逆时针
+            // context.arc(100, 100, 50, 0, Math.PI / 2, true);
+            // context.arc(100, 100, 50, 0, Math.PI / 2);
+            // context.arc(100, 100, 50, 0, Math.PI / 4);
+            //直线路径m直线终点
+            context.moveTo(50, 50);
+            context.lineTo(50, 100);
+            context.lineTo(150, 100);
+
+            // context.arc(300, 300, 50, 0, Math.PI * 2);
+            //结束路径  终点跟起点会连起来
+            context.closePath();
+            //开始绘制
+            //填充绘制
+            context.fillStyle = 'red';
+            context.fill();
+            //轮廓
+            // context.stroke();
+        }
+    </script>
+</head>
+
+<body>
+    <canvas width="400px" height="400px"></canvas>
+</body>
+
+</html>

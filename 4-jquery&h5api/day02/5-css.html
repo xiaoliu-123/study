@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css样式操作</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+    <script src="../js/jquery-3.5.1.js"></script>
+    <script>
+        $(function () {
+            //获取div高度  dom.style
+            // console.log($('.one')[0].style.height);
+            // console.log($('.one').css('height'));
+            //获取只会返回一个  设置可以批量设置
+            // console.log($('.one').css('height', '300px'));
+            $('.one').css({
+                width: '200px',
+                height: '200px',
+                // backgroundColor: 'cyan'
+                "background-color": "pink"
+            })
+            console.log($('.one')[0].style);
+            // console.log($('#one').css('height'));
+        })
+    </script>
+</head>
+
+<body>
+    <div class="one"></div>
+    <div id="one" class="one" style="height: 200px;"></div>
+</body>
+
+</html>

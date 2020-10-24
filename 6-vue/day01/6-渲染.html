@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渲染</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <div v-if="isLogin">欢迎您</div>
+        <div v-else="isLogin">请登录</div>
+        <button @click="change">切换</button>
+
+        <div v-show="isLogin">测试是否显示</div>
+    </div>
+    <script>
+        //基本渲染 条件渲染 v-if v-else v-show  列表渲染(循环渲染) v-for指令
+        //如果用户登录了显示欢迎您，如果用户没登录显示请登录
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello',
+                isLogin: true,
+            },
+            methods: {
+                change() {
+                    this.isLogin = !this.isLogin
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

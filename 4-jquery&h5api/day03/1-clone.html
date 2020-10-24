@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复制节点</title>
+    <script src="../js/jquery-3.5.1.js"></script>
+    <script>
+        $(function () {
+            $('.one').click(function () {
+                alert(1);
+            });
+            //原生dom复制节点
+            //querySelector仅返回匹配到的第一个
+            //cloneNode仅复制节点不复制事件
+            // var newDom = document.querySelector('.one').cloneNode(true);
+            // document.body.appendChild(newDom);
+            //jq复制节点
+            //clone  如果后面有10个.one，也会复制
+            //默认false浅复制，复制节点和内容，如果是true，深复制，还会复制事件
+            var newOne = $('.one').clone(true);
+            // console.log(newOne);
+            $('body').append(newOne);
+        })
+    </script>
+</head>
+
+<body>
+    <div class="one">one</div>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 300px;
+            height: 300px;
+            /* border: 1px solid darkorchid; */
+            padding: 30px;
+            border: 10px dashed red;
+            margin: 20px;
+
+            /* background-color背景颜色 效率高 */
+            /* background-color: skyblue; */
+            /* background背景 效率低 */
+            /* background: red; */
+            background-image: url(./images/2.jpg);
+            /* 设置背景图片的大小 */
+            /* background-size: 100% 100%; */
+            /* background-size: 200px 200px; */
+            /* background-image: url(./images/1.PNG); */
+
+            /* 背景图片的重复设置 */
+            /* background-repeat: no-repeat;
+            background-repeat: repeat-x;
+            background-repeat: repeat-y;
+            background-repeat: repeat; */
+
+            /* 图片显示全，占满容器，但是比例会失调 */
+            background-size: 100% 100%;
+            /* 可能导致图片显示不全，但是图片比例不变 */
+            /* background-size: cover; */
+            /* 可能导致容器有一部分没有背景，但是图片比例不变 */
+            /* background-size: contain; */
+            /* background-repeat: no-repeat; */
+
+            /* 背景图片开始绘制的位置  默认是从padding开始绘制 */
+            /* background-origin: padding-box; */
+            /* background-origin: content-box; */
+            background-origin: border-box;
+            /* 裁切背景图片 border-box默认值*/
+            background-clip: border-box;
+            /* background-clip: padding-box; */
+            /* background-clip: content-box; */
+
+        }
+    </style>
+</head>
+
+<body>
+    <div>hello</div>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+块级元素独占一行，宽高有效
+行内元素与其他元素共享一行，宽高无效
+
+W3C盒子模型
+  内容区的宽高
+  宽：width
+  高:height
+
+  盒子的宽高
+  宽：width+paddingLeft+paddingRight+borderleft+borderRight
+  高：height+paddingTop+paddingBottom+borderTop+borderBottom
+
+  所占屏幕的宽高
+  宽：width+paddingLeft+paddingRight+borderleft+borderRight+marginLeft+marginRight
+  高：height+paddingTop+paddingBottom+borderTop+borderBottom+marginTop+marginBottom
+
+IE盒子模型
+  box-sizing:border-box;
+  设置的宽高是盒子的宽高
+  内容区的宽高  
+    宽：width-左右border-左右padding
+    高：height-上下border-上下padding
+  
+  盒子的宽高
+    宽：width
+    高：height
+    
+  所占屏幕的宽高
+    宽：width+左右margin
+    高：height+上下margin
+
+
+子元素都浮动，body没有设置高度，那么body高度为0
+
+浮动
+  浮动元素脱离文档流，原先位置不保留，飘在文档流上方
+  float:left/right
+  清除浮动
+    兄弟元素上使用：clear:both  清除浮动对该兄弟元素产生的影响
+    或者
+    父级元素上使用overflow:hidden   清除子元素浮动对父级元素产生的影响
+  如果块级元素没有设置宽度，浮动了该元素，那么该元素的宽度不再是100%，而是内容区的宽度
+  浮动的块级元素没有独占一行的特点

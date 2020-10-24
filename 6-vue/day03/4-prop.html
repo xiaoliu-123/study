@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prop</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <!-- <my-a sub-msg="父给子" :stus="[1,2,3]" :is-active="undefined"></my-a> -->
+        <!-- <my-a sub-msg="父给子" :stus="[1,2,3]" :is-active="null"></my-a> -->
+        <!-- <my-a sub-msg="父给子" :stus="[1,2,3]" :is-active="true"></my-a> -->
+        <my-a :msg="msg" sub-msg="父给子" :is-active="true" :age="15"></my-a>
+    </div>
+    <script>
+        let myA = {
+            props: {
+                subMsg: String,
+                // stus: Array,
+                stus: {
+                    type: Array,
+                    //错误
+                    // default: [6, 7, 8]
+                    //正确  Array/Object 要一个工厂函数返回一个默认值
+                    // default: function () { return [6, 7, 8] }
+                    default() { return [6, 7, 8] }
+                },
+                // isActive: Boolean,
+                isActive: [String, Boolean],
+                name: {
+                    type: String,
+                    // required: true
+                    default: 'lisi'
+                },
+                //自定义校验规则
+                age: {
+                    type: Number,
+                    //校验器
+                    //value是形参，实参是将来父组件给子组件传递的数据
+                    validator(value) {
+                        return value < 18
+                    }
+                },
+                msg: String,
+            },
+            template: `
+                <div>
+                    {{subMsg}}
+                    {{stus}}
+                    {{isActive}}
+                    {{name}}
+                    {{age}}
+                    {{msg}}
+                </div>
+
+            `
+        }
+        Vue.component('my-a', myA)
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello world'
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

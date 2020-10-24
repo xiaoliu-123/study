@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖曳</title>
+    <style>
+        .parent {
+            height: 200px;
+            width: 200px;
+            float: left;
+            margin: 10px;
+            border: 1px solid blue;
+        }
+
+        .child {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            margin: 10px;
+            float: left;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var parents = document.querySelectorAll('.parent');
+            var childs = document.querySelectorAll('.child');
+            console.log(parents);
+            console.log(childs);
+            //类数组对象转成数组
+            parents = Array.from(parents);
+            childs = Array.from(childs);
+            //ES6 箭头函数
+            childs.forEach((item, index) => {
+                //开始拖放
+                item.ondragstart = function (event) {
+                    console.log('ondragstart');
+                    event.dataTransfer.setData('id', item.id)
+                }
+                //正在拖放
+                item.ondrag = function () {
+                    console.log('ondrag');
+                }
+                //正在结束
+                item.ondragend = function () {
+                    console.log('ondragend');
+                }
+
+            });
+
+            parents.forEach((item, index) => {
+                //进入目标元素
+                item.ondragenter = function () {
+                    console.log('ondragenter');
+                }
+                //在目标元素内活动
+                item.ondragover = function (event) {
+                    console.log('ondragover');
+                    event.preventDefault();
+                }
+                //将拖放元素放置到目标元素内
+                item.ondrop = function (event) {
+                    console.log('ondrop');
+                    //获取传输对象内的数据，通过数据获取节点，放置节点
+                    var id = event.dataTransfer.getData('id');
+                    var dom = document.querySelector('#' + id);
+                    this.appendChild(dom);
+                    event.stopPropagation();
+                }
+            });
+            document.body.ondragover = function (event) {
+                event.preventDefault();
+            }
+            document.body.ondrop = function (event) {
+                console.log('ondrop');
+                //获取数据传输对象内的数据，通过数据获取节点，放置节点
+                var id = event.dataTransfer.getData('id');
+                var dom = document.querySelector("#" + id);
+                this.appendChild(dom);
+                event.stopPropagation();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="parent"></div>
+    <div class="parent"></div>
+    <div class="parent"></div>
+    <div class="parent"></div>
+    <div class="parent"></div>
+    <div class="parent"></div>
+    <div class="parent"></div>
+    <div class="parent"></div>
+    <div class="parent"></div>
+    <div class="parent"></div>
+    <div id="one" class="child" draggable="true">1</div>
+    <div id="two" class="child" draggable="true">2</div>
+    <div id="three" class="child" draggable="true">3</div>
+    <div id="four" class="child" draggable="true">4</div>
+    <div id="five" class="child" draggable="true">5</div>
+    <div id="six" class="child" draggable="true">6</div>
+    <div id="seven" class="child" draggable="true">7</div>
+    <div id="eight" class="child" draggable="true">8</div>
+    <div id="night" class="child" draggable="true">9</div>
+    <div id="ten" class="child" draggable="true">10</div>
+</body>
+
+</html>

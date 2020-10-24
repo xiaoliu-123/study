@@ -1,0 +1,75 @@
+ES6-->ES5转换
+    1.下载依赖
+        cnpm install --save-dev babel-cli bebel-preset-latest
+    2.根目录创建.babelrc文件
+        {
+            "preset":["latest"]
+        }
+    3.转换
+        babel a.js
+        babel a.js --out-file b.js
+        babel src --out-file dist
+
+ES6模块化
+    导出
+        export {a,b}
+        export {a as aa,b}
+        export var e=1
+        export function test(){}
+            导出的是接口，接口内的数据，接口内有a,b,aa,e,test
+        export default {
+            name:'zahngsan'
+        }
+    导入
+        import {a,b,aa,e,test} from './a.js';
+        import obj from 'a.js'
+CommonJS模块化
+    导出
+        module.exports={
+            name:'lisi',
+            age:12
+        };
+    导入
+        var obj require('a.js')
+        var {name} require('a.js')
+        var * as obj require('a.js')
+ES6导出的是接口，是引用，编译时加载，静态加载，按需导入
+CommonJS导出的是对象，是值得拷贝，运行时加载
+  ES6  CommonJS 是平行的关系
+
+
+解构
+    对象解构  let {}={}
+    数组解构    let []=[]
+    字符串解构  let []=''  let {}=''
+    数值解构    let {} = 12
+    布尔解构    let {} = true
+设置默认值
+    let {name:n,age:a=10} = {}
+
+
+function test(a,b=1,c=2){}
+test(1,2,3)
+实参个数
+    arguments.length  3
+形参个数
+    test.length  1
+
+function test(a,b,c=1){}
+实参个数
+    arguments.length  3
+形参个数
+    test.length  2
+
+创建数组
+    1.构造函数
+    new Array()
+    new Array('hello',3)
+      ['hello',3]
+    new Array(20,30,40)
+      [20,30,40]
+    new Array(20);
+
+    Array.of(20);
+
+    2.字面量

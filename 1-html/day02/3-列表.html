@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表</title>
+    <style>
+        ol{
+            /* 控制列表的项目编号 */
+            /* list-style-type:upper-alpha; */
+        }
+    </style>
+</head>
+<body> 
+    <!-- reversed 是boolean属性，只写属性名就代表true
+    reversed=true、reversed="true"、reversed=""、reversed="false"依旧是true
+    如果想要值是false，那就不要写该属性  
+    -->
+<!-- type="lower-roman" -->
+    <ol start="5" reversed >
+        <!-- order list 有序列表 -->
+        <li>第一章</li>
+        <li>第二章</li>
+        <li>第三章</li>
+    </ol>
+    <ol reversed>
+        <!-- order list 有序列表 -->
+        <li>第一章</li>
+        <li>第二章</li>
+        <li>第三章</li>
+    </ol>
+    <ul>
+        <!-- unorder list 有序列表 -->
+        <li>第一章</li>
+        <li>第二章</li>
+        <li>第三章</li>
+    </ul>
+    <!-- 自定义列表dl -->
+    <dl>
+        <dt>HTML</dt>
+        <dd>HyperText Markup language</dd>
+        <dt>HTML</dt>
+        <dd>HyperText Markup language</dd>
+        <dt>HTML</dt>
+        <dd>HyperText Markup language</dd>
+    </dl>
+    
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>侦听</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <br>
+        {{obj}}
+        <button @click="changeObj">更改obj</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello',
+                a: 1,
+                obj: {
+                    name: 'zhangsan',
+                    age: 12,
+                }
+            },
+            watch: {
+                a(newValue, oldValue) {
+                    console.log('a数据发生了变化')
+                },
+                /*  obj(newValue, oldValue) {
+                     console.log('obj数据发生了变化')
+                 } */
+                //深度监听
+                obj: {
+                    handler(newValue, oldValue) {
+                        console.log('obj数据发生了变化...')
+                    },
+                    //深度监听
+                    deep: true
+                }
+            },
+            methods: {
+                changeObj() {
+                    //更改内部数据
+                    this.obj.name = 'lisi'
+                    //更改指向
+                    /* this.obj = {
+                        ...this.obj,
+                        name: 'lisi'
+                    } */
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

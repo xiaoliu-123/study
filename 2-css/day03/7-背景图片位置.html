@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>背景图片位置</title>
+    <style>
+        div {
+            width: 140px;
+            height: 140px;
+            background-image: url(./images/图标.jpg);
+            background-repeat: no-repeat;
+            border: 1px solid red;
+            /*        调整背景图片位置 
+             background-position
+            设置为背景图像初始位置,相对于background-origin定义的位置， */
+            background-position: top center;
+            background-position: center;
+            background-position: bottom;
+            background-position: 10px 20px;
+
+            /* 图片精灵技术  css  sprites技术 */
+            background-position: -118px -129px;
+            background-position: -463px -482px;
+            /* background-position: 50px 50px; */
+
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+</body>
+
+</html>

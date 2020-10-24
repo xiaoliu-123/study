@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件修饰符</title>
+    <script src="../js/vue-2.6.12.js"></script>
+    <style>
+        .outer {
+            width: 200px;
+            height: 200px;
+            background-color: coral;
+            overflow: scroll;
+        }
+
+        .inner {
+            width: 100px;
+            height: 400px;
+            background-color: cyan;
+            margin: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- .enter  按键修饰符 -->
+        <!-- <input type="text" @keyup.enter="keyupHandle"> -->
+        <!-- <input type="text" @keyup.13="keyupHandle"> -->
+        <!-- .left 鼠标修饰符 -->
+        <input type="text" @mouseup.left="keyupHandle">
+        {{msg}}
+        <a @click.once.prevent="toJump" href="http://www.baidu.com">百度一下</a>
+        <!-- .self 只当在 event.target 是当前元素自身时触发处理函数 -->
+        <!-- <div class="outer" @click.self="outer"> -->
+        <!-- <div class="outer" @click.capture="outer"> -->
+        <div class="outer" @scroll.passive="outer">
+            outer
+            <!-- .stop  -->
+            <!-- <div class="inner" @click.stop="inner">inner</div> -->
+            <div class="inner" @click.capture="inner">inner</div>
+        </div>
+
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg: '事件修饰符',
+            },
+            methods: {
+                keyupHandle() {
+                    console.log('按下某些特性键');
+                },
+                toJump() {
+                    alert(1);
+                    console.log('跳转')
+                },
+                outer() {
+                    // e.target触发事件的源头元素，目标元素
+                    //e.currentTarget  当前执行事件处理程序的元素，当前目标元素
+                    // console.log('outer', e.target, e.currentTarget)
+                    console.log('outer')
+                    for (let i = 0; i < 100; i++) {
+                        console.log(i);
+                    }
+                },
+                inner() {
+                    // e.stopPropagation();
+                    // console.log('inner', e.target, e.currentTarget)
+                    console.log('inner')
+                },
+
+            },
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+有开始标签和结束标签的是双标签
+head内的子元素有
+    <meta> 可以指定版本号等
+    <titli></title>
+
+vscode插件
+  汉化 Chinese
+  (Simplified)
+  Language
+  在服务器中打开 Live Server
+  在浏览器打开 open in browser
+  文件路径自动提示 Path Autocomlete
+  文件图标 vs-code-icons
+
+body 
+  盒子模型
+  内容区     查看元素淡蓝色区域
+  padding区  内间距区  查看元素紫色区域
+  border区  边框区    查看元素的边框的宽度的灰黑色区域
+  margin区  外边距区 查看元素黄色区域
+
+tag  标签
+
+整个html文档中不区分大小写
+
+initial-scale初始缩放
+
+Ctrl+回车 下一行
+
+<p>标签默认上下有16px
+标题标签默认上下有margin
+
+选中单词 Ctrl + D 可做批量修改
+选中单词 Ctrl + D 左右键 可修改某一个字母
+
+&lt;  小于号
+&gt;  大于号
+
+ul 和 ol  左边padding 40px
+dd 左 margin 40px
+
+锚点跳转 可以从底部跳到顶部
+
+alt 表示替换图片的文本内容，当url地址出错时，将会显示alt的内容（面试问过）
+
+块级元素
+  独占一行，设置宽高有效
+行内元素
+  与其他行内元素共享一行，设置宽高无效
+img
+  元素既不是块级元素页不是行内元素
+
+table 块级元素
+块级元素和行内元素可以放到块级元素内
+块级元素不可以放到行内元素内
+<div>
+  <div></div>
+  <span></span>
+</div>
+<span>
+  <span></span>
+  <p></p>
+  X不能放<div></div>
+</span>
+块级元素和行内元素可以相互转化
+
+H5新特性
+  1、标签语义化
+    <article></article>
+    <address></address>

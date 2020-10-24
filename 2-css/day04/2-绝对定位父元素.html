@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绝对定位-父元素</title>
+    <style>
+        .parent1 {
+            width: 600px;
+            height: 600px;
+            background-color: rgb(173, 120, 95);
+            /* padding: 100px; */
+            border: 1px solid red;
+            position: relative;
+        }
+
+        .parent2 {
+            width: 400px;
+            height: 400px;
+            background-color: rgb(150, 160, 91);
+            margin: 100px;
+            /* box-sizing: border-box; */
+            border: 1px solid green;
+            /* 提供定位参考点 */
+            position: relative;
+        }
+
+        .child {
+            width: 200px;
+            height: 200px;
+            background-color: rgb(115, 150, 179);
+            margin: 100px;
+            border: 1px solid blue;
+            /* 绝对定位 */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .static {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent1">
+        <div class="parent2">
+            <div class="child"></div>
+        </div>
+    </div>
+    <div class="static">其他元素</div>
+</body>
+
+</html>

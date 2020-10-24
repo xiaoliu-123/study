@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <!-- 模板的数据来源可以是数据模型也可以是计算属性 -->
+        <br>
+        a: <input type="text" v-model.number="a">
+        <br>
+        +
+        <br>
+        b: <input type="text" v-model.number="b">
+        <br>
+        =
+        <br>
+        <output>{{total}}</output>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello',
+                a: 0,
+                b: 0,
+                total: 0,
+            },
+            methods: {},
+            //监听 侦听
+            watch: {
+                a(newValue, oldValue) {
+                    // console.log(newValue, oldValue);
+                    this.total = this.a + this.b;
+                },
+                b(newValue, oldValue) {
+                    // console.log(newValue, oldValue);
+                    this.total = this.b + this.a;
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

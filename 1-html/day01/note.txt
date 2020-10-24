@@ -1,0 +1,78 @@
+HTML元素
+  开始标签，结束标签和内部内容
+  <div>Hello</div>
+  超文本是可以包含图片、链接、音乐、程序等非文本元素
+  标记符就是标签
+  对书写错误的标记不指出其错误
+  后缀 .html 或 .htm
+
+静态服务器httpd服务器
+  服务器作用：将代码部署到服务器上，供其他用户访问
+    协议：//IP地址：端口号/路径/
+    index.html
+    //URL 统一资源定位符
+    http://127.0.0.1:8080/
+    域名  www.baidu.com
+
+    如果默认：443  https协议
+             80   http协议
+
+  Apache服务器，不是Tomcat服务器
+  Ngix服务器
+
+以前
+  
+  1.静态网页设计师  HTML+CSS+JS 做静态网页 html静态页面，不对接后台数据
+  数据时死数据
+  2.JAVA工程师 
+  将静态网页给JAVA人员，JAVA人员将html页面转换成JSP页面（后缀是。JSP)
+  JSP页面可以跟java程序对接数据。JAVA人员需要对接JSP页面数据，还需要对接数据库，
+  还需要控制页面的跳转。
+  3.数据库工程师
+    数据库的设计与制作
+
+前后端分离
+  1.前端工程师
+    前端人员做页面的制作，与后台数据对接，页面的跳转控制。（html页面）
+  2.JAVA工程师
+    与数据库对接数据，与前端工程师对接数据，与第三方平台对接数据
+  3.数据库工程师
+    数据库的设计与制作
+    关系型数据库  Oracle  MySQL, 内部的SQL语言是一样的，方言是不一样的
+
+    编程语言
+    JavaScript
+      if(){}else{}
+      类 Set Map
+    Java
+      if(){}else{}
+      类，接口 Set  Map
+
+B/S  浏览器/服务器架构
+C/S  客户端/服务器架构  
+  Hybird混合式开发   
+     用制作网页的技术去制作app、cordova打包、
+         html  css  JS(面试重点)
+     React-native
+       以React框架为基础
+     weex
+       以Vue框架为基础
+
+大前端
+  前端 PC端
+  Android开发
+  IOS开发
+
+前端使用AJAX技术与后台进行数据交互
+  HTML CSS JS
+
+Java后台使用JDBC技术与数据库进行数据交互
+  JAVA Python PHP NodeJS
+
+微信小程序
+  wxml
+  wxss
+  JS
+
+https协议 有请求有响应
+

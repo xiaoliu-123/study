@@ -1,0 +1,8 @@
+@import './a.css';
+@import './b.css';
+@import './c.css';
+
+body{
+  background-color: coral;
+  height: 200px;
+}

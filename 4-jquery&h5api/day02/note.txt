@@ -1,0 +1,131 @@
+dom节点和jQuery对象
+    var $div = $('div');
+    //如何将jQuery对象转成dom节点
+    $div[index]
+
+
+2.attr方法和prop方法的区别  
+    对于HTML元素本身就带有的固有属性，在处理时，使用prop方法。
+    对于HTML元素我们自己自定义的DOM属性，在处理时，使用attr方法。
+    具有 true 和 false 两个属性的属性，如 checked, selected 或者 disabled 使用prop()
+
+获取内部文本
+    text()
+设置内部文本
+    text('hello')
+获取固有属性值，自定义属性的属性值
+    attr('id')
+设置固有属性值，自定义属性的属性值
+    attr('id','1004');
+获取固有属性值，布尔属性的属性值
+    prop('id')
+获取固有属性值，布尔属性的属性值
+    prop('id','1004')
+获取表单元素的value值
+    $('input').val()
+    dom.value
+设置表单元素的value值
+    $('input').val('')
+
+
+操作class类
+    addClass()
+    removeClass()
+    toggleClass()
+显示与隐藏
+    hide()
+    show()
+    toggle()
+    fadeIn()
+    fadeOut()
+    fadeToggle()
+    slideDown()
+    slideUp()
+    slideToggle()
+css样式操作
+    获取 $('div).css('height')
+    设置 $('div).css('height','100px')
+    设置 $('div').css({
+            height:'100px',
+            width:'100px'
+        })
+
+
+
+批量删除：
+    给复选框的value=${item.id}，
+    批量删除按钮一个batchDelete类，
+    给批量删除按钮绑定点击事件click，
+    然后获取到用户选中的复选框，
+    从而map映射得到用户勾选的ids值。
+    然后判断根据ids的数量进行判断，如果ids小于0，则提醒用户勾选要删除的数据。如果ids>0，则弹出确认框询问用户是否要批量删除，如果是，则删除。
+
+全选按钮操作
+    给表头复选框一个change()事件
+    获取当前表头复选框的值， var value = $(this).prop('checked');
+    把这个值设置给表体复选框 $('.tables tbody :checkbox').prop('checked', value);
+
+页面一加载 就要显示有数据
+    如果有token，则模拟加载数据即可 $('.load').trigger('click');
+    如果没有token，模拟登陆，在模拟登陆成功之后进行模拟加载数据$('.load').trigger('click');//写在登陆成功里面。
+    if (sessionStorage.getItem('token')) {
+                $.ajaxSetup({
+                    headers: {
+                        "Authorization": sessionStorage.getItem('token')
+                    }
+                });
+                $('.load').trigger('click');
+            } else {
+                $('.login').trigger('click');
+                // $('.load').trigger('click');
+            }
+
+添加按钮
+    给添加按钮绑定click()事件
+    首先清空user的数据  user = null;
+    然后设置模态框的标题为$('.dialog-header').html('新增用户信息');
+    在清空表单数据
+    最后显示模态框
+
+取消按钮
+    给取消按钮绑定click()事件
+      隐藏模态框 $('.dialog').fadeOut();
+
+定义全局的user对象
+
+submit提交
+ 添加或更新用户信息：
+    给提交按钮绑定click()事件
+    获取用户输入表单的信息
+    发送请求给后台
+    如果成功，则提示用户保存成功
+    隐藏模态框
+    局部刷新数据
+        
+        $.ajax({
+            id: user ? user.id : '',    判断是新增的还是修改的
+            url:'',
+            method:'',
+            data:{},
+            success:function(res){
+                //提示用户保存成功
+                if (res.status == 200) {
+                    alert('保存成功');
+                    $('.dialog').fadeOut();
+                    $('.load').trigger('click');
+                }
+            },
+            error:function(err){},
+        })
+
+
+修改用户信息
+    修改按钮设置自定义属性data-item值为${JSON.stringify(item)} (获取的是当前用户对象)
+    修改按钮用事件代理绑定click事件，
+      首先获取当前要修改的用户对象 user = $(this).attr('data-item');
+      解析该对象 user = JSON.parse(user); （因为前面拿的是JSON格式的）
+      再把对象数据设置到表单里面 
+      之后设置模态框标题   $('.dialog-header').html('修改用户信息');
+      最后显示模态框  $('.dialog').fadeIn();
+
+

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>音视频</title>
+  <script src="../js/jquery-3.5.1.js"></script>
+  <style>
+    /* video { */
+    /* 视频是有比例的，不要同时设置宽高 */
+    /* width: 600px; */
+    /* } */
+  </style>
+  <script>
+    $(function () {
+      var video = $('video')[0];
+      $('button').click(function () {
+        //播放
+        if ($(this).text() === '播放') {
+          video.play();
+        }
+        //暂停
+        if ($(this).text() === '暂停') {
+          video.pause();
+        }
+        //切换
+        if ($(this).text() === '切换') {
+          //音视频是否暂停
+          // console.log(video.paused);
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        }
+        //音量+
+        if ($(this).text() === '音量+') {
+          video.volume = (video.volume > 0.9 ? 0.9 : video.volume) + 0.1;
+        }
+        //音量-
+        if ($(this).text() === '音量-') {
+          video.volume = (video.volume < 0.1 ? 0.1 : video.volume) - 0.1;
+        }
+        //快进
+        if ($(this).text() === '快进') {
+          video.currentTime += 5;
+        }
+        //回退
+        if ($(this).text() === '回退') {
+          video.currentTime -= 5;
+        }
+        //倍速播放
+        if ($(this).text() === '倍速播放') {
+          video.playbackRate = 2;
+        }
+
+      })
+
+      video.onvolumechange = function () {
+        // console.log('音量改变事件监听');
+        if (this.volume > 0.8) {
+          alert('为了您的听力健康，请调小音量...');
+        }
+      }
+    })
+  </script>
+</head>
+
+<body>
+  <!--controls控制条 autoplay自动播放 loop循环 poster="../imgs/timg.jpg"封面 muted静音-->
+  <video src="../video/video/1.mp4" controls></video>
+  <button>播放</button>
+  <button>暂停</button>
+  <button>切换</button>
+  <button>音量+</button>
+  <button>音量-</button>
+  <button>快进</button>
+  <button>回退</button>
+  <button>倍速播放</button>
+  <!-- controls autoplay loop-->
+  <!-- 背景音乐 -->
+  <audio src="../video/video/1.mp3" autoplay loop></audio>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态组件</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <button @click="current='my-a'">A组件</button>
+        <button @click="current='my-b'">B组件</button>
+        <button @click="current='my-c'">C组件</button>
+        <!-- 静态is值为注册的组件的名称 -->
+        <!-- 可行 -->
+        <!-- <component is="my-a"></component> -->
+        <!-- 不可行 -->
+        <!-- <component :is="my-a"></component> -->
+        <!-- 可行 -->
+        <keep-alive>
+            <component :is="current"></component>
+        </keep-alive>
+    </div>
+    <script>
+        let myA = {
+            template: `
+                <div>
+                    A组件的内容
+                </div>
+            `,
+            created() {
+                console.log('A组件created')
+            }
+        }
+        let myB = {
+            template: `
+                <div>
+                    B组件的内容
+                </div>
+            `,
+            created() {
+                console.log('B组件created')
+            }
+        }
+        let myC = {
+            template: `
+                <div>
+                    C组件的内容
+                </div>
+            `,
+            created() {
+                console.log('C组件created')
+            }
+        }
+        Vue.component('my-a', myA);
+        Vue.component('my-b', myB);
+        Vue.component('my-c', myC)
+        new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello',
+                //可行
+                // current: myA,
+                //可行
+                current: 'my-a'
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

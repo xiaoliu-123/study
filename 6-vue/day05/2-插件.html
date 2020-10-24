@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>插件</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}} {{msg | myFilter}}
+    </div>
+    <script>
+        //声明插件对象
+        let myPlugin = {
+            //install方法在Vue.use(myPlugin)会执行
+            //自己写的插件一定要有一个install()方法
+            install(Vue, options) {
+                // console.log(1);
+                //可以提供一些静态属性和方法
+                Vue.isVue = () => { }
+                //提供一些原型属性和方法
+                Vue.prototype.$sayVue = () => { }
+                //全局注册(组件/过滤器/指令/混入)
+                Vue.filter('myFilter', (data) => {
+                    return data.toUpperCase()
+                })
+            }
+        }
+        // console.log(Vue.isVue);
+        //使用插件  一定要在new Vue({})之前使用
+        Vue.use(myPlugin);
+        // console.log(Vue.isVue);
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello'
+            },
+            methods: {},
+        })
+        // console.log(vm.$sayVue);
+    </script>
+</body>
+
+</html>

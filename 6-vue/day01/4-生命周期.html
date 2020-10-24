@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <button @click="test">事件测试</button>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'hello',
+            },
+            methods: {
+                test() {
+                    console.log('点击事件处理程序')
+                }
+            },
+            beforeCreate() {
+                console.log('创建实例之前')
+            },
+            created() {
+                console.log('实例创建好了，可以访问数据模型中的数据')
+                //可以发起异步
+            },
+            beforeMount() {
+                console.log('挂载之前')
+            },
+            mounted() {
+                console.log('挂载之后')
+                //一般在这边操作dom
+            },
+            beforeUpdate() {
+                console.log('更新之前')
+            },
+            updated() {
+                console.log('更新好了')
+            },
+            beforeDestroy() {
+                console.log('销毁实例之前')
+                // console.log(this.msg)
+            },
+            destroyed() {
+                console.log('实例销毁完毕')
+                // console.log(this.msg)
+            }
+        })
+        setTimeout(() => {
+            // vm.msg = 123;
+            vm.$destroy()
+            // console.log(vm)
+            // console.log(vm.msg)
+        }, 5000)
+    </script>
+</body>
+
+</html>

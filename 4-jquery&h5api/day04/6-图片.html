@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var canvas = document.querySelector('canvas');
+            var context = canvas.getContext('2d');
+            //绘制图片到画布中，图片dom节点，img节点绘制或者创建img节点
+            var img = new Image();
+            // console.log(img);
+            img.src = '../imgs/timg.jpg';
+            //绘制图片到画布中 从0,0点开始绘制图片，绘制一个200*200大小的图片
+            img.onload = function () {
+                context.drawImage(img, 0, 0, 200, 200);
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <canvas width="400px" height="400px"></canvas>
+</body>
+
+</html>

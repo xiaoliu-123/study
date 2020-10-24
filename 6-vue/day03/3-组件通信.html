@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件通信</title>
+  <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h3>子组件怎么使用父组件的数据</h3>
+    <h3>父组件怎么使用子组件的数据</h3>
+    {{msg}}
+    <br>
+    ----组件使用-----
+    <br>
+    <!-- 父组件给子组件传递数据 使用属性传递数据-->
+    <my-com @my-event="myEventHandle" :title="msg" static-attr="父组件给子组件的静态数据"></my-com>
+  </div>
+  <script>
+    //1.创建组件
+    let myCom = {
+      //接收父组件传递的数据
+      // 用驼峰命名法去接staticAttr
+      props: ['title', 'staticAttr'],
+      data() {
+        //返回的对象是该组件的数据模型
+        return {
+          comMsg: '子组件数据'
+        }
+      },
+      //模板 只能有一个根节点
+      template: `
+                <div>
+                    <span>子组件内部数据：{{comMsg}}</span>
+                    <br>
+                    <span>父组件内部数据：{{title}}--{{staticAttr}}</span>
+                    <button @click="comMsg='新数据'">更改数据模型中的数据</button>
+                    <button @click="toEmit">发射数据</button>
+                </div>
+            `,
+      methods: {
+        toEmit() {
+          //发射  参数：自定义事件名称，事件处理程序的实参(发射的数据)
+          // 子组件发射数据给父组件
+          this.$emit('my-event', this.comMsg, 100);
+        }
+      }
+    };
+    //2.组件书册
+    //全局注册
+    Vue.component('my-com', myCom)
+    new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello'
+      },
+      methods: {
+        //my-event的事件处理程序
+        myEventHandle(a, b) {
+          console.log(a, b, '---------------');
+          // this.aa = a
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

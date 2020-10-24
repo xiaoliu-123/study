@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vuex</title>
+  <script src="../js/vue-2.6.12.js"></script>
+  <script src="../js/vuex-3.5.1.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    {{msg}}
+    <br>
+    {{amsg}}
+    <br>
+    {{bmsg}}
+    <br>
+    {{bbmsg}}
+    =========
+  </div>
+  <script>
+    let aModule = {
+      //仓库命名空间
+      namespaced: true,
+      state: {
+        amsg: 'aMsg数据',
+      }
+    };
+    let bModule = {
+      namespaced: true,
+      state: {
+        bmsg: 'bMsg数据',
+        msg: 'bHello'
+      }
+    }
+    let store = new Vuex.Store({
+      //模块化导入
+      modules: {
+        aModule,
+        b: bModule
+      }
+    })
+    new Vue({
+      el: '#app',
+      store,
+      data: {
+        msg: 'hello'
+      },
+      computed: {
+        ...Vuex.mapState('aModule', ['amsg']),
+        //第二个参数对象给仓库中的数据重命名，对象内属性名是新名字
+        ...Vuex.mapState('b', {
+          bmsg: 'bmsg',
+          bbmsg: 'msg'
+        }),
+      },
+      methods: {},
+    })
+  </script>
+</body>
+
+</html>

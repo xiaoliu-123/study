@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件</title>
+    <script>
+        window.onload = function () {
+            var one = document.getElementById('one');
+            //DOM0级绑定事件
+            one.onclick = function () {
+                console.log(1);
+            }
+            /*one.onclick = function () {
+                console.log(2);
+            }*/
+            //解绑  再写原先功能和新加的功能
+            /*one.onclick = null;
+            one.onclick = function () {
+                console.log(1);
+                console.log(2);
+            }*/
+            //DOM2级绑定事件
+            //非IE8及以下浏览器
+            function handle() {
+                console.log(1);
+            }
+            function handle2() {
+                console.log(2);
+            }
+            //追加功能用addEventListener比较合适。追加不覆盖
+            one.addEventListener('click', handle);
+            one.addEventListener('click', handle2);
+            one.addEventListener('click', function () { });
+            //解绑  没有名字的事件处理程序解绑不了
+            one.removeEventListener('click', handle);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="one">点击我</div>
+</body>
+
+</html>

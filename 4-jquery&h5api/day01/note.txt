@@ -1,0 +1,65 @@
+jQuery是一个函数，jQuery是一个对象,jQuery是一个函数，jQuery对象是一个类数组对象
+    $()
+    将dom转成jquery对象
+        $(dom)
+    选择元素
+        $('.one')
+        $('#one')
+    文档加载完毕之后执行的函数
+        $(function(){})
+    html代码片段，创建节点，并返回jquery对象
+
+    $div = $(`
+        <div>
+            <div>
+            
+            </div>
+        </div>
+    
+    `)
+    {
+        0:dom节点
+    }
+
+
+jquery.js  学习
+jquery.min.js  压缩代码 部署环境 文件大小比较小
+
+
+ajax
+    1.后台接口的路径url
+    2.后台接口的请求方式
+    3.请求的参数格式
+    4.请求头的设置
+    5.相应数据的获取
+
+$.ajax({
+    //请求的路径
+    url:'http://127.0.0.1:7788/user/login',
+    //请求的方式
+    method:'get',
+    //请求携带的数据
+    data:{},
+    //请求头的设置
+    headers:{
+        "Content-Type":'application/x-www-form-encoded',
+        "token":'hdgdqywf1253xc',
+    },
+    //请求成功的回调函数
+    success:function(res){
+        //res就是后台响应的数据
+    },
+    //请求失败的回调函数
+    error:function(err){
+        //err就是后台响应的错误数据
+    }
+})
+
+
+全局设置ajax的头部
+    $.ajaxSetup({
+        headers:{
+            "Authorization":"token值",
+        },
+    })
+

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>select</title>
+</head>
+<body>
+    <form action="#">
+        <section>
+            <!-- address 提交给后台的属性名 value="shanghai"提交给后台的属性值-->
+            <!-- select的value值是用户选中的option的value值。所以以后获取籍贯信息通过select的value来获取 -->
+            <!-- selected 默认选中 -->
+            <!-- multiple 多选  在浏览器中需要按住Ctrl进行多选 -->
+            <!--  size="2" 显示两个列表项的大小 -->
+            籍贯： <select name="address" id="address">
+                <option value="">请选择</option>
+                 <!--label="江苏省"   组名-->
+                <optgroup disabled label="江苏省">  
+                    <option value="">苏州</option>
+                    <option value="">南京</option>
+                </optgroup>               
+                <option disabled value="shanghai">上海</option>
+                <option value="beijing">北京</option>
+                <option selected value="hangzhou">杭州</option>
+                <option value="guilin">桂林</option>
+                <option value="lanzhou">兰州</option>
+            </select>
+        </section>
+
+        <section>
+            <!-- textarea 没有value值 -->
+            个人简介：<textarea id="info" name="info" col="30" row="10">Hello</textarea>
+        </section>  
+        <section>
+            <fieldset>
+                <legend>基本信息</legend>
+                用户名：<input type="text">
+                <br>
+                密码：<input type="password">
+            </fieldset>
+        </section> 
+    </form>
+    <button id="btn">不提交</button>
+    <script>
+        //写js代码
+        var btn = document.getElementById("btn");
+        var select = document.getElementById("address");
+        var info = document.getElementById("info");
+        btn.onclick = function() {
+            //获取select的值，获取textarea的值
+            console.log(select.value);
+            console.log(info.value);
+        }
+    </script>
+</body>
+</html>

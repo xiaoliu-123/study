@@ -1,0 +1,310 @@
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid #ccc;
+    }
+
+    table {
+        margin-top: 10px;
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        line-height: 30px;
+    }
+
+    .dialog {
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 0;
+        left: 0;
+        line-height: 30px;
+        display: none;
+    }
+
+    .container {
+        width: 60%;
+        height: 300px;
+        background-color: #fff;
+        margin: calc((100vh - 300px)/2) auto;
+        border-radius: 5px;
+        padding: 10px
+    }
+</style>
+<script>
+    //设置基础URL
+    var baseURL = 'http://120.26.176.26:7788';
+
+
+    $(function () {
+        //1.当前修改的用户 2.区别模态框的确定按钮是要进行新增操作还是修改操作
+        //每次点击新增按钮的时候，设置user=null, 每次点击修改按钮的时候，设置user为当前修改的用户对象
+        var course = null;
+
+        //Auth2认证  JWT认证  token
+        //登录功能:访问后台接口获取token，将token存到sessionStorage
+        $('.login').click(function () {
+            var user = {
+                username: 'admin1',
+                password: '123321',
+            };
+            $.ajax({
+                url: baseURL + '/user/login',
+                method: 'post',
+                data: JSON.stringify(user),
+                headers: {
+                    //设置JSON
+                    "Content-Type": "application/json"
+                },
+                success: function (res) {
+                    // console.log(res);
+                    // res.data.token
+                    sessionStorage.setItem('token', res.data.token);
+                    //配置全局ajax,注意当前sessionStorage还没有token
+                    $.ajaxSetup({
+                        headers: {
+                            "Authorization": sessionStorage.getItem('token')
+                        }
+                    });
+                    //加载数据
+                    $('.load').trigger('click');
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+            });
+        });
+        //获取数据功能：点击获取数据按钮，发起请求，请求携带token，获取响应，遍历用户数据，生成tr，追加到tbody中
+        $('.load').click(function () {
+            $.ajax({
+                url: baseURL + '/course/query',
+                method: 'get',
+                success: function (res) {
+                    //清空tbody数据
+                    $('.tables tbody').empty();
+                    console.log(res, '------');
+                    res.data.forEach(function (item, index) {
+                        //item-->每一个用户对象
+                        var newTr = $(`
+                                <tr>
+                                    
+                                    <td>${index + 1}</td>
+                                    <td>${item.name}</td>
+                                    <td>${item.credit}</td>
+                                    <td>${item.year}</td>
+                                    <td>${item.term}</td>
+                                    <td>${item.teacherId}</td>
+                                    <td>${item.type}</td>
+                                    <td>
+                                        <button data-id="${item.id}" class="deleteBtn">删除</button>
+                                        <button data-item='${JSON.stringify(item)}' class="toUpdate">修改</button>
+                                    </td>
+                                </tr>
+                            `);
+                        $('.tables tbody').append(newTr);
+                    });
+
+                },
+
+                error: function (err) {
+                    console.log(err, '++++++');
+                }
+            });
+        });
+        //单个删除：获取到当前要删除的用户的id，确认是否真的要删除，如果是真的，拿到id给后台，后台删除成功之后，再次查找数据局部刷新页面
+        //事件代理
+        $('.tables tbody').on('click', '.deleteBtn', function () {
+            // console.log(this);
+            //获取data-id值 
+            //attr('name','test') attr获取属性值  如果是两个参数：设置属性值
+            var id = $(this).attr('data-id');
+            // console.log(id);
+            if (confirm('确认删除吗？')) {
+                $.ajax({
+                    url: baseURL + '/course/deleteById',
+                    method: 'get',
+                    //第一个id与后台对应的，后台的单个删除接口需要一个参数id
+                    //第二个id是变量id，是要删除的用户的id
+                    data: { id: id },
+                    success: function (res) {
+                        console.log(res);
+                        $('.load').trigger('click');
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+        //修改:获取到当前要修改的用户对象，将数据设置到表单中
+        //事件代理
+        $('.tables tbody').on('click', '.toUpdate', function () {
+            course = $(this).attr('data-item');
+            course = JSON.parse(course);
+            console.log(course);
+            $('input[name=username]').val(course.username);
+            $('input[name=password]').val(course.password);
+            $('input[name=realname]').val(course.realname);
+            $('input[name=telephone]').val(course.telephone);
+            $('input[type=radio][value=' + course.gender + ']').prop('checked', true);
+            //设置模态框标题
+            $('.dialog-header').html('修改用户信息');
+            // 显示模态框
+            $('.dialog').fadeIn();
+            // console.log(user);
+        })
+
+
+        //提交按钮  新增：保存数据给后台
+        // 修改：更新数据
+        // 传id代表修改，不传id代表新增
+        // console.log($('.submit'), '-------');
+        $('.submit').click(function () {
+            // 获取用户输入的信息
+            var username = $('input[name=username]').val();
+            var password = $('input[name=password]').val();
+            var realname = $('input[name=realname]').val();
+            var telephone = $('input[name=telephone]').val();
+            var gender = $('input[type=radio]:checked').val();
+            // console.log(username, password, realname, telephone, gender);
+            //访问后台接口，保存到数据库，保存成功之后刷新数据
+            $.ajax({
+                url: baseURL + '/baseUser/saveOrUpdate',
+                method: 'post',
+                data: {
+                    id: user ? user.id : '',
+                    username: username,
+                    password: password,
+                    realname: realname,
+                    telephone: telephone,
+                    gender: gender
+                },
+                success: function (res) {
+                    console.log(res);
+                    //提示用户保存成功
+                    if (res.status == 200) {
+                        alert('保存成功');
+                        $('.dialog').fadeOut();
+                        $('.load').trigger('click');
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+
+            });
+        });
+
+        //取消按钮
+        $('.cancel').click(function () {
+            $('.dialog').fadeOut();
+        })
+        //新增：显示模态框
+        $('.toAdd').click(function () {
+            //清空user,设置模态框头部
+            user = null;
+            $('.dialog-header').html('新增用户信息');
+            //清空表单数据
+            $('input[name=username]').val('');
+            $('input[name=password]').val('');
+            $('input[name=realname]').val('');
+            $('input[name=telephone]').val('');
+            $('input[type=radio]').prop('checked', false);
+            $('.dialog').fadeIn();
+        });
+
+
+        //if判断是解决刷新页面之后带不上toktn
+        if (sessionStorage.getItem('token')) {
+            $.ajaxSetup({
+                headers: {
+                    "Authorization": sessionStorage.getItem('token')
+                }
+            });
+            $('.load').trigger('click');
+        } else {
+            $('.login').trigger('click');
+            // $('.load').trigger('click');
+        }
+
+    });
+
+
+</script>
+
+
+
+<div class="btns">
+    <button class="login">登录</button>
+    <button class="load">加载数据</button>
+    <button class="toAdd">新增</button>
+
+</div>
+<!-- 表格 -->
+<div class="tables">
+    <!-- 追加到表格中数据 -->
+    <table>
+        <thead>
+            <tr>
+                <!-- <th>
+                    <input type="checkbox">
+                </th> -->
+                <th>序号</th>
+                <th>课程名称</th>
+                <th>学分</th>
+                <th>学年</th>
+                <th>学期</th>
+                <th>任课老师</th>
+                <th>课程性质</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <tr>
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>编号</td>
+                    <td>用户名</td>
+                    <td>姓名</td>
+                    <td>角色</td>
+                    <td>性别</td>
+                    <td>状态</td>
+                    <td>手机号</td>
+                    <td>操作</td>
+                </tr> -->
+        </tbody>
+    </table>
+</div>
+<!-- 模态框 -->
+<div class="dialog">
+    <div class="container">
+        <div class="dialog-header">
+            添加用户信息
+        </div>
+        <div class="dialog-center">
+            <div>
+                用户名：<input type="text" name="username">
+            </div>
+            <div>
+                密码：<input type="password" name="password">
+            </div>
+            <div>
+                真实姓名：<input type="text" name="realname">
+            </div>
+            <div>
+                电话：<input type="text" name="telephone">
+            </div>
+            <div>
+                性别：<input name="gender" type="radio" value="male">男
+                <input name="gender" type="radio" value="female">女
+            </div>
+        </div>
+        <div class="dialog-footer">
+            <button class="cancel">取消</button>
+            <button class="submit">确定</button>
+        </div>
+    </div>
+</div>

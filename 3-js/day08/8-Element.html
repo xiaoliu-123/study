@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element</title>
+    <script>
+        function test() {
+            console.log(1);
+        }
+
+
+        window.onload = function () {
+            var div = document.getElementById('one');
+            // console.log(div);
+            //获取属性值
+            console.log(div.id);
+            console.log(div.className);
+            console.log(div['title']);
+            //使用. 访问不到自定义属性的值  
+            //以下代码识别为div.data减flag
+            // console.log(div.data-flag);
+            // console.log(div['data-flag']);
+            //对自定义属性进行操作用getAttribute、setAttribute
+            console.log(div.getAttribute('data-flag'));
+            //修改属性值
+            div.id = 'one1';
+            // div['data-flag'] = 'test';
+            //修改自定义属性值
+            div.setAttribute('data-flag', 'test')
+            console.log(div);
+            //获取style属性值和onclick属性值
+            //div.style  .onclick 拿到的对象或函数
+            console.log(div.style);
+            div.style.width = '200px'
+            div.style.height = '200px';
+            console.log(div.onclick);
+            //getAttribute('style'/'onclick') 拿到的是字符串
+            console.log(div.getAttribute('style'));
+            console.log(div.getAttribute('onclick'));
+            //移除属性
+            div.removeAttribute('title');
+            console.log(div);
+        }
+    </script>
+</head>
+
+<body>
+    <!-- 一般前面加data-的是自定义属性 -->
+    <div id="one" class="two" title="hello" data-flag="testdata"
+        style="width: 100px;height: 100px;background-color: pink;" onclick="test()"></div>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>样式表</title>
+    <!-- 引入外部样式表 -->
+    <!-- <link rel="stylesheet" href="./css/main.css"> -->
+    
+    <!--在选择器特性值（权值）一样的情况下 谁在后边谁生效  就近原则  标签选择器 特性值都是1-->
+    <!-- 内部样式表 -->
+    <!-- A.css   B.css
+        A.css里面引入B.css  link A.css
+        B.css里面引入A.css  link B.css
+        在一个css文件里怎么引另一个css文件
+        A.css
+            样式表第一行写 @import './B.css';
+        B.css
+    -->
+    <style>
+        /* 引入外部样式表 */
+        @import './css/main.css';
+        div {
+            background-color:brown;
+            border:10px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <!-- 行内样式表 特性值1000-->
+    <div style="background-color: chocolate; color: white;">Hello</div>
+    <br>
+    <div id="one" class="two">World</div>
+    <p>段落</p>
+
+</body>
+</html>

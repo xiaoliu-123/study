@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/qs/6.9.4/qs.js"></script>
+    <script>
+        var qs = Qs;
+        //接收url查询字符串参数
+        console.log(document);
+        // console.log(document.location);
+        console.log(location.search);
+        //将?name=lisi&age=18转成js对象  qs qs.stringify(obj)  qs.parse(str)
+        var str = "?name=lisi&age=18";
+        //str.slice(开始，结束)  str.substring(开始，结束)  str.substr(开始，项数)
+        str = str.slice(1);
+        console.log(str);
+        // console.log(qs.parse(str));
+        //原生操作查询字符串
+        var arr = str.split('&');
+        arr = arr.map((item) => {
+            return item.split('=');
+        })
+        // arr = [['name','lisi'],['age',18]];
+        var obj = {};
+        arr.forEach((item) => {
+            obj[item[0]] = item[1];
+        })
+        console.log(obj);
+    </script>
+</head>
+
+<body>
+    B页面
+</body>
+
+</html>

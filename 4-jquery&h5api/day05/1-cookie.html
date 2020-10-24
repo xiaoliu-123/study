@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原生cookie操作</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/js-cookie/latest/js.cookie.js"></script>
+    <script>
+        //从cookie里存数据
+        // Cookies.set('cookie1', 'test1');
+        // Cookies.set('cookie2', 'test2');
+        //原生js获取
+        var cookieStr = document.cookie;
+        console.log(cookieStr);  //cookie1=test1; cookie2=test2
+        //获取cookie2  key对应的值
+        var arr = cookieStr.split('; ');
+        console.log(arr);       // [ "cookie1=test1", "cookie2=test2" ]
+        var result = arr.map(function (item) {
+            return item.split('=');
+        })
+        console.log(result);   //[[ "cookie1", "test1" ],[ "cookie2", "test2" ]]
+        var tempArr = result.filter(function (item) {
+            //返回满足条件组成的数据
+            return item[0] == 'cookie2';
+        })
+        console.log(tempArr);  //[[ "cookie2", "test2" ]]
+        console.log(tempArr[0][1]);  //test2
+        // arr.forEach(function (item, index) {
+        //     //如果item是引用数据类型
+        //     // item.name='zhangsan';
+        //     arr[index] = item.split('=');
+        // })
+        // console.log(arr);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>渲染</title>
+  <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    {{msg}}
+    <ul>
+      <!-- :key  加了个冒号，代表key的值是变量 -->
+      <li v-for="(item,index) in fruits" :key="index" :title="msg">{{index+1}}-{{index+1+''+item}}</li>
+    </ul>
+    <table>
+      <tr>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+      </tr>
+      <tr v-for="item in stus" :key="item.id">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.age}}</td>
+      </tr>
+    </table>
+  </div>
+  <script>
+    //基本渲染 条件渲染 v-if v-else v-show  列表渲染(循环渲染) v-for指令
+    new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello',
+        fruits: ['苹果', '橘子', '香蕉'],
+        stus: [{
+          id: 1001,
+          name: 'zhangsan',
+          age: 12
+        }, {
+          id: 1002,
+          name: 'lisi',
+          age: 22
+        }, {
+          id: 1003,
+          name: 'terry',
+          age: 30
+        }],
+      },
+      methods: {},
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+
+
+插槽
+    默认插槽
+        没有名字的插槽就是默认的插槽
+        <slot>123</slot>
+        <slot name="default">123</slot>
+    具名插槽
+        有名字的插槽就是具名插槽
+        <slot name="test">123</slot>
+插槽充值
+    <my-com>hello</my-com>
+    内容填充到哪个插槽
+    指定插槽
+        <my-com>
+            <template v-slot:default>
+                hello
+            </template>
+            <template v-slot:test>
+                123
+            </template>
+            //简写
+            <template #test>
+                123
+            </template>
+        </my-com>
+
+
+组件
+    组件声明 {}
+    组件模板 {template:``}
+插槽
+    插槽声明 {template:`<slot>插槽的默认模板</slot>`}
+    插槽模板
+        默认模板
+        <slot>插槽的默认模板</slot>
+        自定义模板
+          <my-com>
+              <template #name>
+                  插槽自定义模板
+              </template>
+          </my-com>
+
+在插槽默认模板中，据可以直接访问子组件的数，可以通过props间接访问父组件的数据
+在插槽自定义模板中，可以直接访问父组件的数据，可以通过插槽属性间接访问子组件的数据(插槽作用域)
+
+子组件访问父组件的数据 子组件:title  子组件模板内可以访问父组件的数据
+
+插槽自定义模板访问子组件的数据
+插槽自定义模板访问插槽声明地方的数据  <slot :title></slot>
+
+学生数组 教师数组 课程数组
+使用一个组件完成数据表格显示
+    <template>
+        <table>
+            <thead>
+                <tr v-for="">
+                    <slot name="thead"></slot>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <slot name="tbody"></slot>
+                </tr>
+            </tbody>
+        </table>
+    </template>
+
+Vue单页面应用
+    咨询管理项目
+        动态组件component标签  is属性
+    组件缓存
+        keep-alive标签
+
+过滤器
+  {{msg | 过滤器}}
+  <div v-bind:title="msg | 过滤器"></div>
+  
+  时间戳
+    1600676416905
+    [{time:1600676416905,name:''},{},{}]
+    拿到原数据,  parse是自己封装的处理时间日期的方法
+      arr.forEach(()=>{
+          item.time = parse(item.time);
+      })
+  处理成年月日时分秒
+  {{date | 过滤器}}
+

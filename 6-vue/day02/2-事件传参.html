@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件传参</title>
+    <script src="../js/vue-2.6.12.js"></script>
+    <!-- 模拟昨天的表格，操作列，删除按钮 -->
+</head>
+
+<body>
+    <div id="app">
+        <table>
+            <tr v-for="item in arr" :key="item.id">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+                <td>
+                    <button @click="toEdit($event,item)">修改</button>
+                    <button @click="toDelete($event,item)">删除</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                arr: [{
+                    id: 1001,
+                    name: 'zhangsan',
+                    age: 12
+                }, {
+                    id: 1002,
+                    name: 'lisi',
+                    age: 22
+                }, {
+                    id: 1003,
+                    name: 'terry',
+                    age: 30
+                }]
+            },
+            methods: {
+                toEdit(e, item) {
+                    console.log(item);
+                },
+                toDelete(e, item) {
+                    console.log(item);
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

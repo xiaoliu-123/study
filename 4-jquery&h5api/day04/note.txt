@@ -1,0 +1,14 @@
+
+拖放
+
+点击one，one上到parent中，点击two，two上到parent中
+
+10parent,10个child，灵活拖拽
+
+Cookie 存储少量数据，面向服务器的
+WebStorage
+    sessionStorage 会话存储，选项卡
+    localStorage  本地存储，存储在本地磁盘，即使浏览器关闭数据依然在
+
+
+

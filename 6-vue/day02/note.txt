@@ -1,0 +1,68 @@
+
+
+vue 用户界面渐进式框架
+MVVM模式  数据驱动框架
+与js的区别
+  vue,框架，不操作dom，面向数据
+  jq，js库，封装dom，动画,ajax
+M-V-V-M
+实例生命周期
+  beforeCreate(){} 初始化事件处理程序，生命周期
+  created(){}  初始化数据和方法，将他们绑定到实例上
+  beforeMounted(){}  挂载之前
+  Mounted(){}  挂载成功
+  beforeUpdated(){}  更新之前
+  Updated(){}  更新之后
+  beforeDestroy(){}  销毁之前
+  Destroyed(){}  销毁之后
+
+渲染
+  基本渲染{{msg}}
+  条件渲染  v-if=""  v-else=""  v-show=""
+  列表渲染  v-for="(item,index) in arr"
+  属性渲染  v-bind:title="msg"  / :title="msg"
+  style和class属性
+    :style="{}/[]"
+    :class="{},/[]"
+  事件绑定   v-on:click="test"  / @click="test"
+
+在vue实例中访问内部的属性和方法，使用this访问
+在vue实例外访问内部的属性和方法，使用实例本身访问
+
+
+
+双向数据绑定
+  发生在表单控件中，使用v-model实现，数据模型中的数据发生改变的时候，视图跟上变，视图发生改变的时候，数据模型中的数据也发生改变
+
+
+数据模型-->视图
+  stu.username = 'lisi'
+  监听对象的属性值发生变化
+  Object.defineProperty(obj,'username',{
+    configurable:true,
+    enumerable:true,
+    getter(){
+      //
+      return 1
+    },
+    setter(param){
+      input.value=param
+    }
+  })
+  console.log(obj.username);
+  obj.username = '123'
+
+
+视图-->数据模型
+  在input上监听键盘抬起事件，获取input的value值，设置给数据模型stu.username
+  input.onkeyup = function(){
+    stu.username = this.value
+  }
+
+
+计算属性
+  有依赖关系的数据
+  total  a  b
+
+
+

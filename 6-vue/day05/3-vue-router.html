@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>路由</title>
+  <script src="../js/vue-2.6.12.js"></script>
+  <script src="../js/vue-router-3.4.3.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    {{msg}}
+    <!-- 4.使用路由 -->
+    <div>
+      <router-link to="/a">去A路由</router-link>
+      <router-link to="/b">去B路由</router-link>
+      <a href="#/a">a标签去A路由</a>
+    </div>
+    <div>
+      <!-- 路由对象组件出现的位置 -->
+      <router-view></router-view>
+    </div>
+  </div>
+  <script>
+    //声明组件
+    let myA = {
+      template: `
+        <div>A组件</div>
+        `
+    }
+    let myB = {
+      template: `
+        <div>B组件</div>
+        `
+    }
+    //1. 定义路由对象数组 route路由对象  router路由器对象  routes路由对象组
+    let routes = [{
+      path: '/a',
+      component: myA
+    }, {
+      path: '/b',
+      component: myB
+    }]
+    //2.创建路由器对象
+    let router = new VueRouter({
+      routes: routes
+    })
+    //3.注册路由器对象
+    new Vue({
+      el: '#app',
+      router: router,
+      components: {
+        "my-a": myA,
+        "my-b": myB
+      },
+      data: {
+        msg: 'hello'
+      },
+      methods: {},
+    })
+  </script>
+</body>
+
+</html>

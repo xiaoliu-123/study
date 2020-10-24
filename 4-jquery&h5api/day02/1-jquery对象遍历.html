@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery对象遍历</title>
+    <script src="../js/jquery-3.5.1.js"></script>
+    <script>
+        $(function () {
+            var ones = $('.one');
+            //遍历ones    each
+            ones.each(function (index, item) {
+                console.log(index, item);
+
+            });
+            //过滤jquery对象内的节点  内部内容带o字符的
+            var result = ones.filter(function (index, item) {
+                //item 每一个dom节点
+                //item.innerText
+                //拿到dom节点内的文本$(item).text()
+                //$(item).text().indexOf('o') > -1  indexOf()返回的是下标
+                return $(item).text().indexOf('o') > -1;
+            });
+            console.log(result);
+            //映射 
+            var ids = ones.map(function (index, item) {
+                //获取属性值  attr
+                // return item.id
+                return $(item).attr('id');
+            });
+            console.log(ids);
+
+
+            //将jquery对象转成数组
+            // var arr = Array.prototype.slice.call(ones, 0);
+            // var arr = Array.from(ones);
+            /*
+            var arr = ones.toArray();
+            arr.forEach(function (item, index) {
+                console.log(item, index);
+            });
+            */
+        })
+    </script>
+</head>
+
+<body>
+    <div id="1001" class="one">one</div>
+    <div id="1002" class="one">two</div>
+    <div id="1003" class="one">three</div>
+</body>
+
+</html>

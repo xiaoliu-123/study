@@ -1,0 +1,43 @@
+/* @mycolor:'#ccc';
+
+div{
+  color:color(@mycolor);
+  //向上取整
+  // font-size: ceil(22.4px);
+  //向下取整
+  // font-size: floor(22.4px);
+  //四舍五入
+  // font-size: round(22.6px);
+  //百分比
+  // width: percentage((0.4));
+  // width: pi()*10px;
+  // width:min(12px,37px,23px)
+  // width:max(12px,37px,23px)
+
+} */
+
+//遍历函数
+// range范围函数
+// @list:range(12);
+// 列表项在each方法内，@key和@index一样，@value是内容
+// 规则集在each方法内，@key是key,@value是value,@index是index
+@list:range(5,12,3);
+// @list:red,blue,green;
+/* @list:{
+  red:red1;
+  blue:blue1;
+  green:green1;
+} */
+/* each(@list,{
+  //@value  @key @index
+  .col-@{value}{
+    // width: 6%*@index;
+    // width:@index;
+    width:@key;
+  }
+}) */
+div{
+  each(@list,{
+    my-@{key}:@value;
+  })
+}

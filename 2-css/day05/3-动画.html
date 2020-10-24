@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大话西游</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            display: block;
+        }
+
+        .container {
+            /* 不能给container设定宽度 */
+            /* width: 100%; */
+            height: 100vh;
+            background-image: url(../大话西游/background.jpg);
+            animation: bg-ani 20s linear infinite;
+            /* animation-delay: 2s; */
+        }
+
+        .parent {
+            position: absolute;
+            top: 400px;
+            left: 200px;
+        }
+
+        /* 悟空 */
+        .wk {
+            /* border: 1px solid red; */
+            width: 200px;
+            /* 把剩余部分隐藏 */
+            overflow: hidden;
+            float: left;
+        }
+
+        .bj {
+            /* border: 1px solid red; */
+            width: 200px;
+            /* 把剩余部分隐藏 */
+            overflow: hidden;
+            float: left;
+        }
+
+        .ts {
+            /* border: 1px solid red; */
+            width: 170px;
+            /* 把剩余部分隐藏 */
+            overflow: hidden;
+            float: left;
+        }
+
+        .ss {
+            /* border: 1px solid red; */
+            width: 210px;
+            /* 把剩余部分隐藏 */
+            overflow: hidden;
+            float: left;
+        }
+
+        .wk img {
+            animation: wk-ani 1s infinite;
+            /* 中间过渡时间为0，中间过渡过程不要，分8步走完 */
+            animation-timing-function: steps(8);
+        }
+
+        .bj img {
+            animation: wk-ani 1s infinite;
+            /* 中间过渡时间为0，中间过渡过程不要，分8步走完 */
+            animation-timing-function: steps(8);
+        }
+
+        .ts img {
+            animation: ts-ani 1s infinite;
+            /* 中间过渡时间为0，中间过渡过程不要，分8步走完 */
+            animation-timing-function: steps(8);
+        }
+
+        .ss img {
+            animation: ss-ani 1s infinite;
+            /* 中间过渡时间为0，中间过渡过程不要，分8步走完 */
+            animation-timing-function: steps(8);
+        }
+
+        /* 悟空动画 */
+        @keyframes wk-ani {
+            from {
+                margin-left: 0;
+            }
+
+            to {
+                margin-left: -1600px;
+            }
+        }
+
+        /* 悟空动画 */
+        @keyframes bj-ani {
+            from {
+                margin-left: 0;
+            }
+
+            to {
+                margin-left: -1600px;
+            }
+        }
+
+        /* 悟空动画 */
+        @keyframes ts-ani {
+            from {
+                margin-left: 0;
+            }
+
+            to {
+                margin-left: -1360px;
+            }
+        }
+
+        /* 悟空动画 */
+        @keyframes ss-ani {
+            from {
+                margin-left: 0;
+            }
+
+            to {
+                margin-left: -1680px;
+            }
+        }
+
+        /* 背景声明动画 */
+        @keyframes bg-ani {
+            from {
+                margin-left: -1920px;
+            }
+
+            to {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 背景图片动画 -->
+    <div class="container"></div>
+
+    <div class="parent">
+        <!-- 悟空动画 -->
+        <div class="wk">
+            <img src="../大话西游/wk.png" alt="">
+        </div>
+        <div class="bj">
+            <img src="../大话西游/bj.png" alt="">
+        </div>
+        <div class="ts">
+            <img src="../大话西游/ts.png" alt="">
+        </div>
+        <div class="ss">
+            <img src="../大话西游/ss.png" alt="">
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通信-跨文档信息传输</title>
+    <script>
+        window.onload = function () {
+            var btn = document.querySelector('button');
+            var sendBtn = document.querySelector('#send');
+            var iframeBtn = document.querySelector('#iframe');
+            var win;
+            btn.onclick = function () {
+                //打开新页面
+                //window方法会返回一个窗口对象
+                win = window.open('./b1.html');
+                console.log(win);
+                //发送消息
+                //无效 
+                // win.postMessage('hello', '*');
+            }
+            sendBtn.onclick = function () {
+                // win.postMessage('hello', '*');
+                var obj = { name: 'zhangsan', age: 12 }
+                var arr = [1, 2, 3, 4, 5];
+                win.postMessage(arr, 'http://127.0.0.1:5501');
+                // win.postMessage('hello', 'http://127.0.0.1:5501');
+                // win.postMessage('hello');
+            }
+            iframeBtn.onclick = function () {
+                //获取b1内联窗口，使用窗口发送数据
+                win = document.querySelector('iframe').contentWindow;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <button>打开b1页面(获取b1窗口)</button>
+    <button id="send">发送消息</button>
+    <button id="iframe">给内联框架发送消息(获取内联b1窗口)</button>
+    <!-- 内联窗口 -->
+    <iframe src="./b1.html" frameborder="0"></iframe>
+</body>
+
+</html>

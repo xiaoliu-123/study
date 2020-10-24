@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            /* 使用动画 */
+            /* 指定动画时长 */
+            animation-duration: 3s;
+            /* 指定动画的名称 */
+            animation-name: ani;
+            /* 动画执行的次数 */
+            /* infinite 无限次 */
+            /* animation-iteration-count: infinite; */
+            /* animation-iteration-count: 2; */
+            /* 动画执行的方向 */
+            /* reverse 反转动画序列执行的方向 */
+            animation-direction: reverse;
+            /* 动画交替执行 */
+            animation-direction: alternate;
+            /* 交替反转执行 */
+            animation-direction: alternate-reverse;
+            /* 正常 */
+            animation-direction: normal;
+            /* 填充动画帧 forwards用动画执行的最后一帧填充元素*/
+            /* animation-fill-mode: forwards; */
+            /* backwards 在延迟时间内用动画执行的第一帧填充元素 */
+            /* animation-fill-mode: backwards; */
+            /* 第一帧、最后一帧都填 */
+            animation-fill-mode: both;
+            /* 延迟动画执行 */
+            animation-delay: 2s;
+        }
+
+        /* 声明动画序列 名称ani */
+        /* 假设动画总时长10秒，10%代表1s时动画的样子 */
+        @keyframes ani {
+
+            /* 第一帧 */
+            /* 0% 可用from替换 */
+            0% {
+                width: 150px;
+            }
+
+            /* 10% {
+                width: 200px;
+            } */
+
+            /* 最后一帧 */
+            /* 100% 可用to替换 */
+            100% {
+                width: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+</body>
+
+</html>

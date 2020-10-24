@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过滤器</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}} {{msg | parseUpper}}
+        ------
+        {{arr}}
+        <!--  -->
+        <div :title="msg | parseUpper" v-for="(item,index) in arr" :key='index'>
+            <span>{{item.name}}</span>
+            <span>{{item.time | parseTime}}</span>
+        </div>
+    </div>
+    <script>
+        //以前
+        /* let arr = [{
+            name: '',
+            time: 1600676654120
+        }, {
+            name: '',
+            time: 1600676684320
+        }, {
+            name: '',
+            time: 1600676702779
+        }];
+        arr.forEach((item) => {
+            item.time = parse(item.time)
+        })
+        console.log(arr)
+        function parse(time) {
+            let date = new Date(time);
+            return date.toLocaleDateString() + '' + date.toLocaleTimeString()
+        } */
+
+        //全局注册过滤器 {{item.time|parseTime}}
+        //date就是item.time
+        /* Vue.filter('parseTime', (date) => {
+            // return new Date(date).toLocaleDateString() + '' + new Date(date).toLocaleTimeString()
+            return new Date(date).toLocaleString()
+        }) */
+        // 过滤器 转大写
+        /* Vue.filter('parseUpper', (date) => {
+            return date.toUpperCase()
+        }) */
+        new Vue({
+            el: '#app',
+            //局部注册过滤器
+            filters: {
+                parseUpper(msg) {
+                    return msg.toUpperCase()
+                },
+                parseTime(date) {
+                    return new Date(date).toLocaleString()
+                }
+            },
+            data: {
+                msg: 'hello',
+                arr: [{
+                    name: 'one',
+                    time: 1600676654120
+                }, {
+                    name: 'two',
+                    time: 1600676684320
+                }, {
+                    name: 'three',
+                    time: 1600676702779
+                }]
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

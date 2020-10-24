@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>混入</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <my-a></my-a>
+    </div>
+    <script>
+        //混入(对象)
+        let mixin = {
+            //数据
+            data() {
+                return {
+                    mixinData: '混入的数据',
+                    obj: { name: 'zhangsan', gender: 'male' },
+                }
+            },
+            //生命周期
+            created() {
+                console.log('混入的created')
+            },
+            //方法
+            methods: {
+                mixinMethod() {
+                    console.log('mixinMethod方法');
+                },
+                test() {
+                    console.log('test混入');
+                }
+            },
+            //原型方法  vm.$destory()
+        }
+
+        //全局混入  全局混入的对象将在每一个组件中混合
+        Vue.mixin(mixin)
+        //组件
+        let myA = {
+            template: `
+                <div>
+                    A组件的内容
+                </div>
+            `,
+            created() {
+                console.log('A组件created')
+            }
+        }
+        //全局注册组件
+        Vue.component('my-a', myA)
+        let vm = new Vue({
+            el: '#app',
+            // 局部混入
+            mixins: [mixin],
+            data: {
+                msg: 'hello',
+                obj: { age: 12, name: 'lisi' },
+            },
+            created() {
+                console.log('created....');
+            },
+            methods: {
+                test() {
+                    console.log('test');
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

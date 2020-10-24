@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vuex</title>
+  <script src="../js/vue-2.6.12.js"></script>
+  <script src="../js/vuex-3.5.1.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    {{msg}}---
+    <br>
+    {{$store.state.storeMsg}}
+    {{$store.getters.storeMsgUpper}}
+    ---------------------
+    {{storeMsg}}
+    {{storeMsgUpper}}
+    <button @click="$store.commit('changeMsg','test')">提交突变</button>
+    <button @click="$store.dispatch('getMsg','fairy')">分发动作</button>
+    <button @click="changeMsg('terry')">提交突变2</button>
+    <button @click="getMsg('terry2')">分发动作2</button>
+  </div>
+  <script>
+    //Vuex提供的组件辅助函数,将来模块化开发的时候可以结构导入，下方就可以省略Vuex.
+    // import { mapActions, mapGetters, mapMutations, mapState } from 'Vuex';
+
+    let { mapActions, mapGetters, mapMutations, mapState } = Vuex;
+
+    //仓库配置对象
+    let storeConf = {
+      state: {
+        storeMsg: '仓库里的数据msg',
+      },
+      getters: {
+        //这里的第一个参数是默认传递的，是state对象
+        storeMsgUpper(state) {
+          return state.storeMsg.toUpperCase()
+        }
+      },
+      mutations: {
+        //这里的第一个参数是默认传递的，是state对象
+        changeMsg(state, payload) {
+          state.storeMsg = payload
+        },
+      },
+      actions: {
+        //这里的第一个参数是默认传递的，是类仓库对象
+        getMsg({ commit, dispatch, getters, state }, payload) {
+          // console.log(st, payload);
+          commit('changeMsg', payload)
+        }
+      }
+    }
+    //仓库对象
+    let store = new Vuex.Store(storeConf);
+    new Vue({
+      el: '#app',
+      //注册仓库
+      store,
+      data: {
+        msg: 'hello',
+      },
+      created() {
+        // console.log(this.$store)
+        console.log(this.$store.state)
+        console.log(this.$store.getters)
+        console.log(this.getMsg)
+        console.log(this.changeMsg)
+      },
+      computed: {
+        // ...Vuex.mapState(['storeMsg']),
+        // ...Vuex.mapGetters(['storeMsgUpper'])
+        ...mapState(['storeMsg']),
+        ...mapGetters(['storeMsgUpper'])
+      },
+      methods: {
+        // ...Vuex.mapActions(["getMsg"]),
+        // ...Vuex.mapMutations(["changeMsg"]),
+        ...mapActions(["getMsg"]),
+        ...mapMutations(["changeMsg"]),
+      },
+    })
+  </script>
+</body>
+
+</html>

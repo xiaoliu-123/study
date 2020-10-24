@@ -1,0 +1,14 @@
+
+// @content:if((5>3),'hello','world');
+div{
+  color: red;
+  &:before{
+    // content:@content
+    // content: if((5>3),'hello','world');
+    // content: if((123),'hello','world');  //world
+    // content:if((true),'hello','world');  //hello
+    // content:if((false),'hello','world');  //world
+    // content:if((0),'hello','world');  //world
+    content:if((boolean(123)),'hello','world');  //world
+  }
+}

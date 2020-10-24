@@ -1,0 +1,44 @@
+文档通信
+    A.html->B.html
+    <a href="./B.html?name=zhangsan&age=12">A页面跳转到B页面</a>
+    document
+    localetion
+
+
+
+var obj={}
+obj.__proto__  获取到的是obj实例的构造函数的原型对象
+obj.consteuctor.prototype
+
+跨文档通信
+    window.open()
+    iframe
+    1.谁发
+        win.postMessage(消息,'目标源');
+    2.谁收
+        window.onmessage=function(e){
+            e.data;
+            e.origin;
+        }
+
+
+同步和异步
+
+
+
+
+物流
+想知道物流到哪里了
+
+发送请求 响应请求、
+
+可以使用轮询，间歇调用内执行请求
+setInterval(function(){
+    ajax->
+    if(res.address){
+        通知用户
+    }
+}，1000)
+
+推送，任务完成后服务器接收一下，浏览器只接收，websocket实时的，长连接
+

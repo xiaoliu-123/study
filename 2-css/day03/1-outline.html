@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外边线</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: teal;
+        }
+
+        .one {
+            /* outline 不占据屏幕空间 */
+            outline: 10px solid red;
+            /* 设置外边线的偏移 */
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="one"></div>
+    <div>Hello</div>
+</body>
+
+</html>

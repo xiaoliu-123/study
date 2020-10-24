@@ -1,0 +1,28 @@
+
+用for循环遍历数组，拿到对象，
+用document.creatElement创建一个tr节点，
+用for-in 遍历对象,拿到属性值
+用innerHTML 和td标签 把属性值，插入到tr节点中。inner.HTML=`<td>`+属性值+`</td>
+再把tr节点放入table节点中。parent.appendChild('')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

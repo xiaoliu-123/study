@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>axios</title>
+  <script src="../js/axios-0.20.0.js"></script>
+  <script src="../js/qs-6.9.4.min.js"></script>
+  <script>
+    //axios里面封装了一些异常操作
+
+    let qs = Qs
+    async function test() {
+      try {
+        let res = await axios({
+          //配置对象
+          url: 'http://47.106.244.1:8099/manager/category/findAllCategory',
+        })
+        console.log(res, '-----');
+      } catch (e) {
+        console.log(e, '+++++')
+      } finally {
+        console.log('结束!')
+      }
+
+    }
+    test();
+
+    axios({
+      //配置对象
+      url: 'http://47.106.244.1:8099/manager/category/findAllCategory',
+    }).then((res) => {
+      console.log(res);
+      console.log(res.data.data);
+    }).catch((err) => {
+      console.log(err);
+    }).finally(() => {
+      console.log('结束');
+    })
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

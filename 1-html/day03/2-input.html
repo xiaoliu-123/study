@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#">
+        <section>
+            <!-- 用户不可见，数据可提交 -->
+            <input type="hidden" value="1001" name="id">
+        </section>
+        <section>
+            <span>性别：</span>
+            <!-- name="gender" 同样的name值，代表他们是同一组，同组内的单选按钮互斥 -->
+            <input type="radio" name="gender" value="male" id="male">
+            <label for="male">男</label>   
+            <input type="radio" name="gender" value="female" id="female">
+            <label for="female">女</label>         
+        </section>
+        <section>
+            <span>爱好：</span>
+            <section>
+                <input type="checkbox" name="hobby" value="basketball">篮球
+                <input type="checkbox" name="hobby" value="football">足球
+                <input type="checkbox" name="hobby"  value="swimming">游泳
+                <input type="checkbox" name="hobby"  value="singing">唱歌
+            </section>
+        </section>
+        <!-- <section>
+            <span>文件上传：</span>
+            <input type="file" name="file">
+        </section> -->
+
+        <input type="reset" value="重置表单">
+        <button type="reset">重置表单2</button>
+        <button>提交</button>
+        <input type="image" width="50px" height="20px" src="./timg.jpg"alt="">
+        <input type="button" value="普通按钮">
+        <button>提交</button>
+        <button type="button">普通提交</button>
+    </form>
+    
+</body>
+</html>

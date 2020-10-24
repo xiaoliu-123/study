@@ -1,0 +1,327 @@
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid #ccc;
+    }
+
+    table {
+        margin-top: 10px;
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        line-height: 30px;
+    }
+
+    .dialog {
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        top: 0;
+        left: 0;
+        line-height: 30px;
+        display: none;
+    }
+
+    .container {
+        width: 60%;
+        height: 250px;
+        background-color: #fff;
+        margin: calc((100vh - 300px)/2) auto;
+        border-radius: 5px;
+        padding: 10px
+    }
+</style>
+
+<script>
+    var baseURL = 'http://120.26.176.26:7788';
+
+    $(function () {
+        //1.当前要修改的栏目数据。2.区别模态框的提交按钮是要进行新增还是编辑操作
+        //每次点击新增按钮的时候，设置category=null，每次点击编辑按钮的时候，设置category为当前要编辑的对象
+        var category = null;
+
+        //登录功能
+        $('.login').click(function () {
+            var user = {
+                username: 'admin1',
+                password: '123321',
+            };
+            $.ajax({
+                url: baseURL + '/user/login',
+                method: 'post',
+                data: JSON.stringify(user),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                success: function (res) {
+                    // console.log(res);
+                    sessionStorage.setItem('token', res.data.token);
+                    //配置全局ajax
+                    $.ajaxSetup({
+                        headers: {
+                            "Authorization": sessionStorage.getItem('token')
+                        }
+                    });
+                    //加载数据
+                    $('.load').trigger('click');
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+            });
+        });
+
+        //加载数据
+        $('.load').click(function () {
+            $.ajax({
+                url: baseURL + '/category/findAll',
+                method: 'get',
+                success: function (res) {
+                    $('.tables tbody').empty();
+                    // console.log(res);
+                    res.data.forEach(function (item, index) {
+                        //item每一个category对象
+                        var newTr = $(`
+                             <tr>
+                                <td>
+                                    <input type="checkbox" value="${item.id}">
+                                </td>
+                                <td>${index + 1}</td>
+                                <td>${item.name}</td>
+                                <td>${item.no}</td>
+                                <td>${item.parentId == null ? '' : item.parentId}</td>
+                                <td>${item.description == null ? '' : item.description}</td>
+                                <td>
+                                    <button data-item='${JSON.stringify(item)}' class="toUpdate">编辑</button>    
+                                    <button data-id=${item.id} class="deleteBtn">删除</button>    
+                                </td>
+                            </tr>
+                        `)
+                        $('.tables tbody').append(newTr);
+
+                        var newOption = $(`
+                            <option value="${item.id}">${item.name}</option>
+                            
+                        `)
+                        $('.dialog .sel').append(newOption);
+
+                    });
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+            })
+        });
+
+        //删除数据  事件代理
+        $('.tables tbody').on('click', '.deleteBtn', function () {
+            //获取data-id值 
+            var id = $(this).attr('data-id');
+            if (confirm('确认要删除吗？')) {
+                $.ajax({
+                    url: baseURL + '/category/deleteById',
+                    method: 'get',
+                    //第一个id与后台对应的，后台的单个删除接口需要一个参数id
+                    //第二个id是变量id，是要删除的用户的id
+                    data: { id: id },
+                    success: function (res) {
+                        console.log(res);
+                        //删除成功后，重新加载数据
+                        $('.load').trigger('click');
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    },
+                });
+            }
+        });
+
+        //批量删除
+        $('.batchDelete').click(function () {
+            //获取用户勾选的checkbox
+            //.tables tbody *:checkbox 获取tbody的复选框  :checked 在过滤出用户选中的
+            var checks = $('.tables tbody *:checkbox:checked');
+            console.log(checks);
+            var ids = checks.map(function (index, item) {
+                //获取每个节点上的value属性的值
+                return $(item).val();
+            });
+            ids = ids.toArray();
+            ids = ids.join();
+            console.log(ids);
+            if (ids.length == 0) {
+                alert('请选择要删除的数据');
+                return;
+            }
+            if (confirm('是否确定要批量删除？')) {
+                //发起请求进行批量删除操作，批量删除结束后，局部刷新页面
+                // alert(ids.toString() + '批量删除');
+
+                $.ajax({
+                    url: baseURL + '/category/batchDelete',
+                    method: 'post',
+                    data: { ids: ids },
+                    success: function (res) {
+                        console.log(res);
+                        $('.load').trigger('click');
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    },
+                })
+
+
+            }
+
+        })
+        //全选或全不选功能
+        $('.tables thead :checkbox').change(function () {
+            //prop 一个参数是获取属性
+            //获取表头复选框的值
+            var value = $(this).prop('checked');
+            //设置表体复选框的值
+            $('.tables tbody :checkbox').prop('checked', value);
+        })
+
+        //修改功能 修改按钮
+        $('.tables tbody').on('click', '.toUpdate', function () {
+            category = $(this).attr('data-item');
+            console.log(category);
+            category = JSON.parse(category);
+            console.log(category);
+            $('input[name=name]').val(category.name);
+            $('input[name=parentId]').val(category.parentId);
+            $('input[name=no]').val(category.no);
+            $('textarea[name=description]').val(category.description);
+            //设置模态框的功能
+            $('.dialog-header').html('修改栏目');
+            $('.dialog').fadeIn();
+
+        })
+
+        //提交功能
+        $('.submit').click(function () {
+            // 获取用户输入的栏目信息
+            var name = $('input[name=name]').val();
+            var parentId = $('select[name=parentId]').val();
+            var no = $('input[name=no]').val();
+            var description = $('textarea[name=description]').val();
+            if (name == "") {
+                alert('请输入用户名');
+                return;
+            }
+            $.ajax({
+                url: baseURL + '/category/saveOrUpdate',
+                method: 'post',
+                data: {
+                    //判断是新增还是修改
+                    id: category ? category.id : '',
+                    name: name,
+                    parentId: parentId,
+                    no: no,
+                    description: description
+                },
+                success: function (res) {
+                    console.log(res);
+                    //提示用户保存成功
+                    if (res.status == 200) {
+                        alert('保存成功');
+                        $('.dialog').fadeOut();
+                        $('.load').trigger('click');
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+            })
+        })
+
+        //取消按钮
+        $('.cancel').click(function () {
+            $('.dialog').fadeOut();
+        });
+
+        //新增按钮
+        $('.toAdd').click(function () {
+            category = null;
+            $('.dialog-header').html('新增用户信息');
+            $('.dialog').fadeIn();
+        })
+
+
+        //if判断是解决刷新页面之后带不上toktn
+        if (sessionStorage.getItem('token')) {
+            $.ajaxSetup({
+                headers: {
+                    "Authorization": sessionStorage.getItem('token')
+                }
+            });
+            $('.load').trigger('click');
+        } else {
+            $('.login').trigger('click');
+            // $('.load').trigger('click');
+        }
+
+    })
+</script>
+
+<div class="btns">
+    <button class="login">登录</button>
+    <button class="load">加载数据</button>
+    <button class="toAdd">新增</button>
+    <button class="batchDelete">批量删除</button>
+</div>
+<div class="tables">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox">
+                </th>
+                <th>序号</th>
+                <th>名称</th>
+                <th>排序号</th>
+                <th>父栏目</th>
+                <th>描述</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+<!-- 模态框 -->
+<div class="dialog">
+    <div class="container">
+        <div class="dialog-header">
+            新增栏目
+        </div>
+        <div class="dialog-center">
+            <div>
+                栏目名称：<input type="text" name="name">
+            </div>
+            <div>
+                父栏目：
+                <!-- <input type="text" name="parentId"> -->
+                <select class="sel" name="parentId" id="">
+                    <option value="">请选择</option>
+                </select>
+
+            </div>
+            <div>
+                序号：<input type="text" name="no">
+            </div>
+            <div>
+                栏目介绍：
+                <textarea name="description" id="" cols="30" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="dialog-footer">
+            <button class="cancel">取消</button>
+            <button class="submit">确定</button>
+        </div>
+    </div>
+</div>

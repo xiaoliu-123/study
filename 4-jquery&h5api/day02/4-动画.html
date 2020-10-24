@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画</title>
+    <style>
+        .one {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            margin: 10px;
+        }
+    </style>
+    <script src="../js/jquery-3.5.1.js"></script>
+    <script>
+        $(function () {
+            $('button').click(function () {
+                //显示
+                // $('div').hide();
+                //显示
+                // $('div').show();
+                //切换
+                // $('div').toggle();
+                //淡出
+                // $('div').fadeOut();
+                //淡入
+                // $('div').fadeIn();
+                //切换
+                // $('div').fadeToggle();
+                //滑上
+                // $('div').slideUp();
+                //滑下
+                // $('div').slideDown();
+                //切换
+                $('div').slideToggle();
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <button>动画</button>
+    <div class="one"></div>
+    <div class="one"></div>
+</body>
+
+</html>

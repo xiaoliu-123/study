@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伪类选择器</title>
+    <style>
+        /* a {
+            color:blue;
+        } */
+        /* 顺序 link  visited  hover  active */
+        /* 未访问的状态 */
+        a:link {
+            color: blue;
+        }
+
+        /* 访问过的状态 */
+        a:visited {
+            color: brown;
+        }
+
+        /* 悬停状态 */
+        a:hover {
+            color: teal;
+        }
+
+        /* 点击、激活状态 */
+        a:active {
+            color: coral;
+        }
+
+        div:hover {
+            color: red;
+        }
+
+        div:active {
+            color: blue;
+        }
+
+        /* 选中默认选中的单选或复选按钮，设置外边线outline */
+        input[type=radio]:default {
+            outline: 2px solid blue;
+        }
+
+        /* 选中用户选中的单选或复选按钮，设置外边线outline */
+        /* border占据屏幕空间 outline外边线不占据屏幕空间 */
+        input[type=radio]:checked {
+            outline: 2px solid red;
+        }
+
+        input[type=text]:enabled {
+            border: 2px solid chartreuse;
+        }
+
+        input[type=text]:disabled {
+            border: 2px solid darkviolet;
+        }
+
+        input[type=email]:valid {
+            border: 2px solid rgb(12, 102, 52);
+        }
+
+        input[type=email]:invalid {
+            color: rgb(231, 112, 15);
+        }
+
+        input[type=number]:in-range {
+            background-color: royalblue;
+        }
+
+        input[type=number]:out-of-range {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="./1-css.html">超链接</a>
+    <div>Hello</div>
+    <form action="">
+        <input name="gender" type="radio" checked>男
+        <input name="gender" type="radio">女
+        <br>
+        ：enabled<input type="text">
+        <br>
+        ：disabled<input type="text" disabled>
+        <br>
+        email<input type="email">
+        <br>
+        <input type="number" min="0" max="10">
+    </form>
+</body>
+
+</html>

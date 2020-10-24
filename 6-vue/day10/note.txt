@@ -1,0 +1,329 @@
+
+================复习 webpack=====================
+前端资源构建和静态资源打包工具
+安装webpack
+  cnpm i -g webpack webpack-cli
+安装完就可以使用webpack命令
+  webpack 入口文件 -o 出口文件
+webpack 默认可以识别js文件和json文件，其他文件借助loader或者plugin
+webpack.config.js 在项目根目录下创建该文件，是webpack的配置文件,有了该文件之后，可以使用webpack命令进行打包
+  内容：
+  const {resolve} = require('path')
+  const HtmlWebpackPlugin = require('html-webpack-plugin')
+  module.exports={
+    //映射 明确报错文件
+    devtool:'source-map',
+
+    //单入口
+    //entry:'入口文件路径',
+    //多入口
+    entry:{
+      入口名称：入口文件路径,
+      入口名称：入口文件路径,
+    },
+    //出口
+    output:{
+      // __dirname nodejs的变量，代表当前文件的目录的绝对路径
+      path:出口路径resolve(__dirname,'dist'),
+      //单出口
+      filename:文件名称'./js/index-dev.js'
+      //多出口
+      filename:文件名称'./js/[name]-dev.[ext]'
+    },
+    //打包模式
+    mode:'development/production',
+    module:{
+      rules:[
+        {
+          test:/\.css$/i,
+          //use:['style-loader','css-loader']
+          use:'file-loader'
+        },
+        {
+          test:/\.less$/i,
+          use:['style-loader','css-loader','less-loader']
+        },
+        {
+          test:/\.png|jpg|gif$/i,
+          use:'file-loader'
+        },
+        {
+          test:/\.html$/i,
+          use:'html-loader'
+        },
+      ]
+    },
+    //插件
+    plugins:[
+      //new HtmlWebpackPlugin()
+      new HtmlWebpackPlugin({
+        template:'./src/main.html'
+      })
+      ],
+    //开发服务器
+    //webpack-dev-server工具
+    //自动构建,自动打包,自动刷新，自动打开浏览器
+    devServer:{
+      //打包后文件的存储目录
+      contentBase:resolve(__dirname,'dist'),
+      compress:true,
+      port:3000,
+      open:true
+    }
+  }
+如果安装了webpack-dev-server，通过npx webpack-dev-server启动webpack
+
+loader使用
+  1.下载
+  2.使用
+plugin
+  1.下载
+  2.引用
+  3.使用
+webpack核心
+  1.入口
+  2.出口
+  3.loader加载器
+  4.plugin
+  5.mode 模式
+
+=========================vuex===================
+下载
+  cnpm i -D vuex
+引入
+  import Vuex from 'vuex'
+使用
+  Vue.use(Vuex)
+  
+自定义插件
+  let myPlugin = {
+    Vue.filter('',a)
+    Vue.mixin(a)
+    Vue.component('',myA)
+    Vue.directive('',myModel)
+    Vue.staticMethod=()=>{}
+    Vue.prototype.$myMethod=()=>{}
+  }
+
+创建仓库配置对象
+let storeConf = {
+  namespaced:true,
+  state:{},
+  getters:{},
+  mutations:{},
+  actions:{},
+}
+创建仓库对象
+  let store = new Vuex.Store({
+    modules:{
+      //storeConf:storeConf
+      storeConf,
+      storeConf2
+    }
+  })
+注册仓库
+  new Vue({
+    store,
+    data(){}
+  })
+
+============路由===================
+下载
+  cnpm i -D vue-router
+引入
+  import VueRouter from 'vue-router'
+使用插件 Vue.use(VueRouter)
+路由对象数组
+  let routes = [{
+    path:'/a',
+    component:myA
+  },{
+    path:'/a',
+    component:myA
+  }]
+创建路由器对象
+  let router = new VueRouter({
+    routes:routes,
+    mode:'hash'
+  })
+路由器对象注册
+  new Vue({
+    router,
+  })
+
+================axios================
+下载 axios
+  cnpm i -D axios
+使用 
+  import axios from 'axios'
+创建实例
+  let instance = axios.create({
+    baseURL:'',
+    headers:{
+      "Auth2":token
+    }
+  })
+拦截器
+  instance.interceptors.request.use((config)=>{
+    if(config.method=='post' && config.url !== '/user/login'){
+      //表单数据
+      config.data = qs.stringify(config.data)
+    }
+  },(err)=>{})
+  instance.interceptors.response.use((res)=>{
+    let result={
+      ...res,
+      data:res.data.data,
+      status:res.data.status,
+      statusText:res.data.message
+    };
+    return result;
+  },(err)=>{})
+  使用
+  import axios from './axios.js'
+  async function test(){
+    try{
+      let res = await axios.get()
+    }catch(err){
+      //提示用户什么出错
+    }
+  }
+
+
+===========vue-cli内做什么=============
+  1.仓库要写
+  2.路由要配
+  3.配置axios数据交互
+  4.UI组件库  ElementUI
+
+//api.js
+  /user/findAll
+instance.get('/user/findAll')
+
+
+
+组件内如果要使用vuex动作，mapActions()
+组件内如果要使用api方法，import
+组件内如果要使用配置文件中的方法，import
+组件内如果要使用request文件中的实例，import
+
+=============================================================
+创建项目
+在src底下创建vue.config.js文件
+    // 补充的webpack配置文件
+    module.exports = {
+      devServer: {
+        port: 3000,
+        open: true
+      }
+    }
+在src底下创建utils文件夹
+  utils文件夹下
+    config.js文件：维护项目的配置文件，公共的将来可能发生更改的数据
+        // 后台服务器路径
+        const baseURL = 'http://127.0.0.1:8899'
+
+        // 提示时长
+        const time = 5000;
+        // token字符串 sessionStorage中存储的key值记录一下
+        const token = 'token'
+
+        export default {
+          baseURL,
+          time,
+          token
+        }
+    request.js文件：用来创建axios实例、编写请求/响应拦截器，导出axios实例
+      导入axios  （先用npm下载  npm i -D axios）
+          // 配置axios
+          import axios from 'axios';
+          // 引入配置文件
+          import { baseURL, token } from './config.js'
+          // 引入qs
+          import qs from 'qs'
+          // 创建axios实例
+          let instance = axios.create({
+            baseURL,
+            headers: {
+              "Authorization": sessionStorage.getItem(token)
+            }
+          })
+          // 请求拦截器
+          instanceaxios.interceptors.request.use(config => {
+            if (config.method == 'post' && config.url !== '/user/login') {
+              config.data = qs.stringify(config.data)
+            }
+            return config;
+          }, error => {
+            return Promise.reject(error);
+          });
+          // 响应拦截器
+          instanceaxios.interceptors.response.use(response => {
+            return {
+              ...response,
+              data: response.data.data,
+              status: response.data.status,
+              statusText: response.data.message
+            }
+          }, error => {
+            return Promise.reject(error);
+          });
+          export default instance
+在src底下创建api文件夹
+  api文件夹下：
+    user.js文件：管理user用户管理模块的请求
+        import request from '../utils/request.js'
+        export default {
+          findAllUser(params) {
+            return request.get('/user/findAll', { params })
+          },
+          saveOrUpdate(params) {
+            return request.post('/user/saveOrUpdate', params)
+          }
+        }
+
+在store文件夹中创建modules文件夹
+  modules文件夹下
+    user.js文件（小仓库）
+        // user的仓库
+        import { findAllUser } from '@/api/user.js'
+        export default {
+          namespaced: true,
+          state: {
+            userMsg: 'user仓库的数据',
+            userData: []
+          },
+          getters: {},
+          mutations: {
+            changeUserData(state, payload) {
+              state.userData = payload
+            }
+          },
+          actions: {
+            async findAllUser({ commit, dispatch }, payload) {
+              // findAllUser api内的方法
+              let res = await findAllUser(payload);
+              //拿到数据后，发起突变，修改state中的userData数据
+              commit('changeUserData', res.data)
+            }
+          }
+        }
+
+
+在views文件夹下创建Login和Home组件
+在App.vue中放置一个容器<router-view></router-view>
+
+配置路由
+  在src/router/index.js
+      {
+        path: '/',
+        redirect: '/login'
+      },
+      {
+        path: '/login',
+        component: () => import('@/views/Login.vue')
+      },
+      {
+        path: '/home',
+        component: () => import('@/views/Home.vue')
+      },

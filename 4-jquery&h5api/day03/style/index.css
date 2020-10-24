@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style: none;
+}
+nav,article,section,header{
+    display: block;
+}
+body{
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+body>nav{
+    flex:4;
+}
+body>nav>header,
+body>article>header{
+    height: 80px;
+    background-color: #ccc;
+}
+body>nav>section{
+    height: calc(100vh - 80px);
+    background-color: #eee;
+}
+body>nav>section li{
+    line-height: 60px;
+    font-size: 20px;
+    text-align: center;
+    border-bottom: 2px solid white;
+    cursor: pointer;
+}
+body>nav>section li:hover{
+    color: teal;
+}
+
+
+
+body>article{
+    flex:20;
+}
+body>article>section{
+    margin: 10px;
+    height: calc(100vh - 100px);
+    background-color: #ddd;
+    overflow: auto;
+}

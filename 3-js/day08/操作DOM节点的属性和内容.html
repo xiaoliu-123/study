@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>操作DOM节点的属性和内容</title>
+    <script>
+        window.onload = function () {
+            var parent = document.getElementById('one');
+            var newChild = document.createElement('div');
+            //给parent节点添加内容
+            parent.innerText = '我是parent';
+            //给newChild节点添加内容
+            newChild.innerHTML = 'hello';
+            // newChild.textContent = 'hello 你好';
+            //给parent节点添加子节点newChild
+            parent.appendChild(newChild);
+            //获取属性值
+            console.log(parent.id);
+            console.log(parent['title']);
+            //修改属性值
+            parent.title = 'two1';
+            console.log(parent);
+            //移除属性
+            parent.removeAttribute('title');
+            console.log(parent);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="one" title="two"></div>
+</body>
+
+</html>

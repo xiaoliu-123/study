@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-事件冒泡</title>
+    <style>
+        #outer {
+            width: 400px;
+            height: 400px;
+            background-color: aqua;
+        }
+
+        #center {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+
+
+            background-color: pink;
+        }
+
+        #inner {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            background-color: rgb(145, 12, 34);
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var outer = document.getElementById('outer');
+            var center = document.getElementById('center');
+            var inner = document.getElementById('inner');
+            var temp = 0;
+            //在点击inner的时候，temp改为1
+            //在点击center的时候，temp改为2
+            //在点击outer的时候，temp改为3
+            inner.onclick = function (event) {
+                temp = 1;
+                console.log(temp);
+                //停止冒泡  要用到event
+                //停止冒泡最好放在最后一行
+                event.stopPropagation();
+            }
+            center.onclick = function () {
+                temp = 2;
+                console.log(temp);
+                event.stopPropagation();
+            }
+            outer.onclick = function () {
+                temp = 3;
+                console.log(temp);
+                event.stopPropagation();
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="outer">
+        outer
+        <div id="center">
+            center
+            <div id="inner">
+                inner
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

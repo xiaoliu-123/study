@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>嵌套路由</title>
+  <script src="../js/vue-2.6.12.js"></script>
+  <script src="../js/vue-router-3.4.3.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- {{msg}} -->
+    <div style="float:left">
+      <router-link to="/student">学生管理</router-link>
+      <br>
+      <router-link to="/course">课程管理</router-link>
+      <br>
+      <router-link to="/course/grade">成绩</router-link>
+      <router-link to="/course/plan">课程</router-link>
+
+    </div>
+    <div style="float:right">
+      <router-view></router-view>
+    </div>
+  </div>
+  <script>
+    let Student = {
+      template: `
+        <div>学生管理</div>
+      `,
+    };
+
+    /*  <div>
+        <router-link to="/course/grade">成绩</router-link>
+        <router-link to="/course/plan">排课</router-link>
+      </div> */
+
+    let Course = {
+      template: `
+        <div>
+         课程管理模块
+          <div>
+            <router-view></router-view>
+          </div>
+        </div>
+      `,
+    };
+    let CourseGrade = {
+      template: `
+        <div>成绩表</div>
+      `,
+    };
+    let CoursePlan = {
+      template: `
+        <div>课程表</div>
+      `,
+    }
+    // 定义路由对象数组
+    let routes = [{
+      path: '/student',
+      component: Student,
+    },
+    {
+      path: '/course',
+      component: Course,
+      //路由重定向
+      redirect: '/course/grade',
+      //子路由
+      children: [{
+        path: 'grade',
+        component: CourseGrade
+      }, {
+        path: 'plan',
+        component: CoursePlan
+      }]
+    }]
+    // 创建路由器对象
+    let router = new VueRouter({
+      routes: routes
+    })
+    new Vue({
+      el: '#app',
+      router: router,
+      data: {
+        msg: 'hello'
+      },
+      methods: {},
+    })
+  </script>
+</body>
+
+</html>

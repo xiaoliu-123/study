@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>style</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 测试样式 -->
+        <!-- :style 后面跟对象或者数组 -->
+        <div :style="styleObj">hello</div>
+        <div :style="{color:currentColor}">World</div>
+        <!-- 数组里谁在后谁生效 -->
+        <div :style="[styleObj,styleObj2]">hello world</div>
+    </div>
+    <script>
+
+        new Vue({
+            el: '#app',
+            data: {
+                currentColor: 'blue',
+                msg: 'hello',
+                styleObj: {
+                    color: 'red',
+                    "font-size": '30px',
+                    // fontSize: '30px',
+                },
+                styleObj2: {
+                    background: 'pink',
+                    color: 'blue'
+                }
+            },
+            methods: {
+
+            },
+        })
+    </script>
+</body>
+
+</html>

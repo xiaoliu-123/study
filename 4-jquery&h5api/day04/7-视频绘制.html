@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var canvas = document.querySelector('canvas');
+            var context = canvas.getContext('2d');
+            var video = document.querySelector('video');
+            draw();
+            function draw() {
+                //video在画布上可设置大小
+                context.drawImage(video, 0, 0, 200, 200);
+                //设置连续播放
+                requestAnimationFrame(draw);
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <canvas width="400px" height="400px"></canvas>
+    <video autoplay loop src="../video/video/1.mp4"></video>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+//声明映射
+.one(){
+  mya:red;
+  myb:'blue'
+}
+div{
+  color:.one[mya];
+  // background-color: .one[myb];
+  background-color: color(.one[myb]);
+}

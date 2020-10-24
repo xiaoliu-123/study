@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>async</title>
+    <script src="../../6-jquery&h5api/js/jquery-3.5.1.js"></script>
+    <script>
+        async function test() {
+            let result = await $.get('http://47.106.244.1:8099/manager/category/findAllCategory', {});
+            console.log(result);
+        }
+        test();
+    </script>
+</head>
+
+<body>
+    <!-- http://47.106.244.1:8099/manager/category/findAllCategory -->
+    <!-- http://47.106.244.1:8099/manager/user/findAllUser -->
+</body>
+
+</html>

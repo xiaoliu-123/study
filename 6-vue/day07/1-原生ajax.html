@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原生ajax</title>
+  <script src="../js/qs-6.9.4.min.js"></script>
+  <script>
+    let qs = Qs
+    //创建对象
+    let xhr = new XMLHttpRequest();
+    //打开连接
+    // xhr.open('get', 'http://47.106.244.1:8099/manager/category/findAllCategory?' + qs.stringify({ id: 1 }));
+    xhr.open('post', 'http://47.106.244.1:8099/manager/category/findAllCategory');
+    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+    xhr.setRequestHeader("Content-Type", "application/json")
+    //发送请求
+    // xhr.send({ id: 1 });
+    // xhr.send(qs.stringify({ id: 1 }));
+    xhr.send(JSON.stringify({ id: 1 }));
+    //接受响应
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log(xhr.responseText)
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

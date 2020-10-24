@@ -1,0 +1,185 @@
+路由
+路由对象
+  {
+    path:'/a',
+    component:myA,
+    redirect:'/a/:b/:c',
+    //redirect:{name:'aRouter'},
+    alias:'/aa',
+    name:'aRouter',
+    //独享守卫
+    beforeEnter(to,from,next){}
+  }
+  [{},{},{}]
+创建路由器
+  let router = new VueRouter({
+    routes:routes
+  })
+注册路由器
+  new Vue({
+    router:router
+  })
+使用
+  <router-link to="/a">文本</router-link>
+  <router-view></router-view>
+
+路由守卫
+  全局前置守卫
+    router.beforeEach(to,from,next){}
+  全局后置守卫
+    router.afterEach(to,from){}
+  路由独享守卫
+    beforeEnter(to,from,next){}
+  组件内守卫
+    {
+      data(){},
+      methods:{},
+      template:``,
+      beforeRouteEnter(to,from,next){
+        //this-->window
+      }
+      beforeRouteUpdate(to,from,next){
+        this-->组件对象
+      }
+      beforeRouteLeave(to,from,next){
+        this-->组件对象
+      }
+    }
+动态路由携带的参数
+  this.$route.params
+  {b:1,c:2}
+
+
+<router-link to="/course"></router-link>
+<router-link to="/course/grade"></router-link>
+<router-link to="/course/plan"></router-link>
+{
+  path:'/course',
+  component:Couese,
+  children:[
+  {
+    path:'grade',
+    component:Grade,
+  }
+  {
+    path:'plan',
+    component:Plan,
+  }]
+}
+
+嵌套路由
+  在父路由对象内写children,在children数组里写子路由对象
+  在父路由组件内写router-view组件，在父路由组件内给子路由组件留位置
+
+跳转路由
+  <router-link></router-link>
+
+vuex插件
+  状态管理模式  状态机
+  组件共享的数据统一管理
+  仓库
+  {
+    //状态存储的位置
+    state:{
+      msg:'hello'
+    },
+    //把state中的状态对外开放
+    //获取  可以获取到state中的数据进行处理再返回
+    getters:{
+      msgUpper(state){
+        return state.msg.toUppperCase();
+      }
+    },
+    //突变 修改state中的数据（想要修改state中的数据只有突变这一种方式）
+    //同步操作
+    mutations:{
+      //playload 载荷  参数
+      //state参数可以不用传，默认会传过来
+      changeMsg(state,payload){
+        state.msg = payload;
+      }
+    },
+    //动作 可以放异步
+    actions:{
+      getAll(st,playload){
+        let arr = [];
+        //state.msg=arr;
+        //提交突变  
+        st.commit('changeMsg',arr)
+        //分发动作
+        //st.dispatch('getAll',[]) 死循环
+      }
+    }
+  }
+
+1.仓库配置对象
+  let storeConf = {
+    state:{},
+    getters:{},
+    mutations:{},
+    actions:{}
+  }
+2.通过配置对象生成仓库对象
+  let store = new Vuex.Store(storeConf);
+3.注册
+  new Vue({
+    el:'',
+    router,
+    store
+  })
+
+
+
+  A组件a数据
+  B组件b数据
+
+  A组件中获取b数据
+  vuex存状态(数据)  (相当于全局仓库，存共享的数据)
+    a数据
+    b数据
+  A组件从vuex获取数据
+  B组件从vuex获取数据
+  C组件
+
+  组件-              ->函数
+  数据模型中的数据     局部变量
+  var a= ;
+  var b= ;
+  function A(){
+    var a = 1;
+  }
+  function B(){
+    var b=2;
+  }
+
+仓库里只有一个配置对象
+
+new Vuex.Store({state:{}})
+配置对象有多个   小仓库
+仓库对象         大仓库
+a={
+  namespaced:ture,
+  state:{
+    msg:''
+  }
+}
+b={
+  namespaced:ture,
+  state:{}
+}
+let store = new Vuex.Store({
+  modules:{
+    aStore:a,
+    bStore:b,
+  }
+})
+this.$store.state.aStore...
+this.$store.state.bStore...
+//第一个参数命名空间
+mapState('aStore',['msg'])
+mapState('bStore',['msg'])
+//如果变量命名冲突
+mapState('bStore',{a:'msg'})
+
+this.msg-->aStore  msg
+this.a-->bStore  msg

@@ -1,0 +1,117 @@
+复习
+
+函数
+  声明方式
+    函数声明
+      function test(形参){}
+    函数表达式
+      var test = function f(形参){
+          arguments.callee===f;
+          arguments.callee === test;
+          //f(num-1);
+      }
+      对外使用test名称,对内使用f名称
+内部属性
+  arguments
+    arguments.length 实参个数
+    arguments.callee 函数名本身
+    环境对象
+函数调用
+  test(实参);
+  test.call(this,实参列表)
+
+
+
+迭代方法源码
+  1.迭代方法的调用
+  2.迭代方法的返回值
+  3.遍历数组
+
+Array.prototype.myFilter = function(fun,obj){
+    var result = [];
+    for(var i=0;i<this.length;i++){
+        if(obj?fun.bind(this)(this[i],i,this):fun(this[i],i,this)){
+            result.push(this[i])
+        }
+    }
+    return result;
+}
+arr.myFilter(function(item,index,arr){
+    return item<50
+})
+
+Array.prototype.myMap = function(fun,obj){
+    var result = [];
+    for(var i=0;i<this.length;i++){
+        result.push(obj?fun.bind(this)(this[i],i,this):fun(this[i],i,this))
+    }
+    return result;
+}
+
+Array.prototype.myForEach(function(fun,obj){
+    for(var i=0;i<this.length; i++){
+        obj?fun.bind(obj)(this[i],i,this):fun(this[i],i,this);
+    }
+
+})
+arr.myForEach(funtion(item,index,arr),{name:'zhangsan'});
+
+闭包
+    函数-->外部作用域中的变量
+
+    function test(){
+        var a = 1;
+        return function(){
+            //console.log(a);
+            return a;
+        }
+    }   
+    var result = test()();
+
+
+解决闭包问题
+    1.使用let声明变量
+      let声明的变量
+      ES5不认花括号作用域，块级作用域
+      ES6 let 认块级作用域
+
+      functiontest（）{
+          
+      }
+      if(){}
+      for(let i=0;i<10;i++){
+          //i  
+      }
+      //拿不到i
+
+
+
+//如何将函数内的局部变量让全局使用，在函数内返回值，在全局调用接受返回值
+function test(){
+    var a = 1;
+    return a;
+}
+var result = test();
+
+
+正则表达式g修饰符
+  匹配模式中的如果有g，会维护一个lastIndex属性代表下次开始查找的位置。如果没有g修饰，lastIndex永远为0.
+
+
+正则表达式
+    文本，模式
+        \d{3}\w{2}\hello\s{2}
+        模式次数 模式次数 模式次数 模式次数
+
+
+    修饰符  img
+
+
+
+RegExp实例方法
+  pattern.test(str)
+  pattern.exec(str)
+String实例方法
+    str.replace
+
+

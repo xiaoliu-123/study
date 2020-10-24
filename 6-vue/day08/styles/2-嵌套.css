@@ -1,0 +1,19 @@
+#one > a {
+  color: purple;
+  font-size: 20px;
+}
+body {
+  background-color: #ccc;
+}
+body div {
+  color: red;
+}
+body > a {
+  text-decoration: none;
+}
+body:hover {
+  background-color: rosybrown;
+}
+body div > *:first-child span {
+  color: blue;
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            border: 2px solid rgb(172, 78, 154);
+            margin: 10px;
+            /* float 可以将块级元素显示在一行 */
+            float: left;
+        }
+
+        /* 选中家的第一个孩子  ：first-child */
+        /* .parent *:first-child {
+            border: 1px solid red;
+        } */
+
+        /* 选中每家的最后一个孩子  ：last-child */
+        /* .parent *:last-child {
+            border: 1px solid red;
+        } */
+
+        /* 选中每家的第三个孩子  ：nth-child(3) */
+        /* .parent *:nth-child(3) {
+            border: 1px solid red;
+        } */
+
+        /* 选中parent后代中的作为别人第一个孩子存在的元素 */
+        /* :first-child { */
+        /* n  2n  3n+1   nth-child(2n)*/
+        /* odd 奇数   even 偶数 */
+        /* :nth-last-child(2) 倒数第二个 */
+        /* .parent *:nth-last-child(2) {
+            border: 1px solid red;
+        } */
+
+        /* last-of-type 每种类型中的最后一个*/
+        /* .parent *:last-of-type {
+            border: 1px solid red;
+        } */
+
+        /* nth-of-type(2) 每种类型中的第二个 */
+        .parent *:nth-of-type(2) {
+            border: 1px solid red;
+        }
+
+        /* :nth-last-of-type(2) */
+        /* .parent *:only-child {
+            border:2px solid red;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <span>span1</span>
+        <span>span2</span>
+        <span>span3</span>
+        <span>span4</span>
+        <p>p1</p>
+        <p>p2</p>
+        <p>p3</p>
+    </div>
+    <div class="parent">
+        <span>span1</span>
+        <span>span2</span>
+        <span>span3</span>
+        <span>span4</span>
+        <p>p1</p>
+        <p>p2</p>
+        <p>p3</p>
+    </div>
+    <div class="parent">
+        <span>span1</span>
+        <span>span2</span>
+        <span>span3</span>
+        <span>span4</span>
+        <p>p1</p>
+        <p>p2</p>
+        <p>p3</p>
+    </div>
+    <div class="parent">
+        <span>span1</span>
+        <span>span2</span>
+        <span>span3</span>
+        <span>span4</span>
+        <p>p1</p>
+        <p>p2</p>
+        <p>p3</p>
+    </div>
+    <div class="parent">
+        <span>span1</span>
+        <span>span2</span>
+        <span>span3</span>
+        <span>span4</span>
+        <p>p1</p>
+        <p>p2</p>
+        <p>p3</p>
+    </div>
+    <div class="parent">
+        <span>span</span>
+    </div>
+    <div class="parent">
+        <span>span</span>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var btns = document.getElementsByTagName('button');
+            btns[0].onclick = function () {
+                location = './2-时间.html';
+            };
+            btns[1].onclick = function () {
+                location.href = './2-时间.html';
+            };
+            btns[2].onclick = function () {
+                location.assign('./2-时间.html');
+            };
+            btns[3].onclick = function () {
+                window.open('./2-时间.html');
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <button>页面跳转1</button>
+    <button>页面跳转2</button>
+    <button>页面跳转3</button>
+    <button>页面跳转4</button>
+</body>
+
+</html>

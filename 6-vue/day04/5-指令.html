@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>指令</title>
+  <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+  <!-- v-model -->
+  <div id="app">
+    {{msg}}
+    {{username}}
+    <!-- <div v-if="show" v-mymodel>{{msg}}</div> -->
+    <!-- <input @input="changeUsername($event)" type="text" v-mymodel="username"> -->
+    <input type="text" v-mymodel="username">
+  </div>
+  <script>
+    let myModel = {
+      //绑定的时候调用一次
+      //el:dom元素  binding对象，指令的详细参数  vnode：Vue 编译生成的虚拟节点 oldVnode:上一个虚拟节点
+      bind(el, binding, vnode, oldVnode) {
+        console.log(el, binding, vnode, oldVnode, 'bind...');
+      },
+      //当节点追加到父节点的时候调用
+      inserted(el, binding, vnode, oldVnode) {
+        console.log(el, binding, vnode, oldVnode, 'inserted...');
+        //把数据模型的数据绑定到视图中
+        el.value = binding.value;
+        el.oninput = function (e) {
+          // console.log(vnode.context.$root.username)
+          // 把视图中的数据，存到数据模型中
+          vnode.context.$root[binding.expression] = e.target.value
+          // console.log(vnode.context.$options.username)
+        }
+        // 在指令钩子函数如何访问
+        // console.log(this)
+      },
+      //vnode更新
+      update(el, binding, vnode, oldVnode) {
+        console.log(el, binding, vnode, oldVnode, 'update...');
+      },
+      //组件更新调用
+      componentUpdated(el, binding, vnode, oldVnode) {
+        console.log(el, binding, vnode, oldVnode, 'componentUpdated...');
+      },
+      //解绑的时候调用一次
+      unbind(el, binding, vnode, oldVnode) {
+        console.log(el, binding, vnode, oldVnode, 'unbind...');
+      },
+    }
+    //全局注册 v-mymodel
+    // Vue.directive('mymodel', myModel)
+
+    let vm = new Vue({
+      el: '#app',
+      components: {},
+      //局部注册
+      directives: {
+        mymodel: myModel
+      },
+      data: {
+        msg: 'hello',
+        show: true,
+        username: 'zhangsan',
+      },
+      methods: {
+        /* changeUsername(e) {
+            this.username = e.target.value
+        }, */
+      },
+    })
+  </script>
+</body>
+
+</html>

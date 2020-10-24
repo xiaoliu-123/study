@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>盒子模型</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            /* W3C盒子模型，标准盒子模型 默认盒子模型*/
+            /* width&height 设置的是内容区的宽高 */
+            /* 盒子的宽：width+padding*2 +border*2 */
+            /* IE盒子模型，设置的宽高是盒子的宽高 */
+            box-sizing: border-box;
+            width: 100px;
+            height: 100px;
+            padding: 20px;
+            border: 2px solid red;
+            margin: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div>123</div>
+    <span>hello</span>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gennerator函数</title>
+    <script src="../../6-jquery&h5api/js/jquery-3.5.1.js"></script>
+    <script>
+        function* test(hanle) {
+            //状态机通用函数
+            hanle();
+            //状态通用变量
+            let a = 1;
+            //状态机不通用res
+            let res = yield getData();
+            console.log(res);
+            hanle();
+            console.log(a)
+            yield '结束了！';
+        }
+        let geo = test(function () {
+            console.log(111);
+        });
+        geo.next();
+        function getData() {
+            return $.get('http://47.106.244.1:8099/manager/category/findAllCategory', {}, (response) => {
+                //发起状态机内第二段程序的执行
+                geo.next(response);
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

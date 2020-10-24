@@ -1,0 +1,52 @@
+自适应布局   浮动、flex、
+  浮动，PC端一行显示6列，到了手机端一行显示3列，其他样式没有发生变化
+  在不同屏幕下依然显示正常
+  相对单位：cm rem 百分比
+
+
+响应式布局  媒体查询
+  PC
+
+
+  浏览器兼容性问题是怎么产生的
+     浏览器是有不同的厂商造出来的，A厂商支持animation属性，B厂商不支持animation属性，提供了-ms-animation用来实现动画。
+     div{
+         animation:ani 3s;
+         -ms-animation:ani 3s;
+         -moz-animation:ani 3s;
+         -webkit-animation:ani 3s;
+         -o-animation:ani 3s;
+     }
+
+
+Less scss是css预处理工具
+  .less文件
+  .scss文件   .sass文件
+  ||
+  css文件
+
+div{
+  color:blue;
+}
+
+div .one{
+  color:black;
+}
+div .two{
+  color:pink;
+}
+
+less、scss
+  div{
+    color:blue;
+    .one{
+      color:black;
+    }
+    .two{
+      color:pink;
+    }
+  }
+
+
+a.scss-->a.css
+scss文件内可以写css代码

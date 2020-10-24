@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>响应拦截器</title>
+  <script src="../js/axios-0.20.0.js"></script>
+  <script src="../js/qs-6.9.4.min.js"></script>
+  <script>
+    let qs = Qs
+    axios.defaults.baseURL = "http://47.106.244.1:8099";
+    //响应拦截器
+    let interceptor = axios.interceptors.response.use(response => {
+      // Do something before response is sent
+      console.log(response, '---response')
+      let res = {
+        ...response,
+        test: '123',
+        data: response.data.data,
+        status: response.data.status,
+        statusText: response.data.message
+      }
+      // return response;
+      return res;
+    }, error => {
+      // Do something with response error
+      return Promise.reject(error);
+    });
+    axios.get('/manager/user/findAllUser').then((res) => {
+      console.log(res, '响应数据')
+    })
+    setTimeout(() => {
+      //移除响应拦截器
+      axios.interceptors.response.eject(interceptor);
+    }, 3000)
+    axios.get('/manager/user/findAllUser').then((res) => {
+      console.log(res, '响应数据')
+    })
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

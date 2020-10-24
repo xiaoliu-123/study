@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>拦截器</title>
+  <script src="../js/axios-0.20.0.js"></script>
+  <script src="../js/qs-6.9.4.min.js"></script>
+  <script>
+    let qs = Qs;
+    axios.defaults.baseURL = "http://47.106.244.1:8099";
+    //请求拦截
+    let arr = ['/manager/user/findAllUser', '/manager/user/findAll']
+    axios.interceptors.request.use(config => {
+      // Do something before request is sent
+      if (arr.includes(config.url)) {
+        //对config做其他处理
+      }
+
+      console.log(config, '---');
+      console.log(config.data)
+      config.my = '123';
+      console.log(config)
+      if (config.method == 'post' && config.url != '/user/login') {
+        //表单数据
+        config.data = qs.stringify(config.data);
+      }
+
+      // if (config.url === '/manager/user/findAllUser') {
+      //   console.log('查找所有用户')
+      //   config.url = '/manager/category/findAllCategory';
+      // }
+      return config;
+    }, error => {
+      // Do something with request error
+      return Promise.reject(error);
+    });
+    // axios.get('/manager/user/findAllUser')
+    // axios.get('/manager/user/findAll')
+    //post请求，所有的要表单数据  除了/user/login要json格式数据
+    axios.post('/user/login1', { username: 'admin1', password: '123321' })
+    axios.post('/user/login', { username: 'admin1', password: '123321' })
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

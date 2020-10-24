@@ -1,0 +1,43 @@
+作业
+  遍历数据，拿到一个对象，生成一个tr，tr中的td中的内容使用对象中的属性值。
+  最后tr追加到tbody中。
+  var students = [{
+    name:'zhansan',
+    age:1,
+    gender:'男'
+  },{
+    name:'zhansan',
+    age:1,
+    gender:'男'
+  },{
+    name:'zhansan',
+    age:1,
+    gender:'男'
+  },{
+    name:'zhansan',
+    age:1,
+    gender:'男'
+  }];
+  遍历到表格中
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

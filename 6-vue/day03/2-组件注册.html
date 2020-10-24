@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单</title>
+    <script src="../js/vue-2.6.12.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        <my-com-b></my-com-b>
+        ----------------
+        <my-com-a></my-com-a>
+    </div>
+    <script>
+        let myComA = {
+            template: `
+                <div>A组件</div>
+            `
+        }
+        let myComB = {
+            //局部注册A组件
+            components: {
+                "my-com-a": myComA
+            },
+            template: `
+                <div>B组件
+                    <my-com-a></my-com-a>
+                </div>
+            `
+        }
+        //全局注册
+        // Vue.component('my-com-a', myComA)
+        Vue.component('my-com-b', myComB)
+        new Vue({
+            el: '#app',
+            //局部注册A组件
+            components: {
+                "my-com-a": myComA
+            },
+            data: {
+                msg: 'hello'
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

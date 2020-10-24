@@ -1,0 +1,28 @@
+/* 设置字符编码 避免汉字乱码问题 */
+@charset 'utf-8';
+/* @import 'XXX.css'; */
+
+/* 普遍选择器 */
+/* 去除所有元素默认样式，比如body的8px的margin,ol ul的40px的左padding */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    background-color: cyan !important;
+    /* 文字大小 */
+    font-size: 50px;
+}
+/* id选择器，特性值100 */
+#one {
+    /* 边框样式属性： 线宽 线类型 线的颜色*/
+    border:2px solid black
+}
+
+/* 类选择器 */
+/* .two {
+    
+} */
+
+

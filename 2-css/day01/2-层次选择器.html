@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>层次选择器</title>
+    <style>
+        /* 给parent下的后代元素设定边框 */
+        /* .parent * {
+            border: 1px solid red;
+        } */
+
+        /* 给parent下的子元素设定边框 */
+        /* .parent>* {
+            border: 1px solid red;
+        } */
+
+        /* 给one的下一个兄弟设置边框 */
+        /* #one+div {
+            border: 1px solid red;
+        } */
+
+        /* 给one之后的所有兄弟设置边框 */
+        #one~div {
+            border: 1px solid red;
+        }
+
+
+        input:default {
+            box-shadow: 0 0 2px 1px coral;
+        }
+
+        input:default+label {
+            color: coral;
+        }
+
+        /* input:enabled{
+            border:2px solid black;
+        } */
+        /* input:valid{
+            border: 5px solid blueviolet;
+        } */
+        input:required {
+            border: 1px solid seagreen;
+        }
+
+        input:in-range {
+            border: 1px solid slateblue;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 空格后代  >子代  +下一个兄弟  ~之后所有的兄弟 -->
+    <div class="parent">
+        <div>hello</div>
+        <div id="one">
+            hello
+            <p>段落</p>
+        </div>
+        <div>hello</div>
+        <div>hello</div>
+        <div>hello</div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <form>
+        <label for="">用户名：</label>
+        <input type="text" required>
+        <br>
+        <input min="0" max="10" value="7" type="number">
+        <br>
+        <input type="radio" checked>
+        <label for="">男</label>
+        <input type="radio">
+        <label for="">女</label>
+    </form>
+
+</body>
+
+</html>

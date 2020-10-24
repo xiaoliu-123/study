@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue-实例</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    //创建vue实例  vue实例要与模板(DOM)绑定
+    window.onload = function () {
+      new Vue({
+        el: '#app',
+        //数据模型
+        data: {
+          msg: 'hello',
+        },
+        //函数
+        methods: {
+          changeMsg() {
+            // console.log(1);
+            //更改数据模型中的数据
+            //获取数据模型中的数据
+            //在vue实例内访问vue实例身上的属性和方法
+            //在vue实例内this都指向新创建的vue实例
+            this.msg = 'hello world';
+          }
+        }
+      })
+    }
+
+  </script>
+</head>
+
+<body>
+  <!-- 当前有一个msg变量，以前怎么把它作为元素文本的，获取dom节点，dom.innerText=msg -->
+  <div id="app">
+    <!-- 在模板内访问vue实例数据模型中的数据 -->
+    <!-- 基本渲染 插值 -->
+    {{msg}}
+    <p>{{msg}}</p>
+    <!-- 事件绑定 -->
+    <button @click="changeMsg">点击我改变msg</button>
+  </div>
+</body>
+
+</html>

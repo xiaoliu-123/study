@@ -1,0 +1,233 @@
+
+---------复习---------
+插槽
+    组件模板里分发slot
+    默认插槽(普通插槽)
+    template:`
+      <div>
+        <slot name="default"></slot>
+      </div>
+    `
+    使用子组件的时候填充slot
+      <my-a>
+        <template v-slot:default>
+          hello
+        </template>
+      </my-a>
+
+  具名插槽
+    template:`
+      <div>
+        <slot name="default"></slot>
+        <slot name="header"></slot>
+      </div>
+    `
+
+    <my-a>
+      <template v-slot:default>
+        hello
+      </template>
+      <template v-slot:header>
+        hello
+      </template>
+    </my-a>
+  作用域插槽
+    data(){return {msg:''}}
+    template:`
+      <div>
+        <slot :title="msg" name="default"></slot>
+        <slot name="header"></slot>
+      </div>
+    `
+
+    <my-a>
+      <template v-slot:default="scope">
+        hello{{scope.title}}
+      </template>
+      <template v-slot:header>
+        hello
+      </template>
+    </my-a>
+
+混入
+    声明
+        let mixin1 ={
+            data(){return{}},
+            methods:{},
+            created(){}
+        }
+        注册
+            Vue.mixin(mixin1)
+            new Vue({
+                mixins:[mixin1,mixin2]
+            })
+        混入规则
+            1.生命周期钩子函数混合为一个数组，函数都执行，混入先，组件后
+            2.methods,computed,components,filters,directives。合并对象，如果有冲突，以组件为主
+            3.data中的数据有引用数据类型的话，进行递归合并
+
+指令
+    自定义指令
+    let mymodel={
+        //指令生命周期钩子
+        bind(el,binding,vnode,oldVnode){},
+        inserted(el,binding,vnode,oldVnode){
+            //v-mymodel='username'
+            //binding.value是username对应的数据
+            el.value = binding.value
+            el.oninput=function(){
+                vnode.context.$root[binding.expression]=e.target.value
+            }
+        },
+        update(el,binding,vnode,oldVnode){},
+        componentUpdated(el,binding,vnode,oldVnode){},
+        unbind(el,binding,vnode,oldVnode){}
+    }
+    注册
+        Vue.directive('mymodel',mymodel)
+        new Vue({
+            directives:{
+                'mymodel':mymodel
+            }
+        })
+
+过滤器
+    声明
+        let myfilter = (data)=>{
+            return data.filter((item)=>{return item>10})
+        }
+    注册
+        Vue.filter('myfilter',myfilter)
+        new Vue({
+            'myfilter':myfilter
+    })
+    使用
+        {{arr | myfilter}}
+        <div :title="arr|myfilter"></div>
+
+动态组件
+    <component is="注册的组件的名称"></component>
+    <component :is="数据模型中的变量"></component>
+
+    数据模型中的变量：注册组件名称/组件对象
+
+    keep-alive 增加组件复用性
+    <keep-alive>
+        <component :is="数据模型中的变量"></component>
+    </keep-alive>
+
+组件模板
+    js原生DOM操作创建div节点
+        document.createElement('div')
+    JS的DOM模型
+        Elementl类型
+        Document类型
+        Text类型
+        Comment类型
+    
+    let myA = {
+        //template:``,
+        //渲染函数
+        render(createElement){
+            //创建节点函数
+          return  createElement(标签名，配置信息，孩子vnode)
+        }
+    };
+
+    jsx
+        render(){
+            return (<div>
+                hello{this.msg}
+                <ul>
+                    {
+                        let arr = ['苹果','香蕉']
+                        arr.map((item)=>{
+                            return <li>{item}</li>
+                        })
+                    }
+                </ul>
+            </div>)
+        }
+vue-cli脚手架
+    安装nodejs
+        测试 node -v
+            npm -v
+    通过npm安装cnpm
+        npm install -g cnpm
+    通过npm安装yarn
+        npm install -g yarn
+    下载vue-cli
+        cnpm install -g @vue/cli
+    创建项目
+        vue create my-project
+
+路由对象
+  {
+    path:'/a',
+    name:'aRouter'
+    component:myA,
+    alias:'/aa',
+    redirect:'/a'
+    //redirect:{name:'aRouter'}
+  }
+路由数组生成路由器
+  let router= new VueRouter({
+    routes:routes
+  })
+路由器注册
+  new Vue({
+    router:router
+  })
+使用
+  <router-link to="/a">文字</router-link>
+  <router-link to="/b">文字</router-link>
+  <router-view></router-view>
+User组件
+  /user/1001 User组件加载1001用户的数据
+  /user/1002 User组件加载1002用户的数据
+  userDetail组件
+  动态路由声明
+    {
+      path:'/user/:id',
+      name:'',
+      component:User,
+    }
+    在User组件内接受动态路由参数数据
+      this.$route.params.id
+
+{
+  sayName(){this-->obj}
+  sayName:()=>{this-->vue实例}
+}
+obj.sayName();
+
+路由守卫
+  1.全局首位
+    前置守卫
+      router.beforeEach((to,from,next)=>{})
+    后置守卫
+      router.afterEach((to,from)=>{})
+  2.路由独享守卫
+    {
+      path:'',
+      beforeEnter(to,from,next){}
+    }
+  3.组件内守卫
+    beforeRouteEnter(to,from,next){
+      //this-->window
+      console.log(this,'beforeRouteEnter');
+      next()
+    },
+    beforeRouteUpdate(to,from,next){
+      console.log(this,'beforeRouteUpdate');
+      next()
+    },
+    beforeRouteLeave(to,from,next){
+      console.log(this,'beforeRouteLeave');
+      next()
+    }
+路由
+    路由对象-->路由数组-->路由器-->注册路由器
+    使用
+      <router-link></router-link>
+      <router-view></router-view>
